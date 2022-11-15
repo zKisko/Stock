@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".contador">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/objeto"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:inputType="textShortMessage|textLongMessage|textMultiLine"
+            android:textAlignment="gravity"
+            android:textSize="20sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="54dp">
+
+            <Button
+                android:id="@+id/botonmas"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@android:color/holo_blue_bright"
+                android:onClick="mas"
+                android:text="+"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:iconTint="@android:color/holo_blue_bright"
+                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/contador1"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:autofillHints=""
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/botonmenos"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@android:color/holo_blue_bright"
+                android:onClick="menos"
+                android:text="-"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:iconTint="@android:color/holo_blue_bright"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </TableRow>
+    </TableRow>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
