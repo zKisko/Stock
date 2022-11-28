@@ -1,38 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/icono_estudio_fondo_negro"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/icono_estudio_fondo_negro"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Stock"
-        tools:targetApi="31" >
+        android:theme="@style/Theme.Stock">
         <activity
-            android:name=".principal"
-            android:exported="true" >
+            android:name="com.cidead.pmdm.stock.Items.ItemsActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Stock.NoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
-        <activity android:name=".primera" />
-        <activity android:name=".info" />
-        <activity android:name=".puestos" />
-        <activity android:name=".contador" />
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+        <activity
+            android:name="com.cidead.pmdm.stock.ItemDetail.ItemDetailActivity"
+            android:label="Detalle"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name="com.cidead.pmdm.stock.AddEditItems.AddEditItemsActivity"
+            android:label="Añadir/Editar elemento"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 
 </manifest>
