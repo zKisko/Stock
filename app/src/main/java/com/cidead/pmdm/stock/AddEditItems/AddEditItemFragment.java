@@ -75,6 +75,7 @@ public class AddEditItemFragment extends Fragment {
         mConditionLabel = (TextInputLayout) root.findViewById(R.id.til_condition);
         mDescriptionLabel = (TextInputLayout) root.findViewById(R.id.til_description);
 
+
         // Eventos  //AÑADE ITEMS A TRAVES DEL BOTON SAVEBUTTON
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override

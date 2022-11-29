@@ -1,109 +1,4 @@
 package com.cidead.pmdm.stock.DB;
-/*
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-
-import static com.cidead.pmdm.stock.DB.ItemsContract.ItemsEntr;
-
-//CLASE QUE MANEJA LA BASE DE DATOS
-
-public class ItemsDBHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "Item.db";
-    public static final String TABLE_ITEMS = "t_elementos";
-
-    public ItemsDBHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + ItemsEntr.TABLE_NAME + " ("
-                + ItemsEntr._ID + " INTERGER PRIMARY KEY AUTOINCREMENT,"
-                + ItemsEntr.ID + " TEXT NOT NULL,"
-                + ItemsEntr.NAME + " TEXT NOT NULL,"
-                + ItemsEntr.QUANTITY + " TEXT NOT NULL,"
-                + ItemsEntr.CONDITION + " TEXT NOT NULL,"
-                + ItemsEntr.DESCRIPTION + " TEXT NOT NULL,"
-                + ItemsEntr.AVATAR + " TEXT,"
-                + "UNIQUE (" + ItemsEntr.ID + "))");
-        mockData(db);
-    }
-
-    private void mockData(SQLiteDatabase sqLiteDatabase) {
-        mockItems(sqLiteDatabase, new Item("Monitor", "2",
-                "Nuevo", "Monitor marca LG 24 pulgadas", ""));
-        mockItems(sqLiteDatabase, new Item("Teclado", "1",
-                "Usado", "Teclado trust", ""));
-    }
-
-    public long mockItems (SQLiteDatabase db, Item item) {
-        return db.insert(
-                ItemsEntr.TABLE_NAME,
-                null,
-                item.toContentValues());
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-    }
-
-    public long saveItems (Item item) {
-        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-
-        return sqLiteDatabase.insert(
-                ItemsEntr.TABLE_NAME,
-                null,
-                item.toContentValues());
-    }
-
-    //METODO PARA OBTENER TODOS LOS ELEMENTOS
-    public Cursor getAllItems () {
-        return getReadableDatabase().query(
-                        ItemsEntr.TABLE_NAME,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null);
-    }
-
-    //METODO PARA OBTENER LOS ELEMENTOS POR ID
-    public Cursor getItemById(String ItemsId){
-        Cursor c = getReadableDatabase().query(
-                ItemsEntr.TABLE_NAME,
-                null,
-                ItemsEntr.ID + " LIKE ?",
-                new String[]{ItemsId},
-                null,
-                null,
-                null);
-        return c;
-    }
-
-    //METODO PARA LA ELIMINACIÓN DE ELEMENTOS
-    public int deleteItem(String itemsId){
-        return getWritableDatabase().delete(
-            ItemsEntr.TABLE_NAME,
-            ItemsEntr.ID + " LIKE ?",
-            new String[]{itemsId});
-    }
-
-    //METODO PARA ACTUALIZAR ELEMENTOS
-    public int updateItems(Item item, String mItemsId) {
-        return getWritableDatabase().update(
-                ItemsEntr.TABLE_NAME,
-                item.toContentValues(),
-                ItemsEntr.ID + " LIKE ?",
-                new String[]{mItemsId}
-        );
-    }
-}
-----------------------------------------------------------------------------------------------*/
-
 
 import android.content.Context;
 import android.database.Cursor;
@@ -111,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static com.cidead.pmdm.stock.DB.ItemsContract.ItemEntry;
+
+//CLASE QUE MANEJA LA BASE DE DATOS
 
 public class ItemsDBHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
@@ -130,14 +27,12 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
                 + ItemsContract.ItemEntry.CONDITION + " TEXT NOT NULL,"
                 + ItemsContract.ItemEntry.DESCRIPTION + " TEXT NOT NULL,"
                 + ItemsContract.ItemEntry.AVATARURL + " TEXT,"
-                + "UNIQUE (" + ItemsContract                .ItemEntry.ID + "))");
+                + "UNIQUE (" + ItemsContract.ItemEntry.ID + "))");
 
-
-
-        // Insertar datos ficticios para prueba inicial
         mockData(db);
-
     }
+
+    // Insertar datos ficticios para prueba inicial
 
     private void mockData(SQLiteDatabase sqLiteDatabase) {
         mockItem(sqLiteDatabase, new Item("Monitor", "3",
@@ -188,6 +83,7 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
 
     }
 
+    //METODO PARA OBTENER TODOS LOS ELEMENTOS
     public Cursor getAllItems() {
         return getReadableDatabase().query(
                         ItemEntry.TABLE_NAME,
@@ -199,6 +95,7 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
                         null);
     }
 
+    //METODO PARA OBTENER LOS ELEMENTOS POR ID
     public Cursor getItemById(String itemId) {
         Cursor c = getReadableDatabase().query(
                 ItemEntry.TABLE_NAME,
@@ -211,6 +108,7 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    //METODO PARA LA ELIMINACIÓN DE ELEMENTOS
     public int deleteItem(String itemId) {
         return getWritableDatabase().delete(
                 ItemEntry.TABLE_NAME,
@@ -218,6 +116,7 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
                 new String[]{itemId});
     }
 
+    //METODO PARA ACTUALIZAR ELEMENTOS
     public int updateItem(Item item, String itemId) {
         return getWritableDatabase().update(
                 ItemEntry.TABLE_NAME,
