@@ -1,3 +1,5 @@
+//CLASE QUE MANEJA LA BASE DE DATOS
+
 package com.cidead.pmdm.stock.DB;
 
 import android.content.Context;
@@ -7,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import static com.cidead.pmdm.stock.DB.ItemsContract.ItemEntry;
 
-//CLASE QUE MANEJA LA BASE DE DATOS
+
 
 public class ItemsDBHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
@@ -32,33 +34,17 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
         mockData(db);
     }
 
-    // Insertar datos ficticios para prueba inicial
+    // Insertamos datos ficticios para prueba inicial
 
     private void mockData(SQLiteDatabase sqLiteDatabase) {
-        mockItem(sqLiteDatabase, new Item("Monitor", "3",
-                "Nuevo", "Monitor LG 24 pulgadas.",
-                ""));
-        mockItem(sqLiteDatabase, new Item("Daniel Samper", "Abogado accidentes de tráfico",
-                "300 200 2222", "Gran profesional con experiencia de 5 años en accidentes de tráfico.",
-                "daniel_samper.jpg"));
-        mockItem(sqLiteDatabase, new Item("Lucia Aristizabal", "Abogado de derechos laborales",
-                "300 200 3333", "Gran profesional con más de 3 años de experiencia en defensa de los trabajadores.",
-                "lucia_aristizabal.jpg"));
-        mockItem(sqLiteDatabase, new Item("Marina Acosta", "Abogado de familia",
-                "300 200 4444", "Gran profesional con experiencia de 5 años en casos de familia.",
-                "marina_acosta.jpg"));
-        mockItem(sqLiteDatabase, new Item("Olga Ortiz", "Abogado de administración pública",
-                "300 200 5555", "Gran profesional con experiencia de 5 años en casos en expedientes de urbanismo.",
-                "olga_ortiz.jpg"));
-        mockItem(sqLiteDatabase, new Item("Pamela Briger", "Abogado fiscalista",
-                "300 200 6666", "Gran profesional con experiencia de 5 años en casos de derecho financiero",
-                "pamela_briger.jpg"));
-        mockItem(sqLiteDatabase, new Item("Rodrigo Benavidez", "Abogado Mercantilista",
-                "300 200 1111", "Gran profesional con experiencia de 5 años en redacción de contratos mercantiles",
-                "rodrigo_benavidez.jpg"));
-        mockItem(sqLiteDatabase, new Item("Tom Bonz", "Abogado penalista",
-                "300 200 1111", "Gran profesional con experiencia de 5 años en casos penales.",
-                "tom_bonz.jpg"));
+        mockItem(sqLiteDatabase, new Item("Monitor", "3","Nuevo", "Monitor LG 24 pulgadas.",""));
+        mockItem(sqLiteDatabase, new Item("Teclado", "", "", "", ""));
+        mockItem(sqLiteDatabase, new Item("Raton", "", "", "", ""));
+        mockItem(sqLiteDatabase, new Item("Torre", "", "", "", "" ));
+        mockItem(sqLiteDatabase, new Item("Cable HDMI", "", "", "", ""));
+        mockItem(sqLiteDatabase, new Item("Cable de alimentación", "", "", "", ""));
+        mockItem(sqLiteDatabase, new Item("Mesa de escritorio", "", "", "", ""));
+        mockItem(sqLiteDatabase, new Item("Silla de oficina", "", "", "", ""));
     }
 
     public long mockItem(SQLiteDatabase db, Item item) {

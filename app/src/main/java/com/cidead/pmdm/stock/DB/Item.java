@@ -1,5 +1,5 @@
-/*con esta clase creamos una plantilla para los elementos que añadiremos
-        en los puestos de nuestro stock*/
+/*con esta clase creamos una plantilla para los elementos
+que añadiremos en los puestos de nuestro stock*/
 
 package com.cidead.pmdm.stock.DB;
 

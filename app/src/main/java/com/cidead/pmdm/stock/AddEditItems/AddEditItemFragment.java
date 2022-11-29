@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.cidead.pmdm.stock.R;
 
 import androidx.fragment.app.Fragment;
+
 /* Vista para creación/edición de un Item */
 
 public class AddEditItemFragment extends Fragment {
@@ -75,7 +76,6 @@ public class AddEditItemFragment extends Fragment {
         mConditionLabel = (TextInputLayout) root.findViewById(R.id.til_condition);
         mDescriptionLabel = (TextInputLayout) root.findViewById(R.id.til_description);
 
-
         // Eventos  //AÑADE ITEMS A TRAVES DEL BOTON SAVEBUTTON
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +99,8 @@ public class AddEditItemFragment extends Fragment {
     }
 
 
-    /*ESTE METODO EXTRAE LOS DATOS DE LOS CAMPOS DE TEXTO COMPRUEBA QUE NO ESTAN VACIOS Y LUEGO CREAN EL NUEVO ITEM*/
+    /*ESTE METODO EXTRAE LOS DATOS DE LOS CAMPOS DE TEXTO,
+     COMPRUEBA QUE NO ESTAN VACIOS Y LUEGO CREAN EL NUEVO ITEM*/
     private void addEditItem() {
         boolean error = false;
 
@@ -201,7 +202,6 @@ public class AddEditItemFragment extends Fragment {
         }
          /* DEPENDIENDO DE LA TAREA ASINCRONA DE ARRIBA (UPDATE O SAVE)
          ESTA ACTIVIDAD NOS MOSTRARÁ EL NUEVO RESULTADO O UN MENSAJE DE ERROR */
-
         @Override
         protected void onPostExecute(Boolean result) {
             showItemsScreen(result);

@@ -38,7 +38,8 @@ public class ItemDetailFragment extends Fragment {
 
     private ItemsDBHelper mItemsDBHelper;
 
-    public ItemDetailFragment() { //CONSTRUCTOR VACIO
+    public ItemDetailFragment() {
+        //CONSTRUCTOR VACIO
         }
 
     public static ItemDetailFragment newInstance(String mItemsId) {
@@ -114,15 +115,17 @@ public class ItemDetailFragment extends Fragment {
         mDescription.setText(item.getDescription());
     }
 
-    private void showEditScreen() { //INICIA LA ACTIVIDAD DE EDICION EXPRESADA EN LA CLASE AddEditItemsActivity
+    //INICIA LA ACTIVIDAD DE EDICION EXPRESADA EN LA CLASE AddEditItemsActivity
+    private void showEditScreen() {
         Intent intent = new Intent(getActivity(), AddEditItemsActivity.class);
         intent.putExtra(ItemsActivity.EXTRA_ITEM_ID, mItemId);
         startActivityForResult(intent, ItemsFragment.REQUEST_UPDATE_DELETE_ITEM);
     }
 
+    /*SI EL ELIMINADO DEL ITEM ES CORRECTO SEGUIRÍA SU CURSO
+   DE LO CONTRARIO MOSTRARIA UN ESTADO DE ERROR CON LA CLASE SHOWDELETEERROR*/
     private void showItemsScreen(boolean requery) {
-        if (!requery) {          /*SI EL ELIMINADO DEL ITEM ES CORRECTO SEGUIRÍA SU CURSO
-                               DE LO CONTRARIO MOSTRARIA UN ESTADO DE ERROR CON LA CLASE SHOWDELETEERROR*/
+        if (!requery) {
             showDeleteError();
         }
         getActivity().setResult(requery ? Activity.RESULT_OK : Activity.RESULT_CANCELED);
@@ -156,8 +159,9 @@ public class ItemDetailFragment extends Fragment {
         }
     }
 
+    //CON ESTA CLASE MANEJAMOS EL EVENTO DE BORRADO
     private class DeleteItemTask extends AsyncTask<Void, Void, Integer> {
-        //CON ESTA CLASE MANEJAMOS EL EVENTO DE BORRADO 
+
         @Override
         protected Integer doInBackground(Void... voids) {
             return mItemsDBHelper.deleteItem(mItemId);
