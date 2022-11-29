@@ -22,12 +22,12 @@ public class ItemDetailActivity extends AppCompatActivity {
         String id = getIntent().getStringExtra(ItemsActivity.EXTRA_ITEM_ID);
 
         ItemDetailFragment fragment = (ItemDetailFragment)
-                getSupportFragmentManager().findFragmentById(R.id.item_detail_container);
+                getSupportFragmentManager().findFragmentById(R.id.content_item_detail);
         if (fragment == null) {
             fragment = ItemDetailFragment.newInstance(id);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.item_detail_container, fragment)
+                    .add(R.id.content_item_detail, fragment)
                     .commit();
         }
     }

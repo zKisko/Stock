@@ -5,27 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:scrollbarDefaultDelayBeforeFade="400"
-    android:scrollbarFadeDuration="250"
-    android:scrollbarSize="4dp"
     tools:context=".ItemDetail.ItemDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         style="@style/Animation.Design.BottomSheetDialog"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:scrollbarDefaultDelayBeforeFade="400"
-        android:scrollbarFadeDuration="250"
-        android:scrollbarSize="4dp"
-        android:theme="@style/Theme.Stock.AppBarOverlay">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_height"
             android:background="@color/black"
-            app:popupTheme="@style/Theme.Stock.AppBarOverlay" />
+            app:popupTheme="@style/Animation.Design.BottomSheetDialog" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -141,8 +141,8 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
 
     private void mockData(SQLiteDatabase sqLiteDatabase) {
         mockItem(sqLiteDatabase, new Item("Monitor", "3",
-                "Nuevo", "Gran profesional con experiencia de 5 años en casos penales.",
-                "carlos_perez.jpg"));
+                "Nuevo", "Monitor LG 24 pulgadas.",
+                ""));
         mockItem(sqLiteDatabase, new Item("Daniel Samper", "Abogado accidentes de tráfico",
                 "300 200 2222", "Gran profesional con experiencia de 5 años en accidentes de tráfico.",
                 "daniel_samper.jpg"));

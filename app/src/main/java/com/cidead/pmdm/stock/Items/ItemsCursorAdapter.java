@@ -43,10 +43,10 @@ public class ItemsCursorAdapter extends CursorAdapter {
 
         //Setup
         nameText.setText(name);
-        Glide
+       /* Glide
                 .with(context)
                 .asBitmap()
-                .load(Uri.parse("file:///android_asset" + avatar))
+                .load(Uri.parse("file:app/src/main/assets" + avatar))
                 .error(R.drawable.ic_menu_mapmode)
                 .centerCrop()
                 .into(new BitmapImageViewTarget(avatarImage) {
@@ -57,7 +57,7 @@ public class ItemsCursorAdapter extends CursorAdapter {
                         drawable.setCircular(true);
                         avatarImage.setImageDrawable(drawable);
                     }
-                });
+                });*/
 
     }
 

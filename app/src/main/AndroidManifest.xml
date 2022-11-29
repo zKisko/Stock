@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+<application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:supportsRtl="true"
+    android:theme="@style/Theme.Stock">
+    <activity
+        android:name=".Items.ItemsActivity"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.Stock">
-        <activity
-            android:name="com.cidead.pmdm.stock.Items.ItemsActivity"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Stock.NoActionBar"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.cidead.pmdm.stock.ItemDetail.ItemDetailActivity"
-            android:label="Detalle"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name="com.cidead.pmdm.stock.AddEditItems.AddEditItemsActivity"
-            android:label="Añadir/Editar elemento"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-    </application>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+    <activity
+        android:name="com.cidead.pmdm.stock.ItemDetail.ItemDetailActivity"
+        android:label="Detalle"
+        android:theme="@style/Theme.AppCompat.NoActionBar" />
+    <activity
+        android:name="com.cidead.pmdm.stock.AddEditItems.AddEditItemsActivity"
+        android:label="Añadir/Editar elemento"
+        android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+</application>
 
 </manifest>

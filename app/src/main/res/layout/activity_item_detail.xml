@@ -39,6 +39,6 @@ tools:context=".ItemDetail.ItemDetailActivity">
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-<include layout="@layout/content_items" />
+<include layout="@layout/content_item_detail" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
