@@ -1,13 +1,9 @@
-package com.cidead.pmdm.stock.Items;
+package com.cidead.pmdm.stock.Workstation;
 
 /* Esta clase hace de adaptardor de los Item*/
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +11,12 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.cidead.pmdm.stock.Item.DB.ItemsContract.ItemEntry;
 import com.cidead.pmdm.stock.R;
-import com.cidead.pmdm.stock.DB.ItemsContract.ItemEntry;
 
 
-public class ItemsCursorAdapter extends CursorAdapter {
-    public ItemsCursorAdapter(Context context, Cursor c) { super(context, c, 0); }
+public class WorkstationCursorAdapter extends CursorAdapter {
+    public WorkstationCursorAdapter(Context context, Cursor c) { super(context, c, 0); }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {

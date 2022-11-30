@@ -1,11 +1,11 @@
-package com.cidead.pmdm.stock.AddEditItems;
+package com.cidead.pmdm.stock.Item.AddEditItems;
 
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cidead.pmdm.stock.Items.ItemsActivity;
+import com.cidead.pmdm.stock.Item.Items.ItemsActivity;
 import com.cidead.pmdm.stock.R;
 
 public class AddEditItemsActivity extends AppCompatActivity {

@@ -5,17 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ItemDetail.ItemDetailActivity">
+    tools:context=".Item.ItemDetail.ItemDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         style="@style/Animation.Design.BottomSheetDialog"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="110dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/app_bar_height"
+            android:layout_height="match_parent"
             android:background="@color/black"
             app:popupTheme="@style/Animation.Design.BottomSheetDialog" />
 
@@ -29,7 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:tint="@android:color/white"
+        android:tint="@color/black"
+        app:backgroundTint="@color/white"
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_account_plus" />
 

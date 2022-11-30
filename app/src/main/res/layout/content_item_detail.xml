@@ -6,5 +6,5 @@
     android:layout_height="match_parent"
     android:id="@+id/content_item_detail"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ItemDetail.ItemDetailActivity"
+    tools:context=".Item.ItemDetail.ItemDetailActivity"
     tools:showIn="@layout/activity_item_detail" />

@@ -1,6 +1,6 @@
 /*con esta clase java creo el esquema de la BD para los items*/
 
-package com.cidead.pmdm.stock.DB;
+package com.cidead.pmdm.stock.Item.DB;
 
 import android.provider.BaseColumns;
 

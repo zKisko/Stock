@@ -1,4 +1,4 @@
-package com.cidead.pmdm.stock.Items;
+package com.cidead.pmdm.stock.Item.Items;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;

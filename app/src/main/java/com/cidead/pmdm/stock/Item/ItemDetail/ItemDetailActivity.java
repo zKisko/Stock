@@ -1,4 +1,4 @@
-package com.cidead.pmdm.stock.ItemDetail;
+package com.cidead.pmdm.stock.Item.ItemDetail;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -6,7 +6,7 @@ import android.view.Menu;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.cidead.pmdm.stock.Items.ItemsActivity;
+import com.cidead.pmdm.stock.Item.Items.ItemsActivity;
 import com.cidead.pmdm.stock.R;
 
 public class ItemDetailActivity extends AppCompatActivity {

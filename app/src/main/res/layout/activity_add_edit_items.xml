@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".AddEditItems.AddEditItemsActivity">
+    tools:context=".Item.AddEditItems.AddEditItemsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -29,7 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:tint="@android:color/white"
+        android:tint="@color/black"
+        app:backgroundTint="@color/white"
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_check" />
 

@@ -1,12 +1,12 @@
-package com.cidead.pmdm.stock.AddEditItems;
+package com.cidead.pmdm.stock.Item.AddEditItems;
 
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.cidead.pmdm.stock.DB.Item;
-import com.cidead.pmdm.stock.DB.ItemsDBHelper;
+import com.cidead.pmdm.stock.Item.DB.Item;
+import com.cidead.pmdm.stock.Item.DB.ItemsDBHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;

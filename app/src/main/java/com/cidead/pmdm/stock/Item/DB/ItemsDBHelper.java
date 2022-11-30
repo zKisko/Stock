@@ -1,13 +1,13 @@
 //CLASE QUE MANEJA LA BASE DE DATOS
 
-package com.cidead.pmdm.stock.DB;
+package com.cidead.pmdm.stock.Item.DB;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static com.cidead.pmdm.stock.DB.ItemsContract.ItemEntry;
+import static com.cidead.pmdm.stock.Item.DB.ItemsContract.ItemEntry;
 
 
 
