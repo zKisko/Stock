@@ -5,10 +5,10 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icono_estudio_fondo_negro"
+        android:icon="@drawable/icono_estudio_fondo_blanco"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".Login.RegisterActivity"
             android:exported="true" />
@@ -27,7 +27,7 @@
         <activity
             android:name=".Item.Items.ItemsActivity"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="Elementos"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"

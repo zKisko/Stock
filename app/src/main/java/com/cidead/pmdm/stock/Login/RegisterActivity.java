@@ -27,11 +27,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
-
-
     private EditText txtUser;
     private EditText txtMail;
-    private EditText txtPhone;
     private TextInputLayout txtPassword;
     private Button btnRegister;
     private TextView lblLogin;
@@ -45,10 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-
         txtUser = findViewById(R.id.txtUser);
         txtMail = findViewById(R.id.txtMail);
-        txtPhone = findViewById(R.id.txtPhone);
         txtPassword = findViewById(R.id.txtPassword);
         lblLogin = findViewById(R.id.lblLogin);
         btnRegister = findViewById(R.id.btnRegister);
@@ -60,17 +55,13 @@ public class RegisterActivity extends AppCompatActivity {
             createuser();
         });
 
-
         lblLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openLoginActivity();
             }
         });
-
     }//End onCreate
-
-
 
     public void openLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
@@ -81,7 +72,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         String name = txtUser.getText().toString();
         String mail = txtMail.getText().toString();
-        String phone = txtPhone.getText().toString();
         String password = txtPassword.getEditText().getText().toString();
 
         if (TextUtils.isEmpty(name)){
@@ -89,9 +79,6 @@ public class RegisterActivity extends AppCompatActivity {
             txtMail.requestFocus();
         }else if (TextUtils.isEmpty(mail)){
             txtMail.setError("Ingrese un Correo");
-            txtMail.requestFocus();
-        }else if (TextUtils.isEmpty(phone)){
-            txtMail.setError("Ingrese un Teléfono");
             txtMail.requestFocus();
         }else if (TextUtils.isEmpty(password)){
             txtMail.setError("Ingrese una Contraseña");
@@ -108,7 +95,6 @@ public class RegisterActivity extends AppCompatActivity {
                         Map<String,Object> user=new HashMap<>();
                         user.put("Nombre", name);
                         user.put("Correo", mail);
-                        user.put("Teléfono", phone);
                         user.put("Contraseña", password);
 
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -122,11 +108,8 @@ public class RegisterActivity extends AppCompatActivity {
                     }else {
                         Toast.makeText(RegisterActivity.this, "Usuario no registrado"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-
                 }
             });
-
         }
     }
-
 }// End RegisterActivity

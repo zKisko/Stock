@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login.RegisterActivity"
-    android:padding="16dp">
+    android:background="@color/white"
+    android:padding="16dp"
+    tools:context=".Login.RegisterActivity">
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="309dp"
-        android:layout_height="237dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="234dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icono_estudio_fondo_negro"
+        app:srcCompat="@drawable/icono_estudio_fondo_blanco"
         tools:ignore="VectorDrawableCompat" />
 
     <TextView
@@ -23,10 +24,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-light"
-        android:text="Stock"
-        android:textColor="@color/black"
+        android:text="STOCK"
+        android:textColor="@color/purple_200"
         android:textSize="28sp"
 
 
@@ -40,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="sans-serif-light"
-        android:text="Completa los Siguientes Datos"
+        android:text="Completa los siguientes datos"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +51,7 @@
         android:id="@+id/txtUser"
         android:layout_width="330dp"
         android:layout_height="55dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="20dp"
 
 
         android:drawablePadding="12dp"
@@ -71,7 +72,7 @@
         android:id="@+id/txtMail"
         android:layout_width="330dp"
         android:layout_height="55dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="20dp"
 
 
         android:drawablePadding="12dp"
@@ -82,46 +83,27 @@
 
         android:paddingStart="10dp"
         android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtUser" />
-
-    <EditText
-        android:id="@+id/txtPhone"
-        android:layout_width="330dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="4dp"
-
-
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:fontFamily="sans-serif-light"
-        android:hint="Teléfono"
-        android:inputType="phone"
-
-        android:paddingStart="10dp"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMail" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtPassword"
         android:layout_width="330dp"
 
         android:layout_height="55dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="20dp"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
         app:helperTextTextColor="@color/purple_500"
         app:hintEnabled="false"
+
+
         app:layout_constraintEnd_toEndOf="parent"
-
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPhone"
+        app:layout_constraintTop_toBottomOf="@+id/txtMail"
         app:passwordToggleEnabled="true"
         app:placeholderTextColor="@color/purple_500">
 
@@ -143,10 +125,12 @@
         android:id="@+id/btnRegister"
         android:layout_width="330dp"
         android:layout_height="55dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/purple_500"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/purple_200"
         android:fontFamily="sans-serif-light"
-        android:text="Register"
+        android:text="Registrar"
+        android:textColor="@color/white"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
@@ -173,7 +157,8 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="100dp"
         android:fontFamily="sans-serif-light"
-        android:text="Inicia Sesión"
+        android:text="Inicia sesión"
+        android:textColor="@color/purple_200"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

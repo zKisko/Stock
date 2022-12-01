@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
                 openRegisterActivity();
             }
         });
-
     }//End onCreate
 
     public void openRegisterActivity() {
@@ -84,10 +83,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             });
-
         }
-
     }
-
-
 }// End LoginActivity
