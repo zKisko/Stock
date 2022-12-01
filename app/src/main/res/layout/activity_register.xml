@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login.LoginActivity"
+    tools:context=".Login.RegisterActivity"
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="77dp"
-
+        android:id="@+id/imageView3"
+        android:layout_width="309dp"
+        android:layout_height="237dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,55 +23,96 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-light"
         android:text="Stock"
-        android:textColor="@color/purple_500"
+        android:textColor="@color/black"
         android:textSize="28sp"
 
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="sans-serif-light"
-        android:text="Inicia sesión para continuar"
+        android:text="Completa los Siguientes Datos"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
+        android:id="@+id/txtUser"
+        android:layout_width="330dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="4dp"
+
+
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-light"
+        android:hint="Nombre Completo"
+        android:inputType="textPersonName"
+
+
+        android:paddingStart="10dp"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
         android:id="@+id/txtMail"
         android:layout_width="330dp"
         android:layout_height="55dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="4dp"
 
 
         android:drawablePadding="12dp"
         android:ems="10"
         android:fontFamily="sans-serif-light"
         android:hint="Correo"
-        android:inputType="textEmailAddress"
+        android:inputType="textPersonName"
+
         android:paddingStart="10dp"
-
-
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/txtUser" />
+
+    <EditText
+        android:id="@+id/txtPhone"
+        android:layout_width="330dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="4dp"
+
+
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-light"
+        android:hint="Teléfono"
+        android:inputType="phone"
+
+        android:paddingStart="10dp"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtMail" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtPassword"
         android:layout_width="330dp"
 
         android:layout_height="55dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="4dp"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
         app:helperTextTextColor="@color/purple_500"
@@ -82,7 +121,7 @@
 
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMail"
+        app:layout_constraintTop_toBottomOf="@+id/txtPhone"
         app:passwordToggleEnabled="true"
         app:placeholderTextColor="@color/purple_500">
 
@@ -95,35 +134,19 @@
             android:inputType="textPassword"
             android:padding="15dp"
             android:paddingStart="10dp"
-            android:textColorHighlight="@color/purple_500"
-            android:textColorLink="@color/purple_500"
-            android:textSize="18dp"
-
-            />
-
-
+            android:textColorHighlight="@color/black"
+            android:textColorLink="@color/black"
+            android:textSize="18dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/lblForgot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:fontFamily="sans-serif-light"
-        android:text="¿Olvido Su contraseña?"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="@+id/txtPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
-
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnRegister"
         android:layout_width="330dp"
         android:layout_height="55dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/purple_500"
         android:fontFamily="sans-serif-light"
-        android:text="Login"
+        android:text="Register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,28 +157,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
+        android:text="¿Ya tienes una cuenta?"
         android:textSize="15dp"
-        android:text="¿No tienes cuenta?"
-        app:layout_constraintEnd_toStartOf="@+id/lblRegister"
+        app:layout_constraintEnd_toStartOf="@+id/lblLogin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/lblRegister"
+        android:id="@+id/lblLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="100dp"
         android:fontFamily="sans-serif-light"
-        android:text="Registrate"
+        android:text="Inicia Sesión"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
