@@ -1,4 +1,4 @@
-package com.cidead.pmdm.stock.Workstation;
+package com.cidead.pmdm.stock.Workstation.Workstation;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,44 +14,42 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.cidead.pmdm.stock.Item.AddEditItems.AddEditItemsActivity;
-import com.cidead.pmdm.stock.Item.DB.ItemsContract.ItemEntry;
-import com.cidead.pmdm.stock.Item.DB.ItemsDBHelper;
-import com.cidead.pmdm.stock.Item.ItemDetail.ItemDetailActivity;
-import com.cidead.pmdm.stock.Item.Items.ItemsActivity;
-import com.cidead.pmdm.stock.Item.Items.ItemsCursorAdapter;
 import com.cidead.pmdm.stock.R;
+import com.cidead.pmdm.stock.Workstation.AddEditWorkstation.AddEditWorkstationActivity;
+import com.cidead.pmdm.stock.Workstation.DBW.WorkstationContract;
+import com.cidead.pmdm.stock.Workstation.DBW.WorkstationDBHelper;
+import com.cidead.pmdm.stock.Workstation.WorkstationDetail.WorkstationDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /* Vista para la lista de Elementos del puesto de trabajo */
 
-public class WorkstationItemsFragment extends Fragment {
-    public static final int REQUEST_UPDATE_DELETE_ITEM = 2;
+public class WorkstationFragment extends Fragment {
+    public static final int REQUEST_UPDATE_DELETE_WORKSTATION = 2;
 
-    private ItemsDBHelper workstationDBHelper;
+    private WorkstationDBHelper workstationDBHelper;
 
     private ListView mWorkstationList;
-    private ItemsCursorAdapter mWorkstationAdapter;
+    private WorkstationCursorAdapter mWorkstationAdapter;
     private FloatingActionButton mAddButton;
 
 
-    public WorkstationItemsFragment() {
+    public WorkstationFragment() {
         // Required empty public constructor
     }
 
-    public static WorkstationItemsFragment newInstance() {
-        return new WorkstationItemsFragment();
+    public static WorkstationFragment newInstance() {
+        return new WorkstationFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_items, container, false);
+        View root = inflater.inflate(R.layout.fragment_workstation, container, false);
 
         // Referencias UI
-        mWorkstationList = (ListView) root.findViewById(R.id.items_list);
-        mWorkstationAdapter = new ItemsCursorAdapter(getActivity(), null);
-        mAddButton = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        mWorkstationList = (ListView) root.findViewById(R.id.workstation_list);
+        mWorkstationAdapter = new WorkstationCursorAdapter(getActivity(), null);
+        mAddButton = (FloatingActionButton) getActivity().findViewById(R.id.work);
 
         // Setup
         mWorkstationList.setAdapter(mWorkstationAdapter);
@@ -62,7 +60,7 @@ public class WorkstationItemsFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Cursor currentWorkstation = (Cursor) mWorkstationAdapter.getItem(i);
                 String currentWorkstationId = currentWorkstation.getString(
-                        currentWorkstation.getColumnIndex(ItemEntry.ID));
+                        currentWorkstation.getColumnIndex(WorkstationContract.WorkstationEntry.ID));
 
                 showDetailScreen(currentWorkstationId);
             }
@@ -78,10 +76,10 @@ public class WorkstationItemsFragment extends Fragment {
         getActivity().deleteDatabase(workstationDBHelper.DATABASE_NAME);
 
         // Instancia de helper
-        workstationDBHelper = new ItemsDBHelper(getActivity());
+        workstationDBHelper = new WorkstationDBHelper(getActivity());
 
         // Carga de datos
-        loadItems();
+        loadWorkstation();
 
         return root;
     }
@@ -91,19 +89,19 @@ public class WorkstationItemsFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (Activity.RESULT_OK == resultCode) {
             switch (requestCode) {
-                case AddEditItemsActivity.REQUEST_ADD_ITEM:
+                case AddEditWorkstationActivity.REQUEST_ADD_WORKSTATION:
                     showSuccessfullSavedMessage();
-                    loadItems();
+                    loadWorkstation();
                     break;
-                case REQUEST_UPDATE_DELETE_ITEM:
-                    loadItems();
+                case REQUEST_UPDATE_DELETE_WORKSTATION:
+                    loadWorkstation();
                     break;
             }
         }
     }
 
-    private void loadItems() {
-        new ItemsLoadTask().execute();
+    private void loadWorkstation() {
+        new WorkstationLoadTask().execute();
     }
 
     private void showSuccessfullSavedMessage() {
@@ -112,22 +110,22 @@ public class WorkstationItemsFragment extends Fragment {
     }
 
     private void showAddScreen() {
-        Intent intent = new Intent(getActivity(), AddEditItemsActivity.class);
-        startActivityForResult(intent, AddEditItemsActivity.REQUEST_ADD_ITEM);
+        Intent intent = new Intent(getActivity(), AddEditWorkstationActivity.class);
+        startActivityForResult(intent, AddEditWorkstationActivity.REQUEST_ADD_WORKSTATION);
     }
 
     //INICIAMOS LA ACTIVIDAD DE DETALLE
-    private void showDetailScreen(String ItemId) {
-        Intent intent = new Intent(getActivity(), ItemDetailActivity.class);
-        intent.putExtra(ItemsActivity.EXTRA_ITEM_ID, ItemId);
-        startActivityForResult(intent, REQUEST_UPDATE_DELETE_ITEM);
+    private void showDetailScreen(String WorkstationId) {
+        Intent intent = new Intent(getActivity(), WorkstationDetailActivity.class);
+        intent.putExtra(WorkstationActivity.EXTRA_WORKSTATION_ID, WorkstationId);
+        startActivityForResult(intent, REQUEST_UPDATE_DELETE_WORKSTATION);
     }
 
-    private class ItemsLoadTask extends AsyncTask<Void, Void, Cursor> {
+    private class WorkstationLoadTask extends AsyncTask<Void, Void, Cursor> {
 
         @Override
         protected Cursor doInBackground(Void... voids) {
-            return workstationDBHelper.getAllItems();
+            return workstationDBHelper.getAllWorkstation();
         }
 
         @Override

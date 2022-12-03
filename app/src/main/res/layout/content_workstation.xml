@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_items"
+    android:id="@+id/content_workstation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Item.Items.ItemsActivity"
-    tools:showIn="@layout/activity_items">
+    tools:context=".Workstation.Workstation.WorkstationActivity"
+    tools:showIn="@layout/activity_workstation">
 
 </RelativeLayout>

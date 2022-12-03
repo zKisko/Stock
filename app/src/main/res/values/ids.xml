@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="et_name" type="id" />
+    <item name="et_wname" type="id" />
     <item name="et_quantity" type="id" />
     <item name="et_condition" type="id" />
     <item name="et_description" type="id" />
+    <item name="et_wdescription" type="id" />
     <item name="til_quantity" type="id" />
     <item name="til_condition" type="id" />
     <item name="til_description" type="id" />
+    <item name="til_wdescription" type="id" />
+    <item name="tw_description" type="id" />
 </resources>

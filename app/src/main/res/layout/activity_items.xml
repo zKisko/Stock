@@ -17,8 +17,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black"
-            app:popupTheme="@style/Animation.Design.BottomSheetDialog" />
+            android:background="@color/purple_200"
+            app:popupTheme="@style/Animation.Design.BottomSheetDialog"
+            app:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -30,8 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:tint="@color/black"
-        app:backgroundTint="@color/white"
+        android:tint="@color/white"
+        app:backgroundTint="@color/purple_200"
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_account_plus" />
 

@@ -17,13 +17,13 @@ public class ItemsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ItemsFragment fragment = (ItemsFragment)
-                getSupportFragmentManager().findFragmentById(R.id.items_container);
+                getSupportFragmentManager().findFragmentById(R.id.content_items);
 
         if (fragment == null) {
             fragment = ItemsFragment.newInstance();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.items_container, fragment)
+                    .add(R.id.content_items, fragment)
                     .commit();
         }
     }

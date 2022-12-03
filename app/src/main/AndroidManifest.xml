@@ -24,11 +24,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+      <!--  <activity
+            android:name=".Workstation.Workstation.WorkstationActivity"
+            android:exported="true"
+            android:label="Equipos"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
         <activity
+            android:name=".Workstation.WorkstationDetail.WorkstationDetailActivity"
+            android:label="Detalle del puesto de trabajo"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Workstation.AddEditWorkstation.AddEditWorkstationActivity"
+            android:label="Añadir/Editar puesto de trabajo"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> -->
+     <activity
             android:name=".Item.Items.ItemsActivity"
             android:exported="true"
             android:label="Elementos"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -36,11 +51,11 @@
         <activity
             android:name=".Item.ItemDetail.ItemDetailActivity"
             android:label="Detalle"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Item.AddEditItems.AddEditItemsActivity"
             android:label="Añadir/Editar elemento"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>
