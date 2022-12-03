@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Bienvenid@", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this, ItemsActivity.class));
                     }else {
+                        Toast.makeText(LoginActivity.this, "Email o contraseña no valido", Toast.LENGTH_SHORT).show();
                         Log.w("TAG", "Error:", task.getException());
                     }
                 }
