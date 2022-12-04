@@ -24,15 +24,15 @@ import com.google.android.material.textfield.TextInputLayout;
 public class AddEditWorkstationFragment extends Fragment {
     private static final String ARG_WORKSTATION_ID = "arg_workstation_id";
 
-    private String mWorkstationId;
+    private String WorkstationId;
 
-    private WorkstationDBHelper mWorkstationDBHelper;
+    private WorkstationDBHelper WorkstationDBHelper;
 
-    private FloatingActionButton mWSaveButton;
-    private TextInputEditText mWNameField;
-    private TextInputEditText mWDescriptionField;
-    private TextInputLayout mWNameLabel;
-    private TextInputLayout mWDescriptionLabel;
+    private FloatingActionButton wSaveButton;
+    private TextInputEditText wNameField;
+    private TextInputEditText wDescriptionField;
+    private TextInputLayout wNameLabel;
+    private TextInputLayout wDescriptionLabel;
 
 
     public AddEditWorkstationFragment() {
@@ -51,7 +51,7 @@ public class AddEditWorkstationFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mWorkstationId = getArguments().getString(ARG_WORKSTATION_ID);
+            WorkstationId = getArguments().getString(ARG_WORKSTATION_ID);
         }
     }
 
@@ -61,26 +61,24 @@ public class AddEditWorkstationFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_add_edit_workstation, container, false);
 
         // Referencias UI
-        mWSaveButton = (FloatingActionButton) getActivity().findViewById(R.id.work);
-        mWNameField = (TextInputEditText) root.findViewById(R.id.et_wname);
-
-        mWDescriptionField = (TextInputEditText) root.findViewById(R.id.et_wdescription);
-        mWNameLabel = (TextInputLayout) root.findViewById(R.id.til_wname);
-
-        mWDescriptionLabel = (TextInputLayout) root.findViewById(R.id.til_wdescription);
+        wSaveButton = (FloatingActionButton) getActivity().findViewById(R.id.work);
+        wNameField = (TextInputEditText) root.findViewById(R.id.f_wname);
+        wDescriptionField = (TextInputEditText) root.findViewById(R.id.f_wdescription);
+        wNameLabel = (TextInputLayout) root.findViewById(R.id.l_wname);
+        wDescriptionLabel = (TextInputLayout) root.findViewById(R.id.l_wdescription);
 
         // Eventos  //AÑADE ITEMS A TRAVES DEL BOTON SAVEBUTTON
-        mWSaveButton.setOnClickListener(new View.OnClickListener() {
+        wSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addEditWorkstation();
             }
         });
 
-        mWorkstationDBHelper = new WorkstationDBHelper(getActivity());
+        WorkstationDBHelper = new WorkstationDBHelper(getActivity());
 
         // Carga de datos
-        if (mWorkstationId != null) {
+        if (WorkstationId != null) {
             loadWorkstation();
         }
 
@@ -97,16 +95,16 @@ public class AddEditWorkstationFragment extends Fragment {
     private void addEditWorkstation() {
         boolean error = false;
 
-        String wname = mWNameField.getText().toString();
-        String wdescription = mWDescriptionField.getText().toString();
+        String wname = wNameField.getText().toString();
+        String wdescription = wDescriptionField.getText().toString();
 
         if (TextUtils.isEmpty(wname)) {
-            mWNameLabel.setError(getString(R.string.field_error));
+            wNameLabel.setError(getString(R.string.field_error));
             error = true;
         }
 
         if (TextUtils.isEmpty(wdescription)) {
-            mWDescriptionLabel.setError(getString(R.string.field_error));
+            wDescriptionLabel.setError(getString(R.string.field_error));
             error = true;
         }
 
@@ -137,8 +135,8 @@ public class AddEditWorkstationFragment extends Fragment {
     }
 
     private void showWorkstation(Workstation workstation) {
-        mWNameField.setText(workstation.getWName());
-        mWDescriptionField.setText(workstation.getWDescription());
+        wNameField.setText(workstation.getWName());
+        wDescriptionField.setText(workstation.getWDescription());
     }
 
     private void showLoadError() {
@@ -150,7 +148,7 @@ public class AddEditWorkstationFragment extends Fragment {
 
         @Override
         protected Cursor doInBackground(Void... voids) {
-            return mWorkstationDBHelper.getWorkstationById(mWorkstationId);
+            return WorkstationDBHelper.getWorkstationById(WorkstationId);
         }
 
         @Override
@@ -170,11 +168,11 @@ public class AddEditWorkstationFragment extends Fragment {
 
         @Override
         protected Boolean doInBackground(Workstation... workstation) {
-            if (mWorkstationId != null) {
-                return mWorkstationDBHelper.updateWorkstation(workstation[0], mWorkstationId) > 0;
+            if (WorkstationId != null) {
+                return WorkstationDBHelper.updateWorkstation(workstation[0], WorkstationId) > 0;
 
             } else {
-                return mWorkstationDBHelper.saveWorkstation(workstation[0]) > 0;
+                return WorkstationDBHelper.saveWorkstation(workstation[0]) > 0;
             }
 
         }

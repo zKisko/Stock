@@ -8,13 +8,13 @@
     tools:context=".Workstation.AddEditWorkstation.AddEditWorkstationActivity">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_wname"
+        android:id="@+id/l_wname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_wname"
+            android:id="@+id/f_wname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre"
@@ -23,15 +23,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_wdescription"
+        android:id="@+id/l_wdescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_wdescription"
+            android:id="@+id/f_wdescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:height="48dp"
             android:gravity="top|start"
             android:hint="Descripción/Observaciones"
             android:imeOptions="actionDone"

@@ -27,29 +27,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText txtUser;
-    private EditText txtMail;
-    private TextInputLayout txtPassword;
+    private EditText user;
+    private EditText email;
+    private TextInputLayout password;
     private Button btnRegister;
     private TextView lblLogin;
 
     private String userID;
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
+    private FirebaseAuth authentication;
+    private FirebaseFirestore firebaseFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        txtUser = findViewById(R.id.txtUser);
-        txtMail = findViewById(R.id.txtMail);
-        txtPassword = findViewById(R.id.txtPassword);
+        user = findViewById(R.id.user);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
         lblLogin = findViewById(R.id.lblLogin);
         btnRegister = findViewById(R.id.btnRegister);
 
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
+        authentication = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         btnRegister.setOnClickListener(view -> {
             createuser();
@@ -61,36 +61,36 @@ public class RegisterActivity extends AppCompatActivity {
                 openLoginActivity();
             }
         });
-    }//End onCreate
+    }
 
     public void openLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-    }// End openLoginActivity
+    }
 
     public void createuser(){
 
-        String name = txtUser.getText().toString();
-        String mail = txtMail.getText().toString();
-        String password = txtPassword.getEditText().getText().toString();
+        String name = user.getText().toString();
+        String mail = email.getText().toString();
+        String password = this.password.getEditText().getText().toString();
 
         if (TextUtils.isEmpty(name)){
-            txtMail.setError("Ingrese un Nombre");
-            txtMail.requestFocus();
+            email.setError("Ingrese un Nombre");
+            email.requestFocus();
         }else if (TextUtils.isEmpty(mail)){
-            txtMail.setError("Ingrese un Correo");
-            txtMail.requestFocus();
+            email.setError("Ingrese un Correo");
+            email.requestFocus();
         }else if (TextUtils.isEmpty(password)){
-            txtMail.setError("Ingrese una Contraseña");
-            txtMail.requestFocus();
+            email.setError("Ingrese una Contraseña");
+            email.requestFocus();
         }else {
 
-            mAuth.createUserWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            authentication.createUserWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
-                        userID = mAuth.getCurrentUser().getUid();
-                        DocumentReference documentReference = db.collection("users").document(userID);
+                        userID = authentication.getCurrentUser().getUid();
+                        DocumentReference documentReference = firebaseFirestore.collection("users").document(userID);
 
                         Map<String,Object> user=new HashMap<>();
                         user.put("Nombre", name);
@@ -112,4 +112,4 @@ public class RegisterActivity extends AppCompatActivity {
             });
         }
     }
-}// End RegisterActivity
+}

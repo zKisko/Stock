@@ -23,30 +23,30 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText txtMail;
-    private TextInputLayout txtPassword;
+    private EditText email;
+    private TextInputLayout password;
     private Button btnLogin;
-    private TextView lblRegister;
+    private TextView btnRegister;
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth authentication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        txtMail = findViewById(R.id.txtMail);
-        txtPassword = findViewById(R.id.txtPassword);
-        lblRegister = findViewById(R.id.lblRegister);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        btnRegister = findViewById(R.id.lblRegister);
         btnLogin = findViewById(R.id.btnLogin);
 
-        mAuth = FirebaseAuth.getInstance();
+        authentication = FirebaseAuth.getInstance();
 
         btnLogin.setOnClickListener(view -> {
             userLogin();
         });
 
-        lblRegister.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openRegisterActivity();
@@ -60,18 +60,18 @@ public class LoginActivity extends AppCompatActivity {
     }// End openRegisterActivity
 
     public void userLogin(){
-        String mail = txtMail.getText().toString();
-        String password = txtPassword.getEditText().getText().toString();
+        String mail = email.getText().toString();
+        String password = this.password.getEditText().getText().toString();
 
         if (TextUtils.isEmpty(mail)){
-            txtMail.setError("Ingrese un correo");
-            txtMail.requestFocus();
+            email.setError("Ingrese un correo");
+            email.requestFocus();
         }else if (TextUtils.isEmpty(password)){
             Toast.makeText(LoginActivity.this, "Ingrese una contraseña", Toast.LENGTH_SHORT).show();
-            txtPassword.requestFocus();
+            this.password.requestFocus();
         }else{
 
-            mAuth.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            authentication.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
@@ -85,4 +85,4 @@ public class LoginActivity extends AppCompatActivity {
             });
         }
     }
-}// End LoginActivity
+}

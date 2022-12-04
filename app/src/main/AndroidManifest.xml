@@ -24,7 +24,7 @@
                  <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>
         </activity>
-        <!--   <activity
+    <!--    <activity
                 android:name=".Workstation.Workstation.WorkstationActivity"
                 android:exported="true"
                 android:label="Equipos"
@@ -43,7 +43,7 @@
              android:name=".Workstation.AddEditWorkstation.AddEditWorkstationActivity"
              android:label="Añadir/Editar puesto de trabajo"
              android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> -->
-    <activity
+  <activity
             android:name=".Item.Items.ItemsActivity"
             android:exported="true"
             android:label="Elementos"

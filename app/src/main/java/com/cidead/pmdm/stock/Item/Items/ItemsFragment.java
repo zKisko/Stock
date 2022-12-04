@@ -50,7 +50,7 @@ public class ItemsFragment extends Fragment {
         // Referencias UI
         mItemsList = (ListView) root.findViewById(R.id.items_list);
         mItemsAdapter = new ItemsCursorAdapter(getActivity(), null);
-        mAddButton = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        mAddButton = (FloatingActionButton) getActivity().findViewById(R.id.savebtn);
 
         // Setup
         mItemsList.setAdapter(mItemsAdapter);
