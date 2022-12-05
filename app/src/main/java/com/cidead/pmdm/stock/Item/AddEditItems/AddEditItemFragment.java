@@ -41,7 +41,7 @@ public class AddEditItemFragment extends Fragment {
 
 
     public AddEditItemFragment() {
-        // Required empty public constructor
+        // CONTRUCTOR VACIO
     }
 
     public static AddEditItemFragment newInstance(String itemId) {

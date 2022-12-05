@@ -1,4 +1,4 @@
-/*con esta clase java creo el esquema de la BD para los items*/
+/*con esta clase java creo el esquema de los campos que va a contener la tabla para los items de la BD */
 
 package com.cidead.pmdm.stock.Item.DB;
 

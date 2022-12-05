@@ -28,11 +28,9 @@ public class WorkstationCursorAdapter extends CursorAdapter {
 
         //Referencia UI.
         TextView nameText = (TextView) view.findViewById(R.id.tw_name);
-       // final ImageView avatarImage = (ImageView) view.findViewById(R.id.iv_avatar);
 
         //Recoger los valores
        String wname = cursor.getString(cursor.getColumnIndex(WorkstationEntry.WNAME));
-      //  String avatar = cursor.getString(cursor.getColumnIndex(ItemEntry.AVATARURL));
 
         //Setup
         nameText.setText(wname);

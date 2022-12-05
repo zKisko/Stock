@@ -52,12 +52,12 @@ public class LoginActivity extends AppCompatActivity {
                 openRegisterActivity();
             }
         });
-    }//End onCreate
+    }
 
     public void openRegisterActivity() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-    }// End openRegisterActivity
+    }
 
     public void userLogin(){
         String mail = email.getText().toString();

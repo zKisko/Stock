@@ -29,13 +29,13 @@ public class ItemsFragment extends Fragment {
 
     private ItemsDBHelper itemsDBHelper;
 
-    private ListView mItemsList;
-    private ItemsCursorAdapter mItemsAdapter;
-    private FloatingActionButton mAddButton;
+    private ListView ItemsList;
+    private ItemsCursorAdapter ItemsAdapter;
+    private FloatingActionButton AddButton;
 
 
     public ItemsFragment() {
-        // Required empty public constructor
+        // CONSTRUCTOR VACIO
     }
 
     public static ItemsFragment newInstance() {
@@ -48,25 +48,25 @@ public class ItemsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_items, container, false);
 
         // Referencias UI
-        mItemsList = (ListView) root.findViewById(R.id.items_list);
-        mItemsAdapter = new ItemsCursorAdapter(getActivity(), null);
-        mAddButton = (FloatingActionButton) getActivity().findViewById(R.id.savebtn);
+        ItemsList = (ListView) root.findViewById(R.id.items_list);
+        ItemsAdapter = new ItemsCursorAdapter(getActivity(), null);
+        AddButton = (FloatingActionButton) getActivity().findViewById(R.id.savebtn);
 
         // Setup
-        mItemsList.setAdapter(mItemsAdapter);
+        ItemsList.setAdapter(ItemsAdapter);
 
         //Eventos: agregamos una escucha con setOnItemClickListener
-        mItemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ItemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Cursor currentItem = (Cursor) mItemsAdapter.getItem(i);
+                Cursor currentItem = (Cursor) ItemsAdapter.getItem(i);
                 String currentItemId = currentItem.getString(
                         currentItem.getColumnIndex(ItemEntry.ID));
 
                 showDetailScreen(currentItemId);
             }
         });
-        mAddButton.setOnClickListener(new View.OnClickListener() {
+        AddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAddScreen();
@@ -132,7 +132,7 @@ public class ItemsFragment extends Fragment {
         @Override
         protected void onPostExecute(Cursor cursor) {
             if (cursor != null && cursor.getCount() > 0) {
-                mItemsAdapter.swapCursor(cursor);
+                ItemsAdapter.swapCursor(cursor);
             } else {
                 // Mostrar estado vacio
             }

@@ -36,7 +36,7 @@ public class AddEditWorkstationFragment extends Fragment {
 
 
     public AddEditWorkstationFragment() {
-        // Required empty public constructor
+        // CONSTRUCTOR VACIO
     }
 
     public static AddEditWorkstationFragment newInstance(String workstationId) {
@@ -55,7 +55,7 @@ public class AddEditWorkstationFragment extends Fragment {
         }
     }
 
-    @Override  //ESTA CLASE VERIFICA EL ID DEL Workstation PARA CARGAR LOS DATOS DE ELEMENTOS EXISTENTES
+    @Override  //ESTA CLASE VERIFICA EL ID DEL WORKSTATION PARA CARGAR LOS DATOS DE ELEMENTOS EXISTENTES
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_add_edit_workstation, container, false);
@@ -67,7 +67,7 @@ public class AddEditWorkstationFragment extends Fragment {
         wNameLabel = (TextInputLayout) root.findViewById(R.id.l_wname);
         wDescriptionLabel = (TextInputLayout) root.findViewById(R.id.l_wdescription);
 
-        // Eventos  //AÑADE ITEMS A TRAVES DEL BOTON SAVEBUTTON
+        // Eventos  //AÑADE WORKSTATION A TRAVES DEL BOTON SAVEBUTTON
         wSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +77,7 @@ public class AddEditWorkstationFragment extends Fragment {
 
         WorkstationDBHelper = new WorkstationDBHelper(getActivity());
 
-        // Carga de datos
+        // CARGA DE DATOS
         if (WorkstationId != null) {
             loadWorkstation();
         }

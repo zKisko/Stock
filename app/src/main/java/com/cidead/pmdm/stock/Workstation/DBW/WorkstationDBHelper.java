@@ -1,4 +1,4 @@
-//CLASE QUE MANEJA LA BASE DE DATOS
+//CLASE QUE MANEJA LA BASE DE DATOS WORKSTATION
 
 package com.cidead.pmdm.stock.Workstation.DBW;
 

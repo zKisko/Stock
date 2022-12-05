@@ -28,13 +28,13 @@ public class WorkstationFragment extends Fragment {
 
     private WorkstationDBHelper workstationDBHelper;
 
-    private ListView mWorkstationList;
-    private WorkstationCursorAdapter mWorkstationAdapter;
-    private FloatingActionButton mAddButton;
+    private ListView WorkstationList;
+    private WorkstationCursorAdapter WorkstationAdapter;
+    private FloatingActionButton wAddButton;
 
 
     public WorkstationFragment() {
-        // Required empty public constructor
+        // CONTRUCTOR VACIO
     }
 
     public static WorkstationFragment newInstance() {
@@ -47,25 +47,25 @@ public class WorkstationFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_workstation, container, false);
 
         // Referencias UI
-        mWorkstationList = (ListView) root.findViewById(R.id.workstation_list);
-        mWorkstationAdapter = new WorkstationCursorAdapter(getActivity(), null);
-        mAddButton = (FloatingActionButton) getActivity().findViewById(R.id.work);
+        WorkstationList = (ListView) root.findViewById(R.id.workstation_list);
+        WorkstationAdapter = new WorkstationCursorAdapter(getActivity(), null);
+        wAddButton = (FloatingActionButton) getActivity().findViewById(R.id.work);
 
         // Setup
-        mWorkstationList.setAdapter(mWorkstationAdapter);
+        WorkstationList.setAdapter(WorkstationAdapter);
 
         //Eventos: agregamos una escucha con setOnItemClickListener
-        mWorkstationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        WorkstationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Cursor currentWorkstation = (Cursor) mWorkstationAdapter.getItem(i);
+                Cursor currentWorkstation = (Cursor) WorkstationAdapter.getItem(i);
                 String currentWorkstationId = currentWorkstation.getString(
                         currentWorkstation.getColumnIndex(WorkstationContract.WorkstationEntry.ID));
 
                 showDetailScreen(currentWorkstationId);
             }
         });
-        mAddButton.setOnClickListener(new View.OnClickListener() {
+        wAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAddScreen();
@@ -131,7 +131,7 @@ public class WorkstationFragment extends Fragment {
         @Override
         protected void onPostExecute(Cursor cursor) {
             if (cursor != null && cursor.getCount() > 0) {
-                mWorkstationAdapter.swapCursor(cursor);
+                WorkstationAdapter.swapCursor(cursor);
             } else {
                 // Mostrar estado vacio
             }
