@@ -46,6 +46,9 @@ public class ItemsActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //CON ESTA LINEA AÑADIMOS EL ICONO DE FLECHA DE RETROCESO
+
+
         ItemsFragment fragment = (ItemsFragment)
                 getSupportFragmentManager().findFragmentById(R.id.content_items);
 
@@ -56,5 +59,12 @@ public class ItemsActivity extends AppCompatActivity {
                     .add(R.id.content_items, fragment)
                     .commit();
         }
+    }
+
+    //CON ESTE METODO HACEMOS QUE NUESTRA FLECHA REGRESE A LA PANTALLA ANTERIOR
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

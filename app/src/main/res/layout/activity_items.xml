@@ -13,13 +13,23 @@
         android:layout_width="match_parent"
         android:layout_height="110dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/purple_200"
-            app:popupTheme="@style/Animation.Design.BottomSheetDialog"
-            app:titleTextColor="@color/white" />
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/purple_200"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/Animation.Design.BottomSheetDialog" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 

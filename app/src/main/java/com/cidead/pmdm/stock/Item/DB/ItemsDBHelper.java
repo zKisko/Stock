@@ -20,16 +20,27 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + ItemsContract.ItemEntry.TABLE_NAME + " ("
-                + ItemsContract.ItemEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + ItemEntry.IDWORKSTATION + " INTEGER NOT NULL,"
-                + ItemsContract.ItemEntry.NAME + " TEXT NOT NULL,"
-                + ItemsContract.ItemEntry.QUANTITY + " TEXT NOT NULL,"
-                + ItemsContract.ItemEntry.CONDITION + " TEXT NOT NULL,"
-                + ItemsContract.ItemEntry.DESCRIPTION + " TEXT NOT NULL,"
-                + ItemsContract.ItemEntry.AVATARURL + " TEXT )");
 
-        mockData(db);
+        /** Creamos un Try Catch para comprobar si existe la tabla Workstation.
+         * En caso contrario, la creamos y la rellenamos con el contenido del mock de pruebas. */
+        if(db.isOpen()){
+
+        }else{
+        }
+        try{
+            getAllItems();
+        }catch(Exception e){
+            db.execSQL("CREATE TABLE " + ItemsContract.ItemEntry.TABLE_NAME + " ("
+                    + ItemsContract.ItemEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + ItemEntry.IDWORKSTATION + " INTEGER NOT NULL,"
+                    + ItemsContract.ItemEntry.NAME + " TEXT NOT NULL,"
+                    + ItemsContract.ItemEntry.QUANTITY + " TEXT NOT NULL,"
+                    + ItemsContract.ItemEntry.CONDITION + " TEXT NOT NULL,"
+                    + ItemsContract.ItemEntry.DESCRIPTION + " TEXT NOT NULL,"
+                    + ItemsContract.ItemEntry.AVATARURL + " TEXT )");
+
+            mockData(db);
+        }
     }
 
     // Insertamos datos ficticios para prueba inicial

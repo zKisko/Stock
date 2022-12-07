@@ -30,10 +30,7 @@ public class AddEditWorkstationFragment extends Fragment {
 
     private FloatingActionButton wSaveButton;
     private TextInputEditText wNameField;
-   // private TextInputEditText wDescriptionField;
     private TextInputLayout wNameLabel;
-   // private TextInputLayout wDescriptionLabel;
-
 
     public AddEditWorkstationFragment() {
         // CONSTRUCTOR VACIO
@@ -63,9 +60,7 @@ public class AddEditWorkstationFragment extends Fragment {
         // Referencias UI
         wSaveButton = (FloatingActionButton) getActivity().findViewById(R.id.work);
         wNameField = (TextInputEditText) root.findViewById(R.id.f_wname);
-       // wDescriptionField = (TextInputEditText) root.findViewById(R.id.f_wdescription);
         wNameLabel = (TextInputLayout) root.findViewById(R.id.l_wname);
-      //  wDescriptionLabel = (TextInputLayout) root.findViewById(R.id.l_wdescription);
 
         // Eventos  //AÑADE WORKSTATION A TRAVES DEL BOTON SAVEBUTTON
         wSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -96,17 +91,11 @@ public class AddEditWorkstationFragment extends Fragment {
         boolean error = false;
 
         String wname = wNameField.getText().toString();
-      //  String wdescription = wDescriptionField.getText().toString();
 
         if (TextUtils.isEmpty(wname)) {
             wNameLabel.setError(getString(R.string.field_error));
             error = true;
         }
-
-      /**  if (TextUtils.isEmpty(wdescription)) {
-            wDescriptionLabel.setError(getString(R.string.field_error));
-            error = true;
-        }*/
 
         if (error) {
             return;

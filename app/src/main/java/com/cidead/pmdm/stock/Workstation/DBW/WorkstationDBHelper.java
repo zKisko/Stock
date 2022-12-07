@@ -18,11 +18,24 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + WorkstationContract.WorkstationEntry.TABLE_NAME + " ("
-                + WorkstationContract.WorkstationEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + WorkstationContract.WorkstationEntry.WNAME + " TEXT NOT NULL )");
+        /** Creamos un Try Catch para comprobar si existe la tabla Workstation.
+         * En caso contrario, la creamos y la rellenamos con el contenido del mock de pruebas. */
+        if(db.isOpen()){
+            // ABRIRIA LA DB SI NO HAY PROBLEMA
+        }else{
 
-        mockData(db);
+        }
+        try{
+            getAllWorkstation();
+
+        }catch(Exception e) {
+
+            db.execSQL("CREATE TABLE " + WorkstationContract.WorkstationEntry.TABLE_NAME + " ("
+                    + WorkstationContract.WorkstationEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + WorkstationContract.WorkstationEntry.WNAME + " TEXT NOT NULL )");
+
+            mockData(db);
+        }
     }
 
     // Insertamos datos ficticios para prueba inicial

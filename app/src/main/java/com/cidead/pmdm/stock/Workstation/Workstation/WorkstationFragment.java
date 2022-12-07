@@ -3,8 +3,10 @@ package com.cidead.pmdm.stock.Workstation.Workstation;
 import static com.cidead.pmdm.stock.Item.DB.CommonVar.*;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -76,11 +78,12 @@ public class WorkstationFragment extends Fragment {
             }
         });
 
-
-        getActivity().deleteDatabase(DATABASE_NAME);
+        SQLiteDatabase db = getActivity().openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+        //getActivity().deleteDatabase(DATABASE_NAME);
 
         // Instancia de helper
         workstationDBHelper = new WorkstationDBHelper(getActivity());
+        workstationDBHelper.onCreate(db);
 
         // Carga de datos
         loadWorkstation();

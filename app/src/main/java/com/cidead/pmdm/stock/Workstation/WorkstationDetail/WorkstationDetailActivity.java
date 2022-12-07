@@ -23,6 +23,7 @@ public class WorkstationDetailActivity extends AppCompatActivity {
 
         WorkstationDetailFragment fragment = (WorkstationDetailFragment)
                 getSupportFragmentManager().findFragmentById(R.id.content_workstation_detail);
+
         if (fragment == null) {
             fragment = WorkstationDetailFragment.newInstance(id);
             getSupportFragmentManager()

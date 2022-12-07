@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.cidead.pmdm.stock.Item.DB.Item;
 import com.cidead.pmdm.stock.Item.DB.ItemsDBHelper;
+import com.cidead.pmdm.stock.Item.Items.FileIOWorkstation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -38,6 +39,8 @@ public class AddEditItemFragment extends Fragment {
     private TextInputLayout QuantityLabel;
     private TextInputLayout ConditionLabel;
     private TextInputLayout DescriptionLabel;
+
+    private Integer idWorkstation;
 
 
     public AddEditItemFragment() {
@@ -104,6 +107,9 @@ public class AddEditItemFragment extends Fragment {
     private void addEditItem() {
         boolean error = false;
 
+        FileIOWorkstation fichero = new FileIOWorkstation(); //CREAMOS LA VARIABLE FICHERO CON LA CARGA DE LOS DATOS
+        idWorkstation = Integer.valueOf(fichero.leerWorkstation(getContext())); // LEEMOS EL DATO idWorkstation DE FICHERO Y LO PASAMOS A UN ENTERO
+
         String name = NameField.getText().toString();
         String quantity = QuantityField.getText().toString();
         String condition = ConditionField.getText().toString();
@@ -134,9 +140,7 @@ public class AddEditItemFragment extends Fragment {
             return;
         }
 
-        int idworkstation = 1; //provisional
-
-        Item item = new Item(idworkstation, name, condition,quantity,condition,"");
+        Item item = new Item(idWorkstation, name, condition,quantity,condition,"");
 
         new AddEditItemTask().execute(item);
 

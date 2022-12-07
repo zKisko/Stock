@@ -10,7 +10,7 @@ public class ItemsContract {
 
         public static final String TABLE_NAME ="Item";
 
-        public static final String _ID = "id";
+        public static final String _ID = "_id";
         public static final String IDWORKSTATION = "id_workstation";
         public static final String NAME = "name";
         public static final String QUANTITY = "quantity";

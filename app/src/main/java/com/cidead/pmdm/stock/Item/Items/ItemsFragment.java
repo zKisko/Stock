@@ -1,8 +1,10 @@
 package com.cidead.pmdm.stock.Item.Items;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -74,12 +76,11 @@ public class ItemsFragment extends Fragment {
                 showAddScreen();
             }
         });
-
-
-        getActivity().deleteDatabase(DATABASE_NAME);
+        SQLiteDatabase db = getActivity().openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
 
         // Instancia de helper
         itemsDBHelper = new ItemsDBHelper(getActivity());
+        itemsDBHelper.onCreate(db);
 
         // CARGA DE DATOS DEL FICHERO TXT
         FileIOWorkstation fichero = new FileIOWorkstation();
