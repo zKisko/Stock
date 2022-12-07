@@ -56,7 +56,7 @@ public class ItemDetailFragment extends Fragment {
         if (getArguments() != null) {
             mItemId = getArguments().getString(ARG_ITEM_ID);
         }
-        setHasOptionsMenu(true); //CON ESTO HABILITAMOS EL FRAGMENTO EN LA TOOLBAR
+        setHasOptionsMenu(true);        //CON ESTO HABILITAMOS EL FRAGMENTO EN LA TOOLBAR
     }
 
     @Override
@@ -82,7 +82,7 @@ public class ItemDetailFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item) {
-        switch (item.getItemId()){ // CREAMOS LAS OPCIONES DEL MENU EN EL TOOLBAR DEL FRAGMENTO
+        switch (item.getItemId()){      // CREAMOS LAS OPCIONES DEL MENU EN EL TOOLBAR DEL FRAGMENTO
             case R.id.action_edit:
                 showEditScreen();
                 break;
@@ -115,34 +115,34 @@ public class ItemDetailFragment extends Fragment {
         mDescription.setText(item.getDescription());
     }
 
-    //INICIA LA ACTIVIDAD DE EDICION EXPRESADA EN LA CLASE AddEditItemsActivity
-    private void showEditScreen() {
+    private void showEditScreen() {         //INICIA LA ACTIVIDAD DE EDICION EXPRESADA EN LA CLASE AddEditItemsActivity
+
         Intent intent = new Intent(getActivity(), AddEditItemsActivity.class);
         intent.putExtra(ItemsActivity.EXTRA_ITEM_ID, mItemId);
         startActivityForResult(intent, ItemsFragment.REQUEST_UPDATE_DELETE_ITEM);
     }
 
-    /*SI EL ELIMINADO DEL ITEM ES CORRECTO SEGUIRÍA SU CURSO
-   DE LO CONTRARIO MOSTRARIA UN ESTADO DE ERROR CON LA CLASE SHOWDELETEERROR*/
-    private void showItemsScreen(boolean requery) {
+
+    private void showItemsScreen(boolean requery) {     //SI EL ELIMINADO DEL ITEM ES CORRECTO SEGUIRÍA SU CURSO
+
         if (!requery) {
-            showDeleteError();
+            showDeleteError();     //DE LO CONTRARIO MOSTRARIA UN ESTADO DE ERROR CON LA CLASE SHOWDELETEERROR
         }
         getActivity().setResult(requery ? Activity.RESULT_OK : Activity.RESULT_CANCELED);
         getActivity().finish();
     }
 
-    private void showLoadError() { //AVISO DE ERROR EN LA CARGA DEL ITEM
+    private void showLoadError() {      //AVISO DE ERROR EN LA CARGA DEL ITEM
         Toast.makeText(getActivity(),
             "Error al cargar información", Toast.LENGTH_SHORT).show();
     }
 
-    private void showDeleteError() { //AVISO DE ERROR AL ELIMINAR ELEMENTO DEL ITEM
+    private void showDeleteError() {        //AVISO DE ERROR AL ELIMINAR ELEMENTO DEL ITEM
             Toast.makeText(getActivity(),
                     "Error al eliminar elemento", Toast.LENGTH_SHORT).show();
         }
 
-    private class GetItemsByIdTask extends AsyncTask<Void, Void, Cursor> {   //con esto vamos a obtener el Item por ID
+    private class GetItemsByIdTask extends AsyncTask<Void, Void, Cursor> {   //CON ESTO VAMOS A OBTENER EL ITEM POR ID
 
         @Override
         protected Cursor doInBackground(Void... voids) {
@@ -159,8 +159,7 @@ public class ItemDetailFragment extends Fragment {
         }
     }
 
-    //CON ESTA CLASE MANEJAMOS EL EVENTO DE BORRADO
-    private class DeleteItemTask extends AsyncTask<Void, Void, Integer> {
+    private class DeleteItemTask extends AsyncTask<Void, Void, Integer> {   //CON ESTA CLASE MANEJAMOS EL EVENTO DE BORRADO
 
         @Override
         protected Integer doInBackground(Void... voids) {

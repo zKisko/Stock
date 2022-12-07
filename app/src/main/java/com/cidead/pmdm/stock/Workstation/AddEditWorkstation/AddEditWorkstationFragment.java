@@ -30,9 +30,9 @@ public class AddEditWorkstationFragment extends Fragment {
 
     private FloatingActionButton wSaveButton;
     private TextInputEditText wNameField;
-    private TextInputEditText wDescriptionField;
+   // private TextInputEditText wDescriptionField;
     private TextInputLayout wNameLabel;
-    private TextInputLayout wDescriptionLabel;
+   // private TextInputLayout wDescriptionLabel;
 
 
     public AddEditWorkstationFragment() {
@@ -55,7 +55,7 @@ public class AddEditWorkstationFragment extends Fragment {
         }
     }
 
-    @Override  //ESTA CLASE VERIFICA EL ID DEL WORKSTATION PARA CARGAR LOS DATOS DE ELEMENTOS EXISTENTES
+    @Override  //ESTA CLASE VERIFICA EL IDWORKSTATION DEL WORKSTATION PARA CARGAR LOS DATOS DE ELEMENTOS EXISTENTES
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_add_edit_workstation, container, false);
@@ -63,9 +63,9 @@ public class AddEditWorkstationFragment extends Fragment {
         // Referencias UI
         wSaveButton = (FloatingActionButton) getActivity().findViewById(R.id.work);
         wNameField = (TextInputEditText) root.findViewById(R.id.f_wname);
-        wDescriptionField = (TextInputEditText) root.findViewById(R.id.f_wdescription);
+       // wDescriptionField = (TextInputEditText) root.findViewById(R.id.f_wdescription);
         wNameLabel = (TextInputLayout) root.findViewById(R.id.l_wname);
-        wDescriptionLabel = (TextInputLayout) root.findViewById(R.id.l_wdescription);
+      //  wDescriptionLabel = (TextInputLayout) root.findViewById(R.id.l_wdescription);
 
         // Eventos  //AÑADE WORKSTATION A TRAVES DEL BOTON SAVEBUTTON
         wSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -90,29 +90,29 @@ public class AddEditWorkstationFragment extends Fragment {
     }
 
 
-    /*ESTE METODO EXTRAE LOS DATOS DE LOS CAMPOS DE TEXTO,
+    /**ESTE METODO EXTRAE LOS DATOS DE LOS CAMPOS DE TEXTO,
      COMPRUEBA QUE NO ESTAN VACIOS Y LUEGO CREAN EL NUEVO ITEM*/
     private void addEditWorkstation() {
         boolean error = false;
 
         String wname = wNameField.getText().toString();
-        String wdescription = wDescriptionField.getText().toString();
+      //  String wdescription = wDescriptionField.getText().toString();
 
         if (TextUtils.isEmpty(wname)) {
             wNameLabel.setError(getString(R.string.field_error));
             error = true;
         }
 
-        if (TextUtils.isEmpty(wdescription)) {
+      /**  if (TextUtils.isEmpty(wdescription)) {
             wDescriptionLabel.setError(getString(R.string.field_error));
             error = true;
-        }
+        }*/
 
         if (error) {
             return;
         }
 
-        Workstation workstation = new Workstation(wname, wdescription);
+        Workstation workstation = new Workstation(wname);
 
         new AddEditWorkstationTask().execute(workstation);
 
@@ -136,7 +136,6 @@ public class AddEditWorkstationFragment extends Fragment {
 
     private void showWorkstation(Workstation workstation) {
         wNameField.setText(workstation.getWName());
-        wDescriptionField.setText(workstation.getWDescription());
     }
 
     private void showLoadError() {
@@ -176,12 +175,10 @@ public class AddEditWorkstationFragment extends Fragment {
             }
 
         }
-         /* DEPENDIENDO DE LA TAREA ASINCRONA DE ARRIBA (UPDATE O SAVE)
+         /** DEPENDIENDO DE LA TAREA ASINCRONA DE ARRIBA (UPDATE O SAVE)
          ESTA ACTIVIDAD NOS MOSTRARÁ EL NUEVO RESULTADO O UN MENSAJE DE ERROR */
         @Override
-        protected void onPostExecute(Boolean result) {
-            showWorkstationScreen(result);
-        }
+        protected void onPostExecute(Boolean result) { showWorkstationScreen(result); }
 
     }
 

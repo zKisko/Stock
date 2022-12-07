@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.cidead.pmdm.stock.Item.Items.ItemsActivity;
 import com.cidead.pmdm.stock.R;
+import com.cidead.pmdm.stock.Workstation.Workstation.WorkstationActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -76,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         Toast.makeText(LoginActivity.this, "Bienvenid@", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, ItemsActivity.class));
+                        startActivity(new Intent(LoginActivity.this, WorkstationActivity.class));
                     }else {
                         Toast.makeText(LoginActivity.this, "Email o contraseña no valido", Toast.LENGTH_SHORT).show();
                         Log.w("TAG", "Error:", task.getException());

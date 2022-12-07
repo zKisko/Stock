@@ -1,5 +1,7 @@
 package com.cidead.pmdm.stock.Workstation.Workstation;
 
+import static com.cidead.pmdm.stock.Item.DB.CommonVar.*;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.cidead.pmdm.stock.Item.Items.ItemsActivity;
 import com.cidead.pmdm.stock.R;
 import com.cidead.pmdm.stock.Workstation.AddEditWorkstation.AddEditWorkstationActivity;
 import com.cidead.pmdm.stock.Workstation.DBW.WorkstationContract;
@@ -25,6 +28,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class WorkstationFragment extends Fragment {
     public static final int REQUEST_UPDATE_DELETE_WORKSTATION = 2;
+    public static final int REQUEST_ITEMS = 1;
 
     private WorkstationDBHelper workstationDBHelper;
 
@@ -59,10 +63,10 @@ public class WorkstationFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Cursor currentWorkstation = (Cursor) WorkstationAdapter.getItem(i);
-                String currentWorkstationId = currentWorkstation.getString(
-                        currentWorkstation.getColumnIndex(WorkstationContract.WorkstationEntry.ID));
+                String currentWorkstationId= currentWorkstation.getString(
+                        currentWorkstation.getColumnIndex(WorkstationContract.WorkstationEntry._ID));
 
-                showDetailScreen(currentWorkstationId);
+                showItemsScreen(currentWorkstationId);
             }
         });
         wAddButton.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +77,7 @@ public class WorkstationFragment extends Fragment {
         });
 
 
-        getActivity().deleteDatabase(workstationDBHelper.DATABASE_NAME);
+        getActivity().deleteDatabase(DATABASE_NAME);
 
         // Instancia de helper
         workstationDBHelper = new WorkstationDBHelper(getActivity());
@@ -112,6 +116,13 @@ public class WorkstationFragment extends Fragment {
     private void showAddScreen() {
         Intent intent = new Intent(getActivity(), AddEditWorkstationActivity.class);
         startActivityForResult(intent, AddEditWorkstationActivity.REQUEST_ADD_WORKSTATION);
+    }
+
+    private void showItemsScreen(String WorkstationId) {
+
+        Intent intent = new Intent(getActivity(), ItemsActivity.class);
+        intent.putExtra(WorkstationActivity.EXTRA_WORKSTATION_ID, WorkstationId);
+        startActivity(intent);
     }
 
     //INICIAMOS LA ACTIVIDAD DE DETALLE

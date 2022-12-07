@@ -98,8 +98,6 @@ public class WorkstationDetailFragment extends Fragment {
 
     private void showWorkstation(Workstation workstation){
         mCollapsingView.setTitle(workstation.getWName());
-
-        mWDescription.setText(workstation.getWDescription());
     }
 
     //INICIA LA ACTIVIDAD DE EDICION EXPRESADA EN LA CLASE AddEditItemsActivity
@@ -109,7 +107,7 @@ public class WorkstationDetailFragment extends Fragment {
         startActivityForResult(intent, WorkstationFragment.REQUEST_UPDATE_DELETE_WORKSTATION);
     }
 
-    /*SI EL ELIMINADO DEL ITEM ES CORRECTO SEGUIRÍA SU CURSO
+    /**SI EL ELIMINADO DEL ITEM ES CORRECTO SEGUIRÍA SU CURSO
    DE LO CONTRARIO MOSTRARIA UN ESTADO DE ERROR CON LA CLASE SHOWDELETEERROR*/
     private void showWorkstationScreen(boolean requery) {
         if (!requery) {
@@ -119,18 +117,18 @@ public class WorkstationDetailFragment extends Fragment {
         getActivity().finish();
     }
 
-    private void showLoadError() { //AVISO DE ERROR EN LA CARGA DEL ITEM
+    private void showLoadError() { //AVISO DE ERROR EN LA CARGA DEL PUESTO DE TRABAJO
         Toast.makeText(getActivity(),
             "Error al cargar información", Toast.LENGTH_SHORT).show();
     }
 
-    private void showDeleteError() { //AVISO DE ERROR AL ELIMINAR ELEMENTO DEL ITEM
+    private void showDeleteError() { //AVISO DE ERROR AL ELIMINAR ELEMENTO DEL PUESTO DE TRABAJO
             Toast.makeText(getActivity(),
                     "Error al eliminar elemento", Toast.LENGTH_SHORT).show();
         }
 
-    private class GetWorkstationByIdTask extends AsyncTask<Void, Void, Cursor> {   //con esto vamos a obtener el Item por ID
-
+    private class GetWorkstationByIdTask extends AsyncTask<Void, Void, Cursor> {
+        //OBTENEMOS EL PUESTO DE TRABAJO POR ID
         @Override
         protected Cursor doInBackground(Void... voids) {
             return mWorkstationDBHelper.getWorkstationById(mWorkstationId);

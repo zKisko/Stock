@@ -18,11 +18,11 @@ import com.cidead.pmdm.stock.Item.AddEditItems.AddEditItemsActivity;
 import com.cidead.pmdm.stock.Item.DB.ItemsContract.ItemEntry;
 import com.cidead.pmdm.stock.Item.DB.ItemsDBHelper;
 import com.cidead.pmdm.stock.Item.ItemDetail.ItemDetailActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import com.cidead.pmdm.stock.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import static com.cidead.pmdm.stock.Item.DB.CommonVar.*;
 
-/* Vista para la lista de Elementos del puesto de trabajo */
+/** Vista para la lista de Elementos del puesto de trabajo */
 
 public class ItemsFragment extends Fragment {
     public static final int REQUEST_UPDATE_DELETE_ITEM = 2;
@@ -32,6 +32,8 @@ public class ItemsFragment extends Fragment {
     private ListView ItemsList;
     private ItemsCursorAdapter ItemsAdapter;
     private FloatingActionButton AddButton;
+
+    private String workStation;  // CREAMOS VARIABLE PARA GUARDAR EL WORKSTATION CON EL QUE TRABAJAMOS
 
 
     public ItemsFragment() {
@@ -61,7 +63,7 @@ public class ItemsFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Cursor currentItem = (Cursor) ItemsAdapter.getItem(i);
                 String currentItemId = currentItem.getString(
-                        currentItem.getColumnIndex(ItemEntry.ID));
+                        currentItem.getColumnIndex(ItemEntry._ID));
 
                 showDetailScreen(currentItemId);
             }
@@ -74,13 +76,15 @@ public class ItemsFragment extends Fragment {
         });
 
 
-        getActivity().deleteDatabase(itemsDBHelper.DATABASE_NAME);
+        getActivity().deleteDatabase(DATABASE_NAME);
 
         // Instancia de helper
         itemsDBHelper = new ItemsDBHelper(getActivity());
 
-        // Carga de datos
-        loadItems();
+        // CARGA DE DATOS DEL FICHERO TXT
+        FileIOWorkstation fichero = new FileIOWorkstation();
+        workStation = fichero.leerWorkstation(getContext());
+        loadItems(workStation);
 
         return root;
     }
@@ -92,10 +96,10 @@ public class ItemsFragment extends Fragment {
             switch (requestCode) {
                 case AddEditItemsActivity.REQUEST_ADD_ITEM:
                     showSuccessfullSavedMessage();
-                    loadItems();
+                    loadItems(workStation);
                     break;
                 case REQUEST_UPDATE_DELETE_ITEM:
-                    loadItems();
+                    loadItems(workStation);
                     break;
             }
         }
@@ -104,6 +108,15 @@ public class ItemsFragment extends Fragment {
     private void loadItems() {
         new ItemsLoadTask().execute();
     }
+
+
+    /** CARGA DE LISTADO DE ITEMS
+     * @param workStation  */
+
+    private void loadItems(String workStation) {
+        new ItemsForWorkspaceLoadTask().execute();
+    }
+
 
     private void showSuccessfullSavedMessage() {
         Toast.makeText(getActivity(),
@@ -127,6 +140,23 @@ public class ItemsFragment extends Fragment {
         @Override
         protected Cursor doInBackground(Void... voids) {
             return itemsDBHelper.getAllItems();
+        }
+
+        @Override
+        protected void onPostExecute(Cursor cursor) {
+            if (cursor != null && cursor.getCount() > 0) {
+                ItemsAdapter.swapCursor(cursor);
+            } else {
+                // Mostrar estado vacio
+            }
+        }
+    }
+
+    private class ItemsForWorkspaceLoadTask extends AsyncTask<Void, Void, Cursor> {
+
+        @Override
+        protected Cursor doInBackground(Void... voids) {
+            return itemsDBHelper.getItemsByIdWorkstation(workStation);
         }
 
         @Override

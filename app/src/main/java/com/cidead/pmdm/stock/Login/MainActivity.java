@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.cidead.pmdm.stock.R;
+import com.cidead.pmdm.stock.Workstation.DBW.Workstation;
+import com.cidead.pmdm.stock.Workstation.Workstation.WorkstationActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         if (user == null){
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }else{
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            startActivity(new Intent(MainActivity.this, WorkstationActivity.class));
         }
     }
 }

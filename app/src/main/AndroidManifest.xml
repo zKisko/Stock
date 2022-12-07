@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -9,41 +13,37 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-       <activity
-             android:name=".Login.RegisterActivity"
-             android:exported="true" />
         <activity
-             android:name=".Login.LoginActivity"
-             android:exported="true" />
+            android:name=".Login.RegisterActivity"
+            android:exported="true" />
         <activity
-             android:name=".Login.MainActivity"
-             android:exported="true">
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
+            android:name=".Login.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Login.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
-        </activity>
-   <!--    <activity
-                android:name=".Workstation.Workstation.WorkstationActivity"
-                android:exported="true"
-                android:label="Equipos"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
-             android:name=".Workstation.WorkstationDetail.WorkstationDetailActivity"
-             android:label="Detalle del puesto de trabajo"
-             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:name=".Workstation.Workstation.WorkstationActivity"
+            android:exported="true"
+            android:label="Equipos"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
         <activity
-             android:name=".Workstation.AddEditWorkstation.AddEditWorkstationActivity"
-             android:label="Añadir/Editar puesto de trabajo"
-             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />  -->
-  <activity
+            android:name=".Workstation.WorkstationDetail.WorkstationDetailActivity"
+            android:label="Detalle del puesto de trabajo"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Workstation.AddEditWorkstation.AddEditWorkstationActivity"
+            android:label="Añadir/Editar puesto de trabajo"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name=".Item.Items.ItemsActivity"
             android:exported="true"
             android:label="Elementos"

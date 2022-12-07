@@ -8,12 +8,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static com.cidead.pmdm.stock.Item.DB.ItemsContract.ItemEntry;
+import static com.cidead.pmdm.stock.Item.DB.CommonVar.*;
 
 
 
 public class ItemsDBHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "Items.db";
 
     public ItemsDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -23,13 +22,12 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + ItemsContract.ItemEntry.TABLE_NAME + " ("
                 + ItemsContract.ItemEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + ItemsContract.ItemEntry.ID + " TEXT NOT NULL,"
+                + ItemEntry.IDWORKSTATION + " INTEGER NOT NULL,"
                 + ItemsContract.ItemEntry.NAME + " TEXT NOT NULL,"
                 + ItemsContract.ItemEntry.QUANTITY + " TEXT NOT NULL,"
                 + ItemsContract.ItemEntry.CONDITION + " TEXT NOT NULL,"
                 + ItemsContract.ItemEntry.DESCRIPTION + " TEXT NOT NULL,"
-                + ItemsContract.ItemEntry.AVATARURL + " TEXT,"
-                + "UNIQUE (" + ItemsContract.ItemEntry.ID + "))");
+                + ItemsContract.ItemEntry.AVATARURL + " TEXT )");
 
         mockData(db);
     }
@@ -37,14 +35,15 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
     // Insertamos datos ficticios para prueba inicial
 
     private void mockData(SQLiteDatabase sqLiteDatabase) {
-        mockItem(sqLiteDatabase, new Item("Monitor", "3","Nuevo", "Monitor LG 24 pulgadas.",""));
-        mockItem(sqLiteDatabase, new Item("Teclado", "", "", "", ""));
-        mockItem(sqLiteDatabase, new Item("Raton", "", "", "", ""));
-        mockItem(sqLiteDatabase, new Item("Torre", "", "", "", "" ));
-        mockItem(sqLiteDatabase, new Item("Cable HDMI", "", "", "", ""));
-        mockItem(sqLiteDatabase, new Item("Cable de alimentación", "", "", "", ""));
-        mockItem(sqLiteDatabase, new Item("Mesa de escritorio", "", "", "", ""));
-        mockItem(sqLiteDatabase, new Item("Silla de oficina", "", "", "", ""));
+        mockItem(sqLiteDatabase, new Item(1,"Monitor", "3","Nuevo", "Monitor LG 24 pulgadas.",null));
+        mockItem(sqLiteDatabase, new Item(1,"Teclado", "2", "Nuevo", "Monitor", null));
+        mockItem(sqLiteDatabase, new Item(1,"Raton", "1", "Nuevo", "Monitor", null));
+        mockItem(sqLiteDatabase, new Item(1,"Torre", "3", "Nuevo", "Monitor", null ));
+        mockItem(sqLiteDatabase, new Item(2,"Cable HDMI", "2", "Nuevo", "Monitor", null));
+        mockItem(sqLiteDatabase, new Item(2,"Cable de alimentación", "3", "Nuevo", "Monitor", null));
+        mockItem(sqLiteDatabase, new Item(2,"Mesa de escritorio", "2", "Nuevo", "Monitor", null));
+        mockItem(sqLiteDatabase, new Item(2,"Silla de oficina", "1", "Nuevo", "Monitor", null));
+
     }
 
     public long mockItem(SQLiteDatabase db, Item item) {
@@ -58,7 +57,7 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // No hay operaciones
     }
-
+    // ESTE METODO SALVA (GUARDA) EL ITEM QUE CREEMOS
     public long saveItem(Item item) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
@@ -86,7 +85,7 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
         Cursor c = getReadableDatabase().query(
                 ItemEntry.TABLE_NAME,
                 null,
-                ItemEntry.ID + " LIKE ?",
+                ItemEntry._ID + " LIKE ?",
                 new String[]{itemId},
                 null,
                 null,
@@ -94,20 +93,46 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    /**
+     * @author: Kisko
+     * @param idWorkstation
+     * @return lista filtrada por el id de workstation
+     */
+    public Cursor getItemsByIdWorkstation(String idWorkstation) {
+        Cursor c = getReadableDatabase().query(
+                ItemEntry.TABLE_NAME,
+                null,
+                ItemEntry.IDWORKSTATION + " LIKE ?",
+                new String[]{idWorkstation},
+                null,
+                null,
+                null);
+        return c;
+    }
+
     //METODO PARA LA ELIMINACIÓN DE ELEMENTOS
+
+    /**
+     * @author: Kisko
+     * @param itemId
+     * @return devuelve un entero con info sobre
+     *          el estado del borrado de datos
+     */
     public int deleteItem(String itemId) {
         return getWritableDatabase().delete(
                 ItemEntry.TABLE_NAME,
-                ItemEntry.ID + " LIKE ?",
+                ItemEntry._ID + " LIKE ?",
                 new String[]{itemId});
     }
 
     //METODO PARA ACTUALIZAR ELEMENTOS
+
+
     public int updateItem(Item item, String itemId) {
         return getWritableDatabase().update(
                 ItemEntry.TABLE_NAME,
                 item.toContentValues(),
-                ItemEntry.ID + " LIKE ?",
+                ItemEntry._ID + " LIKE ?",
                 new String[]{itemId}
         );
     }

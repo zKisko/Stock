@@ -6,11 +6,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import static com.cidead.pmdm.stock.Item.DB.CommonVar.*;
 
 
 public class WorkstationDBHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "Workstation.db";
+
 
     public WorkstationDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -20,10 +20,7 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + WorkstationContract.WorkstationEntry.TABLE_NAME + " ("
                 + WorkstationContract.WorkstationEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + WorkstationContract.WorkstationEntry.ID + " TEXT NOT NULL,"
-                + WorkstationContract.WorkstationEntry.WNAME + " TEXT NOT NULL,"
-                + WorkstationContract.WorkstationEntry.WDESCRIPTION + " TEXT NOT NULL,"
-                + "UNIQUE (" + WorkstationContract.WorkstationEntry.ID + "))");
+                + WorkstationContract.WorkstationEntry.WNAME + " TEXT NOT NULL )");
 
         mockData(db);
     }
@@ -31,8 +28,8 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
     // Insertamos datos ficticios para prueba inicial
 
     private void mockData(SQLiteDatabase sqLiteDatabase) {
-        mockWorkstation(sqLiteDatabase, new Workstation("Puesto de Kisko", "Monitor LG 24 pulgadas."));
-        mockWorkstation(sqLiteDatabase, new Workstation("Puesto de Laura", "Remoto."));
+        mockWorkstation(sqLiteDatabase, new Workstation("Puesto de Kisko"));
+        mockWorkstation(sqLiteDatabase, new Workstation("Puesto de Laura"));
 
     }
 
@@ -70,7 +67,7 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
                         null);
     }
 
-    //METODO PARA OBTENER LOS ELEMENTOS POR ID
+    //METODO PARA OBTENER LOS PUESTOS DE TRABAJO POR ID
     public Cursor getWorkstationById(String WorkstationId) {
         Cursor c = getReadableDatabase().query(
                 WorkstationContract.WorkstationEntry.TABLE_NAME,
@@ -83,7 +80,7 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    //METODO PARA LA ELIMINACIÓN DE ELEMENTOS
+    //METODO PARA LA ELIMINACIÓN DE PUESTOS DE TRABAJO
     public int deleteWorkstation(String WorkstationId) {
         return getWritableDatabase().delete(
                 WorkstationContract.WorkstationEntry.TABLE_NAME,

@@ -60,7 +60,7 @@ public class AddEditItemFragment extends Fragment {
         }
     }
 
-    @Override  //ESTA CLASE VERIFICA EL ID DEL ITEM PARA CARGAR LOS DATOS DE ELEMENTOS EXISTENTES
+    @Override  //ESTA CLASE VERIFICA EL IDWORKSTATION DEL ITEM PARA CARGAR LOS DATOS DE ELEMENTOS EXISTENTES
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_add_edit_item, container, false);
@@ -134,7 +134,9 @@ public class AddEditItemFragment extends Fragment {
             return;
         }
 
-        Item item = new Item(name, condition, quantity, description, "");
+        int idworkstation = 1; //provisional
+
+        Item item = new Item(idworkstation, name, condition,quantity,condition,"");
 
         new AddEditItemTask().execute(item);
 

@@ -2,49 +2,42 @@
 
 package com.cidead.pmdm.stock.Workstation.DBW;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import java.util.UUID;
 
 /*inicio las variables de la plantilla*/
 
 public class Workstation {
-        private String id; /* codigo */
+        private String _id; /* codigo */
         private String wname; /* nombre */
-        private String wdescription; /* descripcion adicional*/
 
 
-        public Workstation(String wname,
-                           String wdescription) {
-            this.id = UUID.randomUUID().toString();
+        public Workstation(String wname) {
             this.wname = wname;
-            this.wdescription = wdescription;
-        }
+                  }
 
+    @SuppressLint("Range")
     public Workstation(Cursor cursor) {
-        id = cursor.getString(cursor.getColumnIndex(WorkstationContract.WorkstationEntry.ID));
+        _id = cursor.getString(cursor.getColumnIndex(WorkstationContract.WorkstationEntry._ID));
         wname = cursor.getString(cursor.getColumnIndex(WorkstationContract.WorkstationEntry.WNAME));
-        wdescription = cursor.getString(cursor.getColumnIndex(WorkstationContract.WorkstationEntry.WDESCRIPTION));
-    }
+         }
 
     public ContentValues toContentValues() {
         ContentValues values = new ContentValues();
-        values.put(WorkstationContract.WorkstationEntry.ID, id);
+        values.put(WorkstationContract.WorkstationEntry._ID, _id);
         values.put(WorkstationContract.WorkstationEntry.WNAME, wname);
-        values.put(WorkstationContract.WorkstationEntry.WDESCRIPTION, wdescription);
         return values;
     }
 
         public String getId() {
-            return id;
+            return _id;
         }
 
         public String getWName() {
             return wname;
         }
-
-        public String getWDescription() { return wdescription; }
 
     }
 

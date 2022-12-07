@@ -8,9 +8,9 @@ public class WorkstationContract {
 
     public static abstract class WorkstationEntry implements BaseColumns{
         public static final String TABLE_NAME ="Workstation";
-        public static final String ID = "id";
+
+        public static final String ID = "_id";
         public static final String WNAME = "wname";
-        public static final String WDESCRIPTION = "wdescription";
 
     }
 }
