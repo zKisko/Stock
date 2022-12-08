@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class WorkstationFragment extends Fragment {
 
     private WorkstationDBHelper workstationDBHelper;
 
-    private ListView WorkstationList;
+    private GridView WorkstationList;
     private WorkstationCursorAdapter WorkstationAdapter;
     private FloatingActionButton wAddButton;
 
@@ -53,7 +54,7 @@ public class WorkstationFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_workstation, container, false);
 
         // Referencias UI
-        WorkstationList = (ListView) root.findViewById(R.id.workstation_list);
+        WorkstationList = (GridView) root.findViewById(R.id.workstation_list);
         WorkstationAdapter = new WorkstationCursorAdapter(getActivity(), null);
         wAddButton = (FloatingActionButton) getActivity().findViewById(R.id.work);
 

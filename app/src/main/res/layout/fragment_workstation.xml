@@ -4,11 +4,18 @@
     android:layout_height="match_parent"
     tools:context=".Workstation.Workstation.WorkstationFragment">
 
-    <ListView
+    <GridView
         android:id="@+id/workstation_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:columnWidth="90dp"
         android:divider="@color/purple_200"
+        android:horizontalSpacing="05dp"
+        android:numColumns="3"
+        android:padding="@dimen/fab_margin"
+        android:stretchMode="columnWidth"
+        android:textAlignment="viewStart"
+        android:verticalSpacing="90dp"
         tools:listitem="@layout/list_workstation" />
 
 </GridLayout>

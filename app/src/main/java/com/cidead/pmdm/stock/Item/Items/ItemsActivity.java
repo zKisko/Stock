@@ -1,24 +1,31 @@
 package com.cidead.pmdm.stock.Item.Items;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableContainer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.cidead.pmdm.stock.R;
+import com.cidead.pmdm.stock.Workstation.Workstation.WorkstationActivity;
 
 public class ItemsActivity extends AppCompatActivity {
 
     public static final String EXTRA_ITEM_ID = "extra_item_id";
     public static final String EXTRA_WORKSTATION_ID = "extra_workstation_id";
+
+    private Button informacion; // VARIABLE QUE NOS SIRVE PARA EL MENSAJE EMERGENTE DE INFORMACIÓN
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,26 @@ public class ItemsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //CON ESTA LINEA AÑADIMOS EL ICONO DE FLECHA DE RETROCESO
 
+        // CON ESTOS METODOS PROGRAMAMOS LA VENTANA EMERGENTE CON LA INFORMACION QUE QUEREMOS MOSTRAR
+
+        informacion = (Button)findViewById(R.id.informacionItems);
+        informacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder info = new AlertDialog.Builder(ItemsActivity.this);
+                info.setMessage("Añade los elementos a los puestos de trabajo pulsando el botón de la parte inferior derecha con el simbolo + ")
+                        .setCancelable(false)
+                        .setNeutralButton("Ok", new DialogInterface.OnClickListener(){ // CREO EL OK PARA CERRRAR LA PANTALLA
+                            @Override
+                            public void onClick(DialogInterface dialog, int which){
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog titulo = info.create();
+                titulo.setTitle("Información:");
+                titulo.show(); // CON ESTOS METODOS AÑADIMOS TITULO Y HACEMOS QUE SE MUESTRE LA PANTALLA
+            }
+        });
 
         ItemsFragment fragment = (ItemsFragment)
                 getSupportFragmentManager().findFragmentById(R.id.content_items);
