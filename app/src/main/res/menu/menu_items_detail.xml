@@ -2,15 +2,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.cidead.pmdm.stock.Item.ItemDetail.ItemDetailActivity">
+
     <item
         android:id="@+id/action_edit"
-        android:icon="@drawable/img"
+        android:icon="@drawable/drive_file_rename_48"
+        android:iconTint="@color/purple_200"
         android:orderInCategory="1"
         android:title="@string/action_settings"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_delete"
-        android:icon="@drawable/eliminar"
+        android:icon="@drawable/delete_48dp"
+        android:iconTint="@color/purple_200"
         android:orderInCategory="2"
         android:title="@string/action_delete"
         app:showAsAction="ifRoom" />

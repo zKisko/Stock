@@ -11,14 +11,31 @@
         android:id="@+id/appBarLayout"
         style="@style/Animation.Design.BottomSheetDialog"
         android:layout_width="match_parent"
-        android:layout_height="110dp">
+        android:layout_height="130dp"
+        android:background="@drawable/fondo_nimio">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/purple_200"
-            app:popupTheme="@style/Animation.Design.BottomSheetDialog" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="112dp"
+                android:layout_height="31dp"
+                android:fontFamily="sans-serif-light"
+                android:text="Equipos"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:textStyle="bold|italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.759" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -33,6 +50,6 @@
         android:tint="@color/white"
         app:backgroundTint="@color/purple_200"
         app:fabSize="normal"
-        app:srcCompat="@drawable/ic_account_plus" />
+        app:srcCompat="@drawable/add_to_queue_48" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
