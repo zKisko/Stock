@@ -1,13 +1,16 @@
 package com.cidead.pmdm.stock.Item.AddEditItems;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.cidead.pmdm.stock.Item.DB.Item;
 import com.cidead.pmdm.stock.Item.DB.ItemsDBHelper;
+import com.cidead.pmdm.stock.Item.ItemDetail.ItemDetailActivity;
 import com.cidead.pmdm.stock.Item.Items.FileIOWorkstation;
+import com.cidead.pmdm.stock.Item.Items.ItemsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -148,14 +151,23 @@ public class AddEditItemFragment extends Fragment {
 
     }
 
-    private void showItemsScreen(Boolean requery) {
+    /**
+     * @param requery
+     * @param idItem
+     *
+     * Creamos este método para que una vez editado el item, vuelva a la pantalla del detalle de item
+     */
+
+    private void showItemScreen(Boolean requery, String idItem) {
         if (!requery) {
             showAddEditError();
             getActivity().setResult(Activity.RESULT_CANCELED);
         } else {
-            getActivity().setResult(Activity.RESULT_OK);
+            Intent intent = new Intent(getActivity(), ItemDetailActivity.class);
+            intent.putExtra(ItemsActivity.EXTRA_ITEM_ID, idItem);
+            startActivityForResult(intent, 2);
         }
-        getActivity().finish();
+        //getActivity().finish();
     }
 
     private void showAddEditError() {
@@ -209,7 +221,7 @@ public class AddEditItemFragment extends Fragment {
          ESTA ACTIVIDAD NOS MOSTRARÁ EL NUEVO RESULTADO O UN MENSAJE DE ERROR */
         @Override
         protected void onPostExecute(Boolean result) {
-            showItemsScreen(result);
+            showItemScreen(result, ItemId);
         }
     }
 }

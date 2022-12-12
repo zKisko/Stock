@@ -1,5 +1,7 @@
 package com.cidead.pmdm.stock.Item.ItemDetail;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -38,8 +40,11 @@ public class ItemDetailActivity extends AppCompatActivity {
         }
 
         @Override
-        public boolean onSupportNavigateUp(){
-            onBackPressed();
+        public boolean onSupportNavigateUp(){ /** METODO QUE AL PULSAR LA FLECHA ATRAS VUELVA A LA PANTALLA
+         INMEDIATAMENTE ANTERIOR*/
+            Context context = this.getBaseContext();
+            Intent intent = new Intent(context,ItemsActivity.class);
+            startActivityForResult(intent, 2);
             return true;
         }
     }
