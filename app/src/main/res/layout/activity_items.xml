@@ -7,28 +7,43 @@
     android:fitsSystemWindows="true"
     tools:context=".Item.ItemDetail.ItemDetailActivity">
 
+    <include
+        layout="@layout/content_items"
+        android:layout_height="match_parent" />
+
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        style="@style/Animation.Design.BottomSheetDialog"
+        android:id="@+id/appBarLayout3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="60dp"
+        android:background="@color/purple_200"
+        android:theme="@style/Animation.Design.BottomSheetDialog">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:fitsSystemWindows="true"
-            android:visibility="visible"
-            app:contentScrim="@color/white"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            tools:visibility="visible">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/Animation.Design.BottomSheetDialog" />
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_items" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/informacionItems"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/purple_200"
+        android:backgroundTint="@color/purple_200"
+        app:backgroundTint="@color/purple_200"
+        app:rippleColor="@color/purple_200"
+        app:srcCompat="@drawable/img_2" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/savebtn"
@@ -40,50 +55,5 @@
         app:backgroundTint="@color/purple_200"
         app:fabSize="normal"
         app:srcCompat="@drawable/add_pc48" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/purple_200"
-        app:layout_anchorGravity="center"
-        app:layout_collapseMode="pin"
-        app:popupTheme="@style/Animation.Design.BottomSheetDialog" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:background="@color/purple_200"
-        android:fontFamily="sans-serif-light"
-        android:text="ELEMENTOS  "
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="24dp"
-        android:textStyle="bold|italic"
-        app:layout_anchor="@+id/toolbar"
-        app:layout_anchorGravity="center" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        app:layout_anchor="@+id/appBarLayout"
-        app:layout_anchorGravity="center">
-
-        <Button
-            android:id="@+id/informacionItems"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:drawable/ic_menu_info_details"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.04" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

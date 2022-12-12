@@ -36,6 +36,7 @@ public class ItemsFragment extends Fragment {
     private FloatingActionButton AddButton;
 
     private String workStation;  // CREAMOS VARIABLE PARA GUARDAR EL WORKSTATION CON EL QUE TRABAJAMOS
+    private Cursor cursor;
 
 
     public ItemsFragment() {
@@ -64,9 +65,8 @@ public class ItemsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Cursor currentItem = (Cursor) ItemsAdapter.getItem(i);
-                String currentItemId = currentItem.getString(
-                        currentItem.getColumnIndex(ItemEntry._ID));
-
+                int columIndex = currentItem.getColumnIndex(ItemEntry._ID);
+                String currentItemId = currentItem.getString(columIndex);
                 showDetailScreen(currentItemId);
             }
         });
@@ -100,7 +100,11 @@ public class ItemsFragment extends Fragment {
                     loadItems(workStation);
                     break;
                 case REQUEST_UPDATE_DELETE_ITEM:
+                    cursor = itemsDBHelper.getItemsByIdWorkstation(workStation);
+                    ItemsAdapter = new ItemsCursorAdapter(getActivity(), cursor);
+                    ItemsList.setAdapter(ItemsAdapter);
                     loadItems(workStation);
+
                     break;
             }
         }

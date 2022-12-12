@@ -1,4 +1,4 @@
-//CLASE QUE MANEJA LA BASE DE DATOS WORKSTATION
+//CLASE QUE MANEJA TABLA WORKSTATION LA BASE DE DATOS
 
 package com.cidead.pmdm.stock.Workstation.DBW;
 
@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import static com.cidead.pmdm.stock.Item.DB.CommonVar.*;
+
+import com.cidead.pmdm.stock.Item.DB.ItemsContract;
 
 
 public class WorkstationDBHelper extends SQLiteOpenHelper {
@@ -18,16 +20,13 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        /** Creamos un Try Catch para comprobar si existe la tabla Workstation.
-         * En caso contrario, la creamos y la rellenamos con el contenido del mock de pruebas. */
-        if(db.isOpen()){
-            // ABRIRIA LA DB SI NO HAY PROBLEMA
+
+        if(db.isOpen()){  /** Creamos un Try Catch para comprobar si existe la tabla Workstation.
+                        * En caso contrario, la creamos y la rellenamos con el contenido del mock de pruebas. */
+                         // ABRIRIA LA DB SI NO HAY PROBLEMA
         }else{
-
-        }
-        try{
+        }try{
             getAllWorkstation();
-
         }catch(Exception e) {
 
             db.execSQL("CREATE TABLE " + WorkstationContract.WorkstationEntry.TABLE_NAME + " ("
@@ -99,6 +98,19 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
                 WorkstationContract.WorkstationEntry.TABLE_NAME,
                 WorkstationContract.WorkstationEntry.ID + " LIKE ?",
                 new String[]{WorkstationId});
+    }
+
+    /**
+     * @author: Kisko
+     * @param workstationId
+     * @return devuelve un entero con info sobre
+     *          el estado del borrado de datos
+     */
+    public int deleteItems(String workstationId) {
+        return getWritableDatabase().delete(
+                ItemsContract.ItemEntry.TABLE_NAME,
+                WorkstationContract.WorkstationEntry._ID + " LIKE ?",
+                new String[]{workstationId});
     }
 
     //METODO PARA ACTUALIZAR ELEMENTOS

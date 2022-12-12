@@ -4,12 +4,9 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableContainer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,14 +15,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.cidead.pmdm.stock.R;
-import com.cidead.pmdm.stock.Workstation.Workstation.WorkstationActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ItemsActivity extends AppCompatActivity {
 
     public static final String EXTRA_ITEM_ID = "extra_item_id";
     public static final String EXTRA_WORKSTATION_ID = "extra_workstation_id";
 
-    private Button informacion; // VARIABLE QUE NOS SIRVE PARA EL MENSAJE EMERGENTE DE INFORMACIÓN
+    private FloatingActionButton informacion; // VARIABLE QUE NOS SIRVE PARA EL MENSAJE EMERGENTE DE INFORMACIÓN
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +56,7 @@ public class ItemsActivity extends AppCompatActivity {
 
         // CON ESTOS METODOS PROGRAMAMOS LA VENTANA EMERGENTE CON LA INFORMACION QUE QUEREMOS MOSTRAR
 
-        informacion = (Button)findViewById(R.id.informacionItems);
+        informacion = (FloatingActionButton)findViewById(R.id.informacionItems);
         informacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

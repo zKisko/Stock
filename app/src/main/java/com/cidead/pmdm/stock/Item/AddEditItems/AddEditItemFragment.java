@@ -70,10 +70,13 @@ public class AddEditItemFragment extends Fragment {
 
         // Referencias UI
         SaveButton = (FloatingActionButton) getActivity().findViewById(R.id.savebtn);
+
+        //Campos
         NameField = (TextInputEditText) root.findViewById(R.id.f_name);
         QuantityField = (TextInputEditText) root.findViewById(R.id.f_quantity);
         ConditionField = (TextInputEditText) root.findViewById(R.id.f_condition);
         DescriptionField = (TextInputEditText) root.findViewById(R.id.f_description);
+        //Etiquetas
         NameLabel = (TextInputLayout) root.findViewById(R.id.l_name);
         QuantityLabel = (TextInputLayout) root.findViewById(R.id.l_quantity);
         ConditionLabel = (TextInputLayout) root.findViewById(R.id.l_condition);
@@ -130,7 +133,6 @@ public class AddEditItemFragment extends Fragment {
             error = true;
         }
 
-
         if (TextUtils.isEmpty(description)) {
             DescriptionLabel.setError(getString(R.string.field_error));
             error = true;
@@ -140,7 +142,7 @@ public class AddEditItemFragment extends Fragment {
             return;
         }
 
-        Item item = new Item(idWorkstation, name, condition,quantity,condition,"");
+        Item item = new Item(idWorkstation, name, quantity,condition,description,"");
 
         new AddEditItemTask().execute(item);
 
@@ -153,7 +155,6 @@ public class AddEditItemFragment extends Fragment {
         } else {
             getActivity().setResult(Activity.RESULT_OK);
         }
-
         getActivity().finish();
     }
 
@@ -191,7 +192,6 @@ public class AddEditItemFragment extends Fragment {
                 getActivity().finish();
             }
         }
-
     }
 
     private class AddEditItemTask extends AsyncTask<Item, Void, Boolean> {
@@ -204,7 +204,6 @@ public class AddEditItemFragment extends Fragment {
             } else {
                 return itemsDBHelper.saveItem(items[0]) > 0;
             }
-
         }
          /* DEPENDIENDO DE LA TAREA ASINCRONA DE ARRIBA (UPDATE O SAVE)
          ESTA ACTIVIDAD NOS MOSTRARÁ EL NUEVO RESULTADO O UN MENSAJE DE ERROR */
@@ -212,7 +211,5 @@ public class AddEditItemFragment extends Fragment {
         protected void onPostExecute(Boolean result) {
             showItemsScreen(result);
         }
-
     }
-
 }

@@ -22,7 +22,7 @@ public class AddEditWorkstationActivity extends AppCompatActivity {
 
         String WorkstationId = getIntent().getStringExtra(WorkstationActivity.EXTRA_WORKSTATION_ID);
 
-        setTitle(WorkstationId == null ? "Añadir elemento" : "Editar elemento");
+        setTitle(WorkstationId == null ? "Añadir puesto de trabajo" : "Editar elemento");
 
         AddEditWorkstationFragment addEditWorkstationFragment = (AddEditWorkstationFragment)
                 getSupportFragmentManager().findFragmentById(R.id.add_edit_workstation_container);

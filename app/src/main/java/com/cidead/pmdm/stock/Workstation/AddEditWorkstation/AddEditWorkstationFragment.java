@@ -64,10 +64,10 @@ public class AddEditWorkstationFragment extends Fragment {
 
         // Eventos  //AÑADE WORKSTATION A TRAVES DEL BOTON SAVEBUTTON
         wSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addEditWorkstation();
-            }
+        @Override
+        public void onClick(View view) {
+        addEditWorkstation();
+        }
         });
 
         WorkstationDBHelper = new WorkstationDBHelper(getActivity());
@@ -76,7 +76,6 @@ public class AddEditWorkstationFragment extends Fragment {
         if (WorkstationId != null) {
             loadWorkstation();
         }
-
         return root;
     }
 
@@ -84,10 +83,8 @@ public class AddEditWorkstationFragment extends Fragment {
         new GetWorkstationByIdTask().execute();
     }
 
-
-    /**ESTE METODO EXTRAE LOS DATOS DE LOS CAMPOS DE TEXTO,
-     COMPRUEBA QUE NO ESTAN VACIOS Y LUEGO CREAN EL NUEVO ITEM*/
-    private void addEditWorkstation() {
+    private void addEditWorkstation() { /**ESTE METODO EXTRAE LOS DATOS DE LOS CAMPOS DE TEXTO,
+                                        COMPRUEBA QUE NO ESTAN VACIOS Y LUEGO CREAN EL NUEVO ITEM*/
         boolean error = false;
 
         String wname = wNameField.getText().toString();
@@ -95,16 +92,11 @@ public class AddEditWorkstationFragment extends Fragment {
         if (TextUtils.isEmpty(wname)) {
             wNameLabel.setError(getString(R.string.field_error));
             error = true;
-        }
-
-        if (error) {
+        }if (error) {
             return;
         }
-
         Workstation workstation = new Workstation(wname);
-
         new AddEditWorkstationTask().execute(workstation);
-
     }
 
     private void showWorkstationScreen(Boolean requery) {
@@ -114,7 +106,6 @@ public class AddEditWorkstationFragment extends Fragment {
         } else {
             getActivity().setResult(Activity.RESULT_OK);
         }
-
         getActivity().finish();
     }
 
@@ -149,7 +140,6 @@ public class AddEditWorkstationFragment extends Fragment {
                 getActivity().finish();
             }
         }
-
     }
 
     private class AddEditWorkstationTask extends AsyncTask<Workstation, Void, Boolean> {
@@ -158,17 +148,13 @@ public class AddEditWorkstationFragment extends Fragment {
         protected Boolean doInBackground(Workstation... workstation) {
             if (WorkstationId != null) {
                 return WorkstationDBHelper.updateWorkstation(workstation[0], WorkstationId) > 0;
-
             } else {
                 return WorkstationDBHelper.saveWorkstation(workstation[0]) > 0;
             }
-
         }
          /** DEPENDIENDO DE LA TAREA ASINCRONA DE ARRIBA (UPDATE O SAVE)
          ESTA ACTIVIDAD NOS MOSTRARÁ EL NUEVO RESULTADO O UN MENSAJE DE ERROR */
         @Override
         protected void onPostExecute(Boolean result) { showWorkstationScreen(result); }
-
     }
-
 }

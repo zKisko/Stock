@@ -72,8 +72,7 @@ public class ItemDetailFragment extends Fragment {
      mItemsDBHelper = new ItemsDBHelper(getActivity());
 
      loadItems();
-
-        return root;
+     return root;
     }
 
     private void loadItems(){
@@ -100,16 +99,14 @@ public class ItemDetailFragment extends Fragment {
                 getActivity().finish();
             }
         }
-
     }
-
 
     private void showItem(Item item){
         mCollapsingView.setTitle(item.getName());
-        Glide.with(getContext())
+       /* Glide.with(getContext())
                 .load(Uri.parse("file:///android_asset/" + item.getAvatarurl()))
                 .centerCrop()
-                .into(mAvatarurl);
+                .into(mAvatarurl);*/
         mQuantity.setText(item.getQuantity());
         mCondition.setText(item.getCondition());
         mDescription.setText(item.getDescription());
@@ -121,7 +118,6 @@ public class ItemDetailFragment extends Fragment {
         intent.putExtra(ItemsActivity.EXTRA_ITEM_ID, mItemId);
         startActivityForResult(intent, ItemsFragment.REQUEST_UPDATE_DELETE_ITEM);
     }
-
 
     private void showItemsScreen(boolean requery) {     //SI EL ELIMINADO DEL ITEM ES CORRECTO SEGUIRÍA SU CURSO
 

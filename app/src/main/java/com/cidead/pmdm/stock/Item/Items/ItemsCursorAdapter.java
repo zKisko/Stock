@@ -16,7 +16,9 @@ import com.cidead.pmdm.stock.Item.DB.ItemsContract.ItemEntry;
 
 
 public class ItemsCursorAdapter extends CursorAdapter {
-    public ItemsCursorAdapter(Context context, Cursor c) { super(context, c, 0); }
+    public ItemsCursorAdapter(Context context, Cursor c) {
+        super(context, c, 0);
+    }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
@@ -34,10 +36,9 @@ public class ItemsCursorAdapter extends CursorAdapter {
         //Recoger los valores
         String name = cursor.getString(cursor.getColumnIndex(ItemEntry.NAME));
         String avatar = cursor.getString(cursor.getColumnIndex(ItemEntry.AVATARURL));
-
-        //Setup
         nameText.setText(name);
-       /* Glide
+        if (avatar != null) {
+             /* Glide
                 .with(context)
                 .asBitmap()
                 .load(Uri.parse("file:app/src/main/assets" + avatar))
@@ -52,7 +53,7 @@ public class ItemsCursorAdapter extends CursorAdapter {
                         avatarImage.setImageDrawable(drawable);
                     }
                 });*/
-
+        }
+        //Setup
     }
-
 }

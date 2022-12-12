@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/purple_200"
             app:popupTheme="@style/Animation.Design.BottomSheetDialog"
-            app:titleTextColor="@color/white"/>
+            app:titleTextColor="@color/black"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

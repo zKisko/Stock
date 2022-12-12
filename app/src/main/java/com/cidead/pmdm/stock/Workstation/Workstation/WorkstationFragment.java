@@ -1,44 +1,54 @@
 package com.cidead.pmdm.stock.Workstation.Workstation;
 
-import static com.cidead.pmdm.stock.Item.DB.CommonVar.*;
+import static com.cidead.pmdm.stock.Item.DB.CommonVar.DATABASE_NAME;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.cidead.pmdm.stock.Item.DB.ItemsDBHelper;
 import com.cidead.pmdm.stock.Item.Items.ItemsActivity;
 import com.cidead.pmdm.stock.R;
 import com.cidead.pmdm.stock.Workstation.AddEditWorkstation.AddEditWorkstationActivity;
+import com.cidead.pmdm.stock.Workstation.DBW.Workstation;
 import com.cidead.pmdm.stock.Workstation.DBW.WorkstationContract;
 import com.cidead.pmdm.stock.Workstation.DBW.WorkstationDBHelper;
-import com.cidead.pmdm.stock.Workstation.WorkstationDetail.WorkstationDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-/* Vista para la lista de Elementos del puesto de trabajo */
+/** Vista para la lista de Elementos del puesto de trabajo */
 
 public class WorkstationFragment extends Fragment {
     public static final int REQUEST_UPDATE_DELETE_WORKSTATION = 2;
-    public static final int REQUEST_ITEMS = 1;
 
     private WorkstationDBHelper workstationDBHelper;
+    private ItemsDBHelper itemsDBHelper;
+
 
     private GridView WorkstationList;
     private WorkstationCursorAdapter WorkstationAdapter;
     private FloatingActionButton wAddButton;
-
+    private String WorkstationId; /** CREO LA VARIABLE PARA ALMACENAR LA ID DE WORKSTATION PARA USARLA
+                                        EN EL BORRADO O EDICION DE LA PANTALLA EMERGENTE */
+    private String tPuestoEditar;
+    private Context context;
+    private Workstation workstation;
 
     public WorkstationFragment() {
         // CONTRUCTOR VACIO
@@ -57,19 +67,118 @@ public class WorkstationFragment extends Fragment {
         WorkstationList = (GridView) root.findViewById(R.id.workstation_list);
         WorkstationAdapter = new WorkstationCursorAdapter(getActivity(), null);
         wAddButton = (FloatingActionButton) getActivity().findViewById(R.id.work);
+        context = getContext();
 
         // Setup
         WorkstationList.setAdapter(WorkstationAdapter);
 
-        //Eventos: agregamos una escucha con setOnItemClickListener
+        /**Eventos: agregamos una escucha con setOnItemClickListener
+        CON ESTE METODO IMPLEMENTAMOS LO QUE HACE NUESTRAS WORKSTATION CON UN CLICK*/
+
         WorkstationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Cursor currentWorkstation = (Cursor) WorkstationAdapter.getItem(i);
-                String currentWorkstationId= currentWorkstation.getString(
-                        currentWorkstation.getColumnIndex(WorkstationContract.WorkstationEntry._ID));
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            Cursor currentWorkstation = (Cursor) WorkstationAdapter.getItem(i);
+            int columIndex = currentWorkstation.getColumnIndex(WorkstationContract.WorkstationEntry._ID);
+            String currentWorkstationId= currentWorkstation.getString(columIndex);
+            showItemsScreen(currentWorkstationId);
+            }
+        });
+        /**IMPLEMENTAMOS ESTE METODO PARA QUE CON UN PULSADO LARGO NO APAREZCA UNA VENTANA EMERGENTE DONDE
+         * PODAMOS EDITAR O BORRAR LAS WORKSTATION */
 
-                showItemsScreen(currentWorkstationId);
+        WorkstationList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Cursor currentWorkstation = (Cursor) WorkstationAdapter.getItem(position);
+                int columIndex = currentWorkstation.getColumnIndex(WorkstationContract.WorkstationEntry._ID);
+                int columIndexName = currentWorkstation.getColumnIndex(WorkstationContract.WorkstationEntry.WNAME);
+                String currentWorkstationId= currentWorkstation.getString(columIndex);
+                String currentWorkstationName= currentWorkstation.getString(columIndexName);
+                AlertDialog.Builder info = new AlertDialog.Builder(context);
+                info.setMessage("¿Desea eliminar o editar el puesto de trabajo? " + currentWorkstationName)
+                        .setCancelable(false)
+                        //Botón cerrar Ventana de dialogo
+                        .setNeutralButton("Cerrar", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which){
+                                dialog.cancel();
+                            }
+                        })
+                        //Botón para eliminar el workstation seleccionado
+                        .setPositiveButton("Eliminar", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which){
+                                DeleteWorkstation(currentWorkstationId);
+                               // loadWorkstation();
+                            }
+                        })
+                        //Botón para editar el workstation seleccionado
+                        .setNegativeButton("Editar", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which){
+                                EditarAlertDialog(currentWorkstation);
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog titulo = info.create();
+                titulo.setTitle("Editar/Borrar:");
+                titulo.show(); // CON ESTOS METODOS AÑADIMOS TITULO Y HACEMOS QUE SE MUESTRE LA PANTALLA
+                loadWorkstation();
+                return true;
+            }
+
+            private void EditarAlertDialog(Cursor currentWorkstation) { /** CON ESTE METODO VAMOS A EDITAR
+                     LA VENTANA EMERGENTE PARA QUE NOS MUESTRE UNA FRASE Y LAS OPCIONES DE EDITAR Y BORRAR*/
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Editar puesto de trabajo");
+                int nombre = currentWorkstation.getColumnIndex(WorkstationContract.WorkstationEntry.WNAME);
+                int id = currentWorkstation.getColumnIndex(WorkstationContract.WorkstationEntry._ID);
+                String columIndexName = currentWorkstation.getString(nombre);
+                String columIndexId = currentWorkstation.getString(id);
+
+                final EditText input = new EditText(context); // Configuramos el input
+
+                input.setFocusable(true); //Enviamos el foco al campo a editar
+                input.requestFocus();
+
+                input.setInputType(InputType.TYPE_CLASS_TEXT); /** Especificamos el tipo de imput que
+                                                        queremos, en nuestro caso, tipo de texto plano*/
+
+                input.setText(columIndexName); // Añadimos el input al dialog.
+                builder.setView(input);
+
+                // Set up the buttons
+                builder.setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tPuestoEditar = input.getText().toString();
+                        workstation = new Workstation(tPuestoEditar);
+                        EditWorkstation(tPuestoEditar, columIndexId);
+                    }
+                });
+
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
+            }
+
+            private void DeleteWorkstation(String currentWorkstationId) { //BORRADO DE WORKSTATIONS
+
+                WorkstationId = currentWorkstationId;
+                new DeleteWorkstationTask().execute();
+
+            }
+            private void EditWorkstation(String newName, String workstationId){ //EDICION DE WORKSTAIONS
+                WorkstationId = workstationId;
+                workstation.setWname(newName);
+                workstation.setId(workstationId);
+                new AddEditWorkstationTask().execute(workstation);
             }
         });
         wAddButton.setOnClickListener(new View.OnClickListener() {
@@ -80,20 +189,17 @@ public class WorkstationFragment extends Fragment {
         });
 
         SQLiteDatabase db = getActivity().openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
-        //getActivity().deleteDatabase(DATABASE_NAME);
 
         // Instancia de helper
         workstationDBHelper = new WorkstationDBHelper(getActivity());
         workstationDBHelper.onCreate(db);
 
-        // Carga de datos
-        loadWorkstation();
+        loadWorkstation(); // Carga de datos
 
         return root;
     }
 
-    //ACTULIZA LA LISTA SI EL RESULTADO ES POSITIVO
-    @Override
+    @Override    //ACTULIZA LA LISTA SI EL RESULTADO ES POSITIVO
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (Activity.RESULT_OK == resultCode) {
             switch (requestCode) {
@@ -129,13 +235,6 @@ public class WorkstationFragment extends Fragment {
         startActivity(intent);
     }
 
-    //INICIAMOS LA ACTIVIDAD DE DETALLE
-    private void showDetailScreen(String WorkstationId) {
-        Intent intent = new Intent(getActivity(), WorkstationDetailActivity.class);
-        intent.putExtra(WorkstationActivity.EXTRA_WORKSTATION_ID, WorkstationId);
-        startActivityForResult(intent, REQUEST_UPDATE_DELETE_WORKSTATION);
-    }
-
     private class WorkstationLoadTask extends AsyncTask<Void, Void, Cursor> {
 
         @Override
@@ -147,10 +246,67 @@ public class WorkstationFragment extends Fragment {
         protected void onPostExecute(Cursor cursor) {
             if (cursor != null && cursor.getCount() > 0) {
                 WorkstationAdapter.swapCursor(cursor);
-            } else {
-                // Mostrar estado vacio
+            } else if(cursor.getCount() == 0) {
+                //TODO:Incluir pantalla de sin registros que mostrar
+            }else{
             }
         }
     }
 
+    private class DeleteWorkstationTask extends AsyncTask<Void, Void, Cursor> {
+
+        @Override
+        protected Cursor doInBackground(Void... voids) {
+
+            if (WorkstationId != null) {
+                itemsDBHelper = new ItemsDBHelper(getActivity());
+                int items = itemsDBHelper.getItemsByIdWorkstation(WorkstationId).getCount();
+                if (items>0){
+                    workstationDBHelper.deleteItems(WorkstationId);
+                }
+                workstationDBHelper.deleteWorkstation(WorkstationId);
+                Cursor cursor = workstationDBHelper.getAllWorkstation();
+                return cursor;
+            } else {
+                return null;
+                //TODO:No se que poner aquí.
+            }
+        }   /** DEPENDIENDO DE LA TAREA ASINCRONA DE ARRIBA (UPDATE O SAVE)
+            ESTA ACTIVIDAD NOS MOSTRARÁ EL NUEVO RESULTADO O UN MENSAJE DE ERROR */
+        @Override
+        protected void onPostExecute(Cursor cursor) {
+            WorkstationAdapter = new WorkstationCursorAdapter(getActivity(), cursor);
+            WorkstationList.setAdapter(WorkstationAdapter);
+        }
+    }
+
+    private class AddEditWorkstationTask extends AsyncTask<Workstation, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Workstation... workstation) {
+            boolean retorno = false;
+            if (WorkstationId != null) {
+                retorno = workstationDBHelper.updateWorkstation(workstation[0], WorkstationId) > 0;
+
+                return retorno;
+
+            } else {
+                retorno = workstationDBHelper.saveWorkstation(workstation[0]) > 0;
+                return retorno;
+            }
+        }
+        /** DEPENDIENDO DE LA TAREA ASINCRONA DE ARRIBA (UPDATE O SAVE)
+         ESTA ACTIVIDAD NOS MOSTRARÁ EL NUEVO RESULTADO O UN MENSAJE DE ERROR */
+        @Override
+        protected void onPostExecute(Boolean result) {
+            Cursor cursor = workstationDBHelper.getAllWorkstation();
+            showWorkstationScreen(cursor);
+        }
+    }
+
+    private void showWorkstationScreen(Cursor cursor) {
+
+        WorkstationAdapter = new WorkstationCursorAdapter(getActivity(), cursor);
+        WorkstationList.setAdapter(WorkstationAdapter);
+    }
 }

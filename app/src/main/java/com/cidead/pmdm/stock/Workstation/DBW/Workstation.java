@@ -7,14 +7,14 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 
-/*inicio las variables de la plantilla*/
+/**inicio las variables de la plantilla para Workstations*/
 
 public class Workstation {
         private String _id; /* codigo */
         private String wname; /* nombre */
 
 
-        public Workstation(String wname) {
+    public Workstation(String wname) {
             this.wname = wname;
                   }
 
@@ -22,7 +22,7 @@ public class Workstation {
     public Workstation(Cursor cursor) {
         _id = cursor.getString(cursor.getColumnIndex(WorkstationContract.WorkstationEntry._ID));
         wname = cursor.getString(cursor.getColumnIndex(WorkstationContract.WorkstationEntry.WNAME));
-         }
+    }
 
     public ContentValues toContentValues() {
         ContentValues values = new ContentValues();
@@ -31,13 +31,17 @@ public class Workstation {
         return values;
     }
 
-        public String getId() {
+    public String getId() {
             return _id;
         }
 
-        public String getWName() {
+    public String getWName() {
             return wname;
         }
+
+    public void setWname(String name){ wname = name; }
+
+    public void setId(String id){ _id = id; }
 
     }
 
