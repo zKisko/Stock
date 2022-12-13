@@ -4,22 +4,21 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import com.cidead.pmdm.stock.Item.DB.Item;
-import com.cidead.pmdm.stock.Item.DB.ItemsDBHelper;
-import com.cidead.pmdm.stock.Item.Items.FileIOWorkstation;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.cidead.pmdm.stock.R;
-
 import androidx.fragment.app.Fragment;
+
+import com.cidead.pmdm.stock.DB.Item;
+import com.cidead.pmdm.stock.DB.ItemsDBHelper;
+import com.cidead.pmdm.stock.Item.Items.FileIOWorkstation;
+import com.cidead.pmdm.stock.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 /* Vista para creación/edición de un Item */
 
