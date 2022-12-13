@@ -1,6 +1,6 @@
 /* con esta clase java creo el esquema de la BD para los Workstation */
 
-package com.cidead.pmdm.stock.Workstation.DBW;
+package com.cidead.pmdm.stock.DB;
 
 import android.provider.BaseColumns;
 

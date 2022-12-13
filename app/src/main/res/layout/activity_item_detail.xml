@@ -28,7 +28,8 @@ tools:context=".Item.ItemDetail.ItemDetailActivity">
                 android:layout_height="match_parent"
                 android:background="@color/purple_200"
                 android:fitsSystemWindows="true"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax"
+                android:src="@drawable/icono_estudio_fondo_blanco"/>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

@@ -3,7 +3,6 @@ package com.cidead.pmdm.stock.Item.ItemDetail;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -17,10 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.cidead.pmdm.stock.Item.AddEditItems.AddEditItemsActivity;
-import com.cidead.pmdm.stock.Item.DB.Item;
-import com.cidead.pmdm.stock.Item.DB.ItemsDBHelper;
+import com.cidead.pmdm.stock.DB.Item;
+import com.cidead.pmdm.stock.DB.ItemsDBHelper;
 import com.cidead.pmdm.stock.Item.Items.ItemsActivity;
 import com.cidead.pmdm.stock.Item.Items.ItemsFragment;
 import com.cidead.pmdm.stock.R;

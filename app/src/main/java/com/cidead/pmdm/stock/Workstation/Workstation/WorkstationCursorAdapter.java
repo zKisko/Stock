@@ -11,7 +11,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import com.cidead.pmdm.stock.R;
-import com.cidead.pmdm.stock.Workstation.DBW.WorkstationContract.WorkstationEntry;
+import com.cidead.pmdm.stock.DB.WorkstationContract.WorkstationEntry;
 
 
 public class WorkstationCursorAdapter extends CursorAdapter {
@@ -30,7 +30,8 @@ public class WorkstationCursorAdapter extends CursorAdapter {
         TextView nameText = (TextView) view.findViewById(R.id.tw_name);
 
         //Recoger los valores
-       String wname = cursor.getString(cursor.getColumnIndex(WorkstationEntry.WNAME));
+        int cursorName = cursor.getColumnIndex(WorkstationEntry.WNAME);
+        String wname = cursor.getString(cursorName);
 
         //Setup
         nameText.setText(wname);

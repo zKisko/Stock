@@ -1,6 +1,6 @@
 /*con esta clase creamos las caracteristicas que tendran los puestos de nuestra empresa*/
 
-package com.cidead.pmdm.stock.Workstation.DBW;
+package com.cidead.pmdm.stock.DB;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;

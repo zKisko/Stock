@@ -1,4 +1,4 @@
-package com.cidead.pmdm.stock.Item.DB;
+package com.cidead.pmdm.stock.Recursos;
 
 public class CommonVar {
 

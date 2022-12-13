@@ -17,12 +17,12 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.cidead.pmdm.stock.Item.AddEditItems.AddEditItemsActivity;
-import com.cidead.pmdm.stock.Item.DB.ItemsContract.ItemEntry;
-import com.cidead.pmdm.stock.Item.DB.ItemsDBHelper;
+import com.cidead.pmdm.stock.DB.ItemsContract.ItemEntry;
+import com.cidead.pmdm.stock.DB.ItemsDBHelper;
 import com.cidead.pmdm.stock.Item.ItemDetail.ItemDetailActivity;
 import com.cidead.pmdm.stock.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import static com.cidead.pmdm.stock.Item.DB.CommonVar.*;
+import static com.cidead.pmdm.stock.Recursos.CommonVar.*;
 
 /** Vista para la lista de Elementos del puesto de trabajo */
 

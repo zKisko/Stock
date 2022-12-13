@@ -1,6 +1,7 @@
 package com.cidead.pmdm.stock.Item.Items;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,6 +16,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.cidead.pmdm.stock.R;
+import com.cidead.pmdm.stock.Workstation.Workstation.WorkstationActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ItemsActivity extends AppCompatActivity {
@@ -43,9 +45,10 @@ public class ItemsActivity extends AppCompatActivity {
         } else {
             Log.i("Mensaje", "Se tiene permiso para leer y escribir!");
         }
-
-        FileIOWorkstation fichero = new FileIOWorkstation();
-        fichero.guardarWorkStation(extraWorkstationId, getApplicationContext());
+        if (extraWorkstationId != null){
+            FileIOWorkstation fichero = new FileIOWorkstation();
+            fichero.guardarWorkStation(extraWorkstationId, getApplicationContext());
+        }
 
         // CON ESTAS LINEAS LO QUE ESTAMOS PIDIENDO PERMISO PARA AÑADIR ARCHIVOS EXTERNAMENTE
 
@@ -90,7 +93,9 @@ public class ItemsActivity extends AppCompatActivity {
     //CON ESTE METODO HACEMOS QUE NUESTRA FLECHA REGRESE A LA PANTALLA ANTERIOR
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        Context context = this.getBaseContext();
+        Intent intent = new Intent(context, WorkstationActivity.class);
+        startActivityForResult(intent, 2);
         return true;
     }
 

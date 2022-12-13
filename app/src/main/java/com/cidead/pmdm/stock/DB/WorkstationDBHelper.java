@@ -1,14 +1,12 @@
 //CLASE QUE MANEJA TABLA WORKSTATION LA BASE DE DATOS
 
-package com.cidead.pmdm.stock.Workstation.DBW;
+package com.cidead.pmdm.stock.DB;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import static com.cidead.pmdm.stock.Item.DB.CommonVar.*;
-
-import com.cidead.pmdm.stock.Item.DB.ItemsContract;
+import static com.cidead.pmdm.stock.Recursos.CommonVar.*;
 
 
 public class WorkstationDBHelper extends SQLiteOpenHelper {

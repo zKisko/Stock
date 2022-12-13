@@ -13,8 +13,8 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.cidead.pmdm.stock.R;
-import com.cidead.pmdm.stock.Workstation.DBW.Workstation;
-import com.cidead.pmdm.stock.Workstation.DBW.WorkstationDBHelper;
+import com.cidead.pmdm.stock.DB.Workstation;
+import com.cidead.pmdm.stock.DB.WorkstationDBHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;

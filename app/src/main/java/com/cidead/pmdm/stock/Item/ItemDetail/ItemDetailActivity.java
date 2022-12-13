@@ -1,5 +1,8 @@
 package com.cidead.pmdm.stock.Item.ItemDetail;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -39,7 +42,9 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         @Override
         public boolean onSupportNavigateUp(){
-            onBackPressed();
+            Context context = this.getBaseContext();
+            Intent intent = new Intent(context,ItemsActivity.class);
+            startActivityForResult(intent, 2);
             return true;
         }
     }

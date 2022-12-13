@@ -1,6 +1,6 @@
 package com.cidead.pmdm.stock.Workstation.Workstation;
 
-import static com.cidead.pmdm.stock.Item.DB.CommonVar.DATABASE_NAME;
+import static com.cidead.pmdm.stock.Recursos.CommonVar.DATABASE_NAME;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,7 +11,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +22,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.cidead.pmdm.stock.Item.DB.ItemsDBHelper;
+import com.cidead.pmdm.stock.DB.ItemsDBHelper;
 import com.cidead.pmdm.stock.Item.Items.ItemsActivity;
 import com.cidead.pmdm.stock.R;
 import com.cidead.pmdm.stock.Workstation.AddEditWorkstation.AddEditWorkstationActivity;
-import com.cidead.pmdm.stock.Workstation.DBW.Workstation;
-import com.cidead.pmdm.stock.Workstation.DBW.WorkstationContract;
-import com.cidead.pmdm.stock.Workstation.DBW.WorkstationDBHelper;
+import com.cidead.pmdm.stock.DB.Workstation;
+import com.cidead.pmdm.stock.DB.WorkstationContract;
+import com.cidead.pmdm.stock.DB.WorkstationDBHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /** Vista para la lista de Elementos del puesto de trabajo */

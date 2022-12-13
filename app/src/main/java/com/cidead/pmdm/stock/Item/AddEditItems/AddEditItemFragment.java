@@ -1,25 +1,45 @@
 package com.cidead.pmdm.stock.Item.AddEditItems;
 
+import static com.cidead.pmdm.stock.Recursos.CommonVar.DATABASE_NAME;
+import static com.cidead.pmdm.stock.DB.CategoriaProductosContract.CategoriaProductosEntry._ID;
+import static com.cidead.pmdm.stock.DB.CategoriaProductosContract.CategoriaProductosEntry.CATEGORIA;
+
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.cidead.pmdm.stock.Item.DB.Item;
-import com.cidead.pmdm.stock.Item.DB.ItemsDBHelper;
+import com.cidead.pmdm.stock.DB.CategoriaProducto;
+import com.cidead.pmdm.stock.DB.CategoriaProductosContract;
+import com.cidead.pmdm.stock.DB.CategoriaProductosDBHelper;
+import com.cidead.pmdm.stock.DB.Item;
+import com.cidead.pmdm.stock.DB.ItemsDBHelper;
+import com.cidead.pmdm.stock.Item.ItemDetail.ItemDetailActivity;
 import com.cidead.pmdm.stock.Item.Items.FileIOWorkstation;
+import com.cidead.pmdm.stock.Item.Items.ItemsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.cidead.pmdm.stock.R;
 
 import androidx.fragment.app.Fragment;
+
+import java.sql.Array;
+import java.util.ArrayList;
 
 /* Vista para creación/edición de un Item */
 
@@ -41,6 +61,10 @@ public class AddEditItemFragment extends Fragment {
     private TextInputLayout DescriptionLabel;
 
     private Integer idWorkstation;
+
+    private Spinner sCategoria;
+    private Spinner sProducto;
+    private Cursor categorias;
 
 
     public AddEditItemFragment() {
@@ -76,6 +100,26 @@ public class AddEditItemFragment extends Fragment {
         QuantityField = (TextInputEditText) root.findViewById(R.id.f_quantity);
         ConditionField = (TextInputEditText) root.findViewById(R.id.f_condition);
         DescriptionField = (TextInputEditText) root.findViewById(R.id.f_description);
+
+        sCategoria = (Spinner) root.findViewById(R.id.s_Categoria);
+        sProducto = (Spinner) root.findViewById(R.id.s_Productos);
+
+        sCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("Spinner Categorias","Posición:" + position + " id:" + id);
+                cargarSpinnerProductos(id);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.i("Spinner Categorias", "Ningún item seleccionado");
+            }
+        });
+
+        llenarCategorias();
+
         //Etiquetas
         NameLabel = (TextInputLayout) root.findViewById(R.id.l_name);
         QuantityLabel = (TextInputLayout) root.findViewById(R.id.l_quantity);
@@ -98,6 +142,46 @@ public class AddEditItemFragment extends Fragment {
         }
 
         return root;
+    }
+
+    /**
+     * Recargamos el spinner de productos filtrando por categoría
+     * @param id
+     */
+    private void cargarSpinnerProductos(long id) {
+        
+    }
+
+    /**
+     * TODO: Por aquí voy.
+     */
+    private void llenarCategorias() {
+        String[] queryCols = new String[]{_ID, CATEGORIA};
+        SQLiteDatabase db = new CategoriaProductosDBHelper(this.getContext()).getReadableDatabase();
+        Cursor cursor = db.query(
+                CategoriaProductosContract.CategoriaProductosEntry.TABLE_NAME, // the table to query
+                queryCols,                // the columns to return
+                null,                     // the columns for the WHERE clause
+                null,                     // the values for the WHERE clause
+                null,                     // don't group the rows
+                null,                     // don't filter by row groups
+                null                      // don't sort
+        );
+
+        String[] adapterCols = new String[]{CATEGORIA};
+        int[] adapterRowViews = new int[]{android.R.id.text1};
+
+        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
+                this.getContext(), android.R.layout.simple_spinner_item, cursor, adapterCols, adapterRowViews, 0);
+        cursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sCategoria.setAdapter(cursorAdapter);
+    }
+
+
+
+    private ArrayList<String> llenarArrayCategorias(Cursor categorias, ArrayList<String> aCategorias) {
+
+        return null;
     }
 
     private void loadItem() {
@@ -158,6 +242,26 @@ public class AddEditItemFragment extends Fragment {
         getActivity().finish();
     }
 
+    /**
+     *
+     * @param requery
+     * @param idItem
+     *
+     * Creamos este método para que una vez editado el item, vuelva a la pantalla del detalle de item
+     */
+
+    private void showItemScreen(Boolean requery, String idItem) {
+        if (!requery) {
+            showAddEditError();
+            getActivity().setResult(Activity.RESULT_CANCELED);
+        } else {
+            Intent intent = new Intent(getActivity(), ItemDetailActivity.class);
+            intent.putExtra(ItemsActivity.EXTRA_ITEM_ID, idItem);
+            startActivityForResult(intent, 2);
+        }
+        //getActivity().finish();
+    }
+
     private void showAddEditError() {
         Toast.makeText(getActivity(),
                 "Error al agregar nueva información", Toast.LENGTH_SHORT).show();
@@ -207,9 +311,15 @@ public class AddEditItemFragment extends Fragment {
         }
          /* DEPENDIENDO DE LA TAREA ASINCRONA DE ARRIBA (UPDATE O SAVE)
          ESTA ACTIVIDAD NOS MOSTRARÁ EL NUEVO RESULTADO O UN MENSAJE DE ERROR */
+
+        /**
+         *
+         * @param result
+         * Cambiamos el método al que llama al terminar la orden de modificación
+         */
         @Override
         protected void onPostExecute(Boolean result) {
-            showItemsScreen(result);
+            showItemScreen(result, ItemId);
         }
     }
 }

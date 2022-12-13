@@ -1,7 +1,7 @@
 /*con esta clase creamos una plantilla para los elementos
 que añadiremos en los puestos de nuestro stock*/
 
-package com.cidead.pmdm.stock.Item.DB;
+package com.cidead.pmdm.stock.DB;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -43,7 +43,6 @@ public class Item {
 
     public ContentValues toContentValues() {
         ContentValues values = new ContentValues();
-        //values.put(ItemsContract.ItemEntry._ID, _id);
         values.put(ItemsContract.ItemEntry.IDWORKSTATION, id_workstation);
         values.put(ItemsContract.ItemEntry.NAME, name);
         values.put(ItemsContract.ItemEntry.QUANTITY, quantity);

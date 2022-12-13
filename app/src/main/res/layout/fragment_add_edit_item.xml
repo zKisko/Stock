@@ -7,6 +7,50 @@
     android:orientation="vertical"
     tools:context=".Item.AddEditItems.AddEditItemsActivity">
 
+    <TextView
+        android:id="@+id/l_categoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="Categorias de producto:"/>
+
+    <Spinner
+        android:id="@+id/s_Categoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+    </Spinner>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nueva Categoria">
+
+    </androidx.appcompat.widget.AppCompatButton>
+
+    <TextView
+        android:id="@+id/l_Productos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="Productos:"/>
+
+    <Spinner
+        android:id="@+id/s_Productos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+    </Spinner>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nuevo Producto">
+
+    </androidx.appcompat.widget.AppCompatButton>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/l_name"
         android:layout_width="match_parent"
@@ -66,7 +110,6 @@
             android:id="@+id/f_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:height="48dp"
             android:gravity="top|start"
             android:hint="@string/descripcion_observaciones"
             android:imeOptions="actionDone"
