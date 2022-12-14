@@ -1,5 +1,3 @@
-//CLASE QUE MANEJA LA BASE DE DATOS
-
 package com.cidead.pmdm.stock.DB;
 
 import static com.cidead.pmdm.stock.DB.CategoriaProductosContract.CategoriaProductosEntry.CATEGORIA;
@@ -13,7 +11,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+import android.util.Log;
 
 public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
 
@@ -22,10 +20,9 @@ public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-
-        /** Creamos un Try Catch para comprobar si existe la tabla Workstation.
-         * En caso contrario, la creamos y la rellenamos con el contenido del mock de pruebas. */
+    public void onCreate(SQLiteDatabase db) {   /** Creamos un Try Catch para comprobar si existe la
+                                                tabla Workstation. En caso contrario, la creamos y la
+                                                rellenamos con el contenido del mock de pruebas. */
         try{
             getAllCategoriasProducto();
         }catch(Exception e){
@@ -34,11 +31,11 @@ public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
                     + CATEGORIA + " TEXT,"
                     + IMAGEN + " TEXT )");
             mockData(db);
+            Log.i("CategoriaProductosDBHelper", "Tabla creada");
         }
     }
 
     // Insertamos datos ficticios para prueba inicial
-
     private void mockData(SQLiteDatabase sqLiteDatabase) {
         mockItem(sqLiteDatabase, new CategoriaProducto("Monitor","monitor.xml"));
         mockItem(sqLiteDatabase, new CategoriaProducto("Teclado","keyboard_outline.xml"));
@@ -51,6 +48,8 @@ public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
         mockItem(sqLiteDatabase, new CategoriaProducto("Escaner","scanner.xml"));
         mockItem(sqLiteDatabase, new CategoriaProducto("Tablet","tablet.xml"));
         mockItem(sqLiteDatabase, new CategoriaProducto("Webcam","webcam.xml"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Cable","cable-48.xml"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Otros","icono_estudio_fondo_blanco.jpg"));
     }
 
     public long mockItem(SQLiteDatabase db, CategoriaProducto categoriaProducto) {
@@ -64,6 +63,7 @@ public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // No hay operaciones
     }
+
     // ESTE METODO SALVA (GUARDA) EL ITEM QUE CREEMOS
     public long saveCategoriaProducto(CategoriaProducto categoriaProducto) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
@@ -71,19 +71,18 @@ public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
                 TABLE_NAME,
                 null,
                 categoriaProducto.toContentValues());
-
     }
 
     //METODO PARA OBTENER TODOS LOS ELEMENTOS
     public Cursor getAllCategoriasProducto() {
         return getReadableDatabase().query(
-                        TABLE_NAME,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null);
+                TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
     }
 
     //METODO PARA OBTENER LOS ELEMENTOS POR ID
@@ -99,14 +98,11 @@ public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
         return c;
     }
 
-   //METODO PARA LA ELIMINACIÓN DE ELEMENTOS
+    //METODO PARA LA ELIMINACIÓN DE ELEMENTOS
 
-    /**
-     * @author: Kisko
+    /** @author: Kisko
      * @param categoriaProductoId
-     * @return devuelve un entero con info sobre
-     *          el estado del borrado de datos
-     */
+     * @return devuelve un entero con info sobre el estado del borrado de datos */
     public int deleteCategoriaProducto(String categoriaProductoId) {
         return getWritableDatabase().delete(
                 TABLE_NAME,
@@ -115,8 +111,6 @@ public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
     }
 
     //METODO PARA ACTUALIZAR ELEMENTOS
-
-
     public int updateCategoriaProducto(CategoriaProducto categoriaProducto, String categoriaProductoId) {
         return getWritableDatabase().update(
                 TABLE_NAME,

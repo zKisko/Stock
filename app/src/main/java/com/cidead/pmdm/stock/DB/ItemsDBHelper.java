@@ -19,12 +19,9 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-
-        /** Creamos un Try Catch para comprobar si existe la tabla Workstation.
-         * En caso contrario, la creamos y la rellenamos con el contenido del mock de pruebas. */
+    public void onCreate(SQLiteDatabase db) { /** Creamos un Try Catch para comprobar si existe la tabla Workstation.
+                                            * En caso contrario, la creamos y la rellenamos con el contenido del mock de pruebas. */
         if(db.isOpen()){
-
         }else{
         }
         try{
@@ -38,13 +35,11 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
                     + ItemsContract.ItemEntry.CONDITION + " TEXT NOT NULL,"
                     + ItemsContract.ItemEntry.DESCRIPTION + " TEXT NOT NULL,"
                     + ItemsContract.ItemEntry.AVATARURL + " TEXT )");
-
             mockData(db);
         }
     }
 
     // Insertamos datos ficticios para prueba inicial
-
     private void mockData(SQLiteDatabase sqLiteDatabase) {
         mockItem(sqLiteDatabase, new Item(1,"Monitor", "3","Nuevo", "Monitor LG 24 pulgadas.",null));
         mockItem(sqLiteDatabase, new Item(1,"Teclado", "2", "Nuevo", "Monitor", null));
@@ -68,19 +63,16 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // No hay operaciones
     }
-    // ESTE METODO SALVA (GUARDA) EL ITEM QUE CREEMOS
-    public long saveItem(Item item) {
-        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
+    public long saveItem(Item item) { // ESTE METODO SALVA (GUARDA) EL ITEM QUE CREEMOS
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         return sqLiteDatabase.insert(
                 ItemsContract.ItemEntry.TABLE_NAME,
                 null,
                 item.toContentValues());
-
     }
 
-    //METODO PARA OBTENER TODOS LOS ELEMENTOS
-    public Cursor getAllItems() {
+    public Cursor getAllItems() { //METODO PARA OBTENER TODOS LOS ELEMENTOS
         return getReadableDatabase().query(
                         ItemEntry.TABLE_NAME,
                         null,
@@ -91,8 +83,7 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
                         null);
     }
 
-    //METODO PARA OBTENER LOS ELEMENTOS POR ID
-    public Cursor getItemById(String itemId) {
+    public Cursor getItemById(String itemId) {  //METODO PARA OBTENER LOS ELEMENTOS POR ID
         Cursor c = getReadableDatabase().query(
                 ItemEntry.TABLE_NAME,
                 null,
@@ -104,11 +95,9 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    /**
-     * @author: Kisko
+    /**@author: Kisko
      * @param idWorkstation
-     * @return lista filtrada por el id de workstation
-     */
+     * @return lista filtrada por el id de workstation */
     public Cursor getItemsByIdWorkstation(String idWorkstation) {
         Cursor c = getReadableDatabase().query(
                 ItemEntry.TABLE_NAME,
@@ -121,25 +110,17 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    //METODO PARA LA ELIMINACIÓN DE ELEMENTOS
-
-    /**
-     * @author: Kisko
+    /**@author: Kisko
      * @param itemId
-     * @return devuelve un entero con info sobre
-     *          el estado del borrado de datos
-     */
-    public int deleteItem(String itemId) {
+     * @return devuelve un entero con info sobre el estado del borrado de datos */
+    public int deleteItem(String itemId) {  //METODO PARA LA ELIMINACIÓN DE ELEMENTOS
         return getWritableDatabase().delete(
                 ItemEntry.TABLE_NAME,
                 ItemEntry._ID + " LIKE ?",
                 new String[]{itemId});
     }
 
-    //METODO PARA ACTUALIZAR ELEMENTOS
-
-
-    public int updateItem(Item item, String itemId) {
+    public int updateItem(Item item, String itemId) { //METODO PARA ACTUALIZAR ELEMENTOS
         return getWritableDatabase().update(
                 ItemEntry.TABLE_NAME,
                 item.toContentValues(),

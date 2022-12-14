@@ -35,7 +35,5 @@ public class WorkstationCursorAdapter extends CursorAdapter {
 
         //Setup
         nameText.setText(wname);
-
     }
-
 }

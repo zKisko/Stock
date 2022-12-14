@@ -16,7 +16,7 @@ public class Workstation {
 
     public Workstation(String wname) {
             this.wname = wname;
-                  }
+    }
 
     @SuppressLint("Range")
     public Workstation(Cursor cursor) {

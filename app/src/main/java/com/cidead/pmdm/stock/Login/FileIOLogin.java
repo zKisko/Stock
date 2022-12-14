@@ -1,4 +1,4 @@
-package com.cidead.pmdm.stock.Item.Items;
+package com.cidead.pmdm.stock.Login;
 
 import android.content.Context;
 
@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class FileIOWorkstation {
+public class FileIOLogin {
 
-    public void guardarWorkStation(String extraWorkstationId, Context context){
+    public void guardarLogin(Context context){
 
         try {
-            String direccion = context.getExternalFilesDir(null) + "/workstation.txt";
+            String direccion = context.getExternalFilesDir(null) + "/login.txt";
             File fich = new File(direccion);
             if(!fich.exists()){
                 try {
@@ -25,24 +25,25 @@ public class FileIOWorkstation {
                 }
             }
             OutputStreamWriter oSw = new OutputStreamWriter(new FileOutputStream(fich));
-            oSw.write(extraWorkstationId);
+            oSw.write("logueado");
             oSw.close();
         }catch (IOException e){
             e.printStackTrace();
         }
+
     }
 
-    public String leerWorkstation(Context context){
-        String direccion = context.getExternalFilesDir(null) + "/workstation.txt";
+    public String leerLogin(Context context){
+        String direccion = context.getExternalFilesDir(null) + "/login.txt";
         File fich = new File(direccion);
-        String workstation = "";
+        String login = "No Login";
         try {
             BufferedReader bf = new BufferedReader(new InputStreamReader(new FileInputStream(fich)));
-            workstation = bf.readLine();
+            login = bf.readLine();
             bf.close();
         }catch (Exception e){
             e.printStackTrace();
         }
-        return workstation;
+        return login;
     }
 }

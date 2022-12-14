@@ -1,4 +1,4 @@
-//CLASE QUE MANEJA TABLA WORKSTATION LA BASE DE DATOS
+/**CLASE QUE MANEJA LA TABLA WORKSTATION DE LA BASE DE DATOS STOCK*/
 
 package com.cidead.pmdm.stock.DB;
 
@@ -17,11 +17,10 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-
-        if(db.isOpen()){  /** Creamos un Try Catch para comprobar si existe la tabla Workstation.
-                        * En caso contrario, la creamos y la rellenamos con el contenido del mock de pruebas. */
-                         // ABRIRIA LA DB SI NO HAY PROBLEMA
+    public void onCreate(SQLiteDatabase db) { /** Creamos un Try Catch para comprobar si existe la tabla Workstation.
+                                             * En caso contrario, la creamos y la rellenamos con el contenido del mock de pruebas.
+                                            * ABRIRIA LA DB SI NO HAY PROBLEMA*/
+        if(db.isOpen()){
         }else{
         }try{
             getAllWorkstation();
@@ -35,7 +34,7 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
         }
     }
 
-    // Insertamos datos ficticios para prueba inicial
+    /** Insertamos datos ficticios para prueba inicial */
 
     private void mockData(SQLiteDatabase sqLiteDatabase) {
         mockWorkstation(sqLiteDatabase, new Workstation("Puesto de Kisko"));
@@ -62,10 +61,9 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
                 WorkstationContract.WorkstationEntry.TABLE_NAME,
                 null,
                 workstation.toContentValues());
-
     }
 
-    //METODO PARA OBTENER TODOS LOS ELEMENTOS
+    /**METODO PARA OBTENER TODOS LOS ELEMENTOS*/
     public Cursor getAllWorkstation() {
         return getReadableDatabase().query(
                 WorkstationContract.WorkstationEntry.TABLE_NAME,
@@ -77,7 +75,7 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
                         null);
     }
 
-    //METODO PARA OBTENER LOS PUESTOS DE TRABAJO POR ID
+    /**METODO PARA OBTENER LOS PUESTOS DE TRABAJO POR ID*/
     public Cursor getWorkstationById(String WorkstationId) {
         Cursor c = getReadableDatabase().query(
                 WorkstationContract.WorkstationEntry.TABLE_NAME,
@@ -90,7 +88,7 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    //METODO PARA LA ELIMINACIÓN DE PUESTOS DE TRABAJO
+    /**METODO PARA LA ELIMINACIÓN DE PUESTOS DE TRABAJO*/
     public int deleteWorkstation(String WorkstationId) {
         return getWritableDatabase().delete(
                 WorkstationContract.WorkstationEntry.TABLE_NAME,
@@ -98,11 +96,9 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
                 new String[]{WorkstationId});
     }
 
-    /**
-     * @author: Kisko
+    /**@author: Kisko
      * @param workstationId
-     * @return devuelve un entero con info sobre
-     *          el estado del borrado de datos
+     * @return devuelve un entero con info sobre el estado del borrado de datos
      */
     public int deleteItems(String workstationId) {
         return getWritableDatabase().delete(
@@ -111,7 +107,7 @@ public class WorkstationDBHelper extends SQLiteOpenHelper {
                 new String[]{workstationId});
     }
 
-    //METODO PARA ACTUALIZAR ELEMENTOS
+    /**METODO PARA ACTUALIZAR ELEMENTOS*/
     public int updateWorkstation(Workstation workstation, String workstationId) {
         return getWritableDatabase().update(
                 WorkstationContract.WorkstationEntry.TABLE_NAME,

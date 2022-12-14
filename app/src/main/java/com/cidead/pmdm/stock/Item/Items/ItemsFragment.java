@@ -24,7 +24,7 @@ import com.cidead.pmdm.stock.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import static com.cidead.pmdm.stock.Recursos.CommonVar.*;
 
-/** Vista para la lista de Elementos del puesto de trabajo */
+// CLASE QUE IMPLEMENTA LA LOGICA DE LAS ACCTIONES QUE SE REALIZAN EN EL FRAGMENT_ITEMS
 
 public class ItemsFragment extends Fragment {
     public static final int REQUEST_UPDATE_DELETE_ITEM = 2;
@@ -37,7 +37,6 @@ public class ItemsFragment extends Fragment {
 
     private String workStation;  // CREAMOS VARIABLE PARA GUARDAR EL WORKSTATION CON EL QUE TRABAJAMOS
     private Cursor cursor;
-
 
     public ItemsFragment() {
         // CONSTRUCTOR VACIO
@@ -86,7 +85,6 @@ public class ItemsFragment extends Fragment {
         FileIOWorkstation fichero = new FileIOWorkstation();
         workStation = fichero.leerWorkstation(getContext());
         loadItems(workStation);
-
         return root;
     }
 
@@ -104,7 +102,6 @@ public class ItemsFragment extends Fragment {
                     ItemsAdapter = new ItemsCursorAdapter(getActivity(), cursor);
                     ItemsList.setAdapter(ItemsAdapter);
                     loadItems(workStation);
-
                     break;
             }
         }
@@ -114,16 +111,13 @@ public class ItemsFragment extends Fragment {
         new ItemsLoadTask().execute();
     }
 
-
     /** CARGA DE LISTADO DE ITEMS
      * @param workStation  */
-
     private void loadItems(String workStation) {
         new ItemsForWorkspaceLoadTask().execute();
     }
 
-
-    private void showSuccessfullSavedMessage() {
+    private void showSuccessfullSavedMessage() { /**MENSAJE EMERGENTE CUANDO SE GUARDA EL ELEMENTO*/
         Toast.makeText(getActivity(),
                 "Elemento guardado correctamente", Toast.LENGTH_SHORT).show();
     }
@@ -133,8 +127,7 @@ public class ItemsFragment extends Fragment {
         startActivityForResult(intent, AddEditItemsActivity.REQUEST_ADD_ITEM);
     }
 
-    //INICIAMOS LA ACTIVIDAD DE DETALLE
-    private void showDetailScreen(String ItemId) {
+    private void showDetailScreen(String ItemId) { //INICIAMOS LA ACTIVIDAD DE DETALLE
         Intent intent = new Intent(getActivity(), ItemDetailActivity.class);
         intent.putExtra(ItemsActivity.EXTRA_ITEM_ID, ItemId);
         startActivityForResult(intent, REQUEST_UPDATE_DELETE_ITEM);

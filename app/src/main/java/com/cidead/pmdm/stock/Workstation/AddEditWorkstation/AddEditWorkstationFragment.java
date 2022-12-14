@@ -19,7 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-/* Vista para creación/edición de un Workstation */
+/** ESTA CLASE IMPLEMENTA LA LOGICA PARA INTERACTURA CON EL LAYOUT FRAGMENT_ADD_EDIT_WORKSTATION */
 
 public class AddEditWorkstationFragment extends Fragment {
     private static final String ARG_WORKSTATION_ID = "arg_workstation_id";
@@ -57,24 +57,21 @@ public class AddEditWorkstationFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_add_edit_workstation, container, false);
 
-        // Referencias UI
+        // INICIAMOS LAS VARIABLES PARA PODER ACTUAR CON ELLAS
         wSaveButton = (FloatingActionButton) getActivity().findViewById(R.id.work);
         wNameField = (TextInputEditText) root.findViewById(R.id.f_wname);
         wNameLabel = (TextInputLayout) root.findViewById(R.id.l_wname);
 
-        // Eventos  //AÑADE WORKSTATION A TRAVES DEL BOTON SAVEBUTTON
+        //AÑADE WORKSTATION A TRAVES DEL BOTON SAVEBUTTON
         wSaveButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
         addEditWorkstation();
         }
         });
-
         WorkstationDBHelper = new WorkstationDBHelper(getActivity());
-
-        // CARGA DE DATOS
         if (WorkstationId != null) {
-            loadWorkstation();
+            loadWorkstation(); // CARGA DE DATOS
         }
         return root;
     }

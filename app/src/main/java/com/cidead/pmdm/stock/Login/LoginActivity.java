@@ -1,6 +1,8 @@
 package com.cidead.pmdm.stock.Login;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.cidead.pmdm.stock.Item.Items.ItemsActivity;
 import com.cidead.pmdm.stock.R;
@@ -30,11 +34,33 @@ public class LoginActivity extends AppCompatActivity {
     private TextView btnRegister;
 
     private FirebaseAuth authentication;
+    private String login = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Guardamos Login para no entrar en la pantalla de logueo
+
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            Log.i("Mensaje", "No se tiene permiso para leer.");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 225);
+        } else {
+            Log.i("Mensaje", "Se tiene permiso para leer y escribir!");
+        }
+
+        FileIOLogin fichero = new FileIOLogin();
+        login = fichero.leerLogin(this.getApplicationContext());
+        if (!login.equals("logueado")){
+            fichero = new FileIOLogin();
+            fichero.guardarLogin(getApplicationContext());
+        }else{
+            startActivity(new Intent(LoginActivity.this, WorkstationActivity.class));
+        }
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);

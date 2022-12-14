@@ -1,6 +1,6 @@
 package com.cidead.pmdm.stock.Item.Items;
 
-/* Esta clase hace de adaptardor de los Item*/
+/** CON ESTA CLASE HAREMOS QUE CADA ITEM TENGA SU ICONO CORRESPONDIENTE*/
 
 import android.content.Context;
 import android.database.Cursor;
@@ -52,22 +52,21 @@ public class ItemsCursorAdapter extends CursorAdapter {
         nameText.setText(name);
         Uri URI = Uri.parse("file:app/src/main/assets/" + avatar);
         if (avatar != null) {
-             Glide
-                .with(context)
-                .asBitmap()
-                .load(URI)
-                .error(R.drawable.icono_estudio_fondo_negro)
-                .centerCrop()
-                .into(new BitmapImageViewTarget(avatarImage) {
-                    @Override
-                    protected void setResource(Bitmap resource){
-                        RoundedBitmapDrawable drawable
-                                = RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                        drawable.setCircular(true);
-                        avatarImage.setImageDrawable(drawable);
-                    }
-             });
+            Glide
+                    .with(context)
+                    .asBitmap()
+                    .load(URI)
+                    .error(R.drawable.icono_estudio_fondo_negro)
+                    .centerCrop()
+                    .into(new BitmapImageViewTarget(avatarImage) {
+                        @Override
+                        protected void setResource(Bitmap resource){
+                            RoundedBitmapDrawable drawable
+                                    = RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                            drawable.setCircular(true);
+                            avatarImage.setImageDrawable(drawable);
+                        }
+                    });
         }
-        //Setup
     }
 }

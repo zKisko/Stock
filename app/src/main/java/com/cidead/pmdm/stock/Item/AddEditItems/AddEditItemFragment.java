@@ -1,27 +1,45 @@
 package com.cidead.pmdm.stock.Item.AddEditItems;
 
+import static com.cidead.pmdm.stock.DB.CategoriaProductosContract.CategoriaProductosEntry.CATEGORIA;
+import static com.cidead.pmdm.stock.DB.CategoriaProductosContract.CategoriaProductosEntry._ID;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.cidead.pmdm.stock.Item.DB.Item;
-import com.cidead.pmdm.stock.Item.DB.ItemsDBHelper;
+import com.cidead.pmdm.stock.DB.CategoriaProductosContract;
+import com.cidead.pmdm.stock.DB.CategoriaProductosDBHelper;
+import com.cidead.pmdm.stock.DB.Item;
+import com.cidead.pmdm.stock.DB.ItemsDBHelper;
+import com.cidead.pmdm.stock.DB.ProductosContract;
+import com.cidead.pmdm.stock.DB.ProductosDBHelper;
+import com.cidead.pmdm.stock.Item.ItemDetail.ItemDetailActivity;
 import com.cidead.pmdm.stock.Item.Items.FileIOWorkstation;
+import com.cidead.pmdm.stock.Item.Items.ItemsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.cidead.pmdm.stock.R;
 
 import androidx.fragment.app.Fragment;
 
-/* Vista para creación/edición de un Item */
+import java.util.ArrayList;
+
+// ESTA CLASE INTERACCIONA CON EL LAYOUT FRAGMENT_ADD_EDIT_iTEM PARA LA CREACION/EDICION DE LOS ELEMENTOS DE LOS PUESTOS
 
 public class AddEditItemFragment extends Fragment {
     private static final String ARG_ITEM_ID = "arg_item_id";
@@ -41,6 +59,11 @@ public class AddEditItemFragment extends Fragment {
     private TextInputLayout DescriptionLabel;
 
     private Integer idWorkstation;
+
+    private Spinner sCategoria;
+    private Spinner sProducto;
+    private Cursor categorias;
+    private ProductosDBHelper ProductosDBHelper;
 
 
     public AddEditItemFragment() {
@@ -82,36 +105,114 @@ public class AddEditItemFragment extends Fragment {
         ConditionLabel = (TextInputLayout) root.findViewById(R.id.l_condition);
         DescriptionLabel = (TextInputLayout) root.findViewById(R.id.l_description);
 
-        // Eventos  //AÑADE ITEMS A TRAVES DEL BOTON SAVEBUTTON
-        SaveButton.setOnClickListener(new View.OnClickListener() {
+        /** inicio las variables para el spinner y las acciones del spinner si hay algun elemento seleccionado o no*/
+        sCategoria = (Spinner) root.findViewById(R.id.s_Categoria);
+        sProducto = (Spinner) root.findViewById(R.id.s_Productos);
+
+        sCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("Spinner Categorias","Posición:" + position + " id:" + id);
+                cargarSpinnerProductos(id);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.i("Spinner Categorias", "Ningún item seleccionado");
+            }
+        });
+
+       // llenarCategorias();
+
+        //TODO: Cargar el nombre de la categoría de la base de datos Categoria, dependiendo del idCategoría
+        //      Y en la Descripción, el nombre del producto, partiendo del idProducto
+
+
+
+        SaveButton.setOnClickListener(new View.OnClickListener() { /**AÑADE ITEMS A TRAVES DEL BOTON SAVEBUTTON*/
             @Override
             public void onClick(View view) {
                 addEditItem();
             }
         });
-
-        itemsDBHelper = new ItemsDBHelper(getActivity());
-
-        // Carga de datos
+        itemsDBHelper = new ItemsDBHelper(getActivity()); // Carga de datos
         if (ItemId != null) {
             loadItem();
         }
-
         return root;
+    }
+
+    /**@author: Kisko
+     * Recargamos el spinner de productos filtrando por categoría
+     * @param id */
+    private void cargarSpinnerProductos(long id) {
+        String[] queryCols = new String[]{_ID, ProductosContract.ProductosEntry.PRODUCTOS};
+        String[] idCategoria = new String[]{String.valueOf(id)};
+        ProductosDBHelper = new ProductosDBHelper(this.getContext());
+
+        SQLiteDatabase db = new ProductosDBHelper(this.getContext()).getReadableDatabase();
+        ProductosDBHelper.onCreate(db);
+        Cursor cursor = db.query(
+                ProductosContract.ProductosEntry.TABLE_NAME, // the table to query
+                queryCols,                // the columns to return
+                ProductosContract.ProductosEntry._IDCATEGORIA+ " LIKE ?", // the columns for the WHERE clause
+                idCategoria,              // the values for the WHERE clause
+                null,                     // don't group the rows
+                null,                     // don't filter by row groups
+                null                      // don't sort
+        );
+
+        String[] adapterCols = new String[]{ProductosContract.ProductosEntry.PRODUCTOS};
+        int[] adapterRowViews = new int[]{android.R.id.text1};
+
+        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
+                this.getContext(), android.R.layout.simple_spinner_item, cursor, adapterCols, adapterRowViews, 0);
+        cursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sProducto.setAdapter(cursorAdapter);
+    }
+
+  /*  private void llenarCategorias() {
+        String[] queryCols = new String[]{_ID, CATEGORIA};
+        SQLiteDatabase db = new CategoriaProductosDBHelper(this.getContext()).getReadableDatabase();
+        Cursor cursor = db.query(
+                CategoriaProductosContract.CategoriaProductosEntry.TABLE_NAME, // the table to query
+                queryCols,                // the columns to return
+                null,                     // the columns for the WHERE clause
+                null,                     // the values for the WHERE clause
+                null,                     // don't group the rows
+                null,                     // don't filter by row groups
+                null                      // don't sort
+        );
+
+        String[] adapterCols = new String[]{CATEGORIA};
+        int[] adapterRowViews = new int[]{android.R.id.text1};
+
+        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
+                this.getContext(), android.R.layout.simple_spinner_item, cursor, adapterCols, adapterRowViews, 0);
+        cursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sCategoria.setAdapter(cursorAdapter);
+    }*/
+
+    private ArrayList<String> llenarArrayCategorias(Cursor categorias, ArrayList<String> aCategorias) {
+        return null;
     }
 
     private void loadItem() {
         new GetItemByIdTask().execute();
     }
 
-
-    /*ESTE METODO EXTRAE LOS DATOS DE LOS CAMPOS DE TEXTO,
-     COMPRUEBA QUE NO ESTAN VACIOS Y LUEGO CREAN EL NUEVO ITEM*/
-    private void addEditItem() {
+    private void addEditItem() {  /**ESTE METODO EXTRAE LOS DATOS DE LOS CAMPOS DE TEXTO,
+                                    COMPRUEBA QUE NO ESTAN VACIOS Y LUEGO CREAN EL NUEVO ITEM*/
         boolean error = false;
 
-        FileIOWorkstation fichero = new FileIOWorkstation(); //CREAMOS LA VARIABLE FICHERO CON LA CARGA DE LOS DATOS
-        idWorkstation = Integer.valueOf(fichero.leerWorkstation(getContext())); // LEEMOS EL DATO idWorkstation DE FICHERO Y LO PASAMOS A UN ENTERO
+        FileIOWorkstation fichero = new FileIOWorkstation(); /**CREAMOS LA VARIABLE FICHERO CON LA CARGA DE LOS DATOS*/
+        idWorkstation = Integer.valueOf(fichero.leerWorkstation(getContext())); /**LEEMOS EL DATO idWorkstation DE FICHERO Y LO PASAMOS A UN ENTERO*/
+
+        //TODO: Cambiar base de datos para que guarde el id de la categoria en vez del nombre
+        //      y la Descripción del producto.
+        //TODO: Recuperar el id de producto para guardarlo en la base de datos y quitar el nombre
+        //      Que lo recuperará de la base de datos productos
 
         String name = NameField.getText().toString();
         String quantity = QuantityField.getText().toString();
@@ -148,14 +249,19 @@ public class AddEditItemFragment extends Fragment {
 
     }
 
-    private void showItemsScreen(Boolean requery) {
+    /** @param requery
+     * @param idItem
+     * Creamos este método para que una vez editado el item, vuelva a la pantalla del detalle de item     */
+
+    private void showItemScreen(Boolean requery, String idItem) {
         if (!requery) {
             showAddEditError();
             getActivity().setResult(Activity.RESULT_CANCELED);
         } else {
-            getActivity().setResult(Activity.RESULT_OK);
+            Intent intent = new Intent(getActivity(), ItemDetailActivity.class);
+            intent.putExtra(ItemsActivity.EXTRA_ITEM_ID, idItem);
+            startActivityForResult(intent, 2);
         }
-        getActivity().finish();
     }
 
     private void showAddEditError() {
@@ -205,11 +311,15 @@ public class AddEditItemFragment extends Fragment {
                 return itemsDBHelper.saveItem(items[0]) > 0;
             }
         }
-         /* DEPENDIENDO DE LA TAREA ASINCRONA DE ARRIBA (UPDATE O SAVE)
+         /** DEPENDIENDO DE LA TAREA ASINCRONA DE ARRIBA (UPDATE O SAVE)
          ESTA ACTIVIDAD NOS MOSTRARÁ EL NUEVO RESULTADO O UN MENSAJE DE ERROR */
+
+        /** @param result
+         * Cambiamos el método al que llama al terminar la orden de modificación */
+
         @Override
         protected void onPostExecute(Boolean result) {
-            showItemsScreen(result);
+            showItemScreen(result, ItemId);
         }
     }
 }

@@ -48,5 +48,4 @@ public class CategoriaProducto {
     }
 
     public String getImagen() {return Imagen;}
-
 }
