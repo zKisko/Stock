@@ -48,8 +48,8 @@ public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
         mockItem(sqLiteDatabase, new CategoriaProducto("Tablet","tablet.xml"));
         mockItem(sqLiteDatabase, new CategoriaProducto("Webcam","webcam.xml"));
         mockItem(sqLiteDatabase, new CategoriaProducto("Cable","cable-48.xml"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Mesa",""));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Silla",""));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Mesa","mesa.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Silla","sillagiratoria.png"));
         mockItem(sqLiteDatabase, new CategoriaProducto("Otros","icono_estudio_fondo_blanco.jpg"));
     }
 
