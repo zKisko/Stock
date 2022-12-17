@@ -36,21 +36,21 @@ public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
 
     // Insertamos datos ficticios para prueba inicial
     private void mockData(SQLiteDatabase sqLiteDatabase) {
-        mockItem(sqLiteDatabase, new CategoriaProducto("Monitor","monitor.xml"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Teclado","keyboard_outline.xml"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Raton","mouse.xml"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Torre","desktop_classic.xml"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Smartphone","cellphone.xml"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Auriculares","headphones.xml"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Portatil","laptop.xml"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Impresora","printer.xml"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Escaner","scanner.xml"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Tablet","tablet.xml"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Webcam","webcam.xml"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Cable","cable-48.xml"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Mesa","mesa.png"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Silla","sillagiratoria.png"));
-        mockItem(sqLiteDatabase, new CategoriaProducto("Otros","icono_estudio_fondo_blanco.jpg"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Monitor","https://cdn-icons-png.flaticon.com/128/3451/3451513.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Teclado","https://cdn-icons-png.flaticon.com/128/1212/1212890.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Raton","https://cdn-icons-png.flaticon.com/128/1786/1786973.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Torre","https://cdn-icons-png.flaticon.com/128/4740/4740513.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Smartphone","https://cdn-icons-png.flaticon.com/128/977/977411.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Auriculares","https://cdn-icons-png.flaticon.com/128/2292/2292116.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Portatil","https://cdn-icons-png.flaticon.com/128/7533/7533214.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Impresora","https://cdn-icons-png.flaticon.com/128/3756/3756803.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Escaner","https://cdn-icons-png.flaticon.com/128/481/481755.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Tablet","https://cdn-icons-png.flaticon.com/128/900/900263.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Webcam","https://cdn-icons-png.flaticon.com/128/2866/2866726.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Cable","https://cdn-icons-png.flaticon.com/128/3432/3432620.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Mesa","https://cdn-icons-png.flaticon.com/128/1189/1189357.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Silla","https://cdn-icons-png.flaticon.com/128/5396/5396311.png"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Otros","https://cdn-icons-png.flaticon.com/128/2432/2432572.png"));
     }
 
     public long mockItem(SQLiteDatabase db, CategoriaProducto categoriaProducto) {

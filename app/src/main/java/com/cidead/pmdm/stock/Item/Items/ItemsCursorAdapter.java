@@ -51,10 +51,8 @@ public class ItemsCursorAdapter extends CursorAdapter {
 
         //Recoger los valores
         int idName = cursor.getColumnIndex(ItemEntry.IDPRODUCTO);
-        int idAvatarURL = cursor.getColumnIndex(ItemEntry.AVATARURL);
         String idProducto = cursor.getString(idName);
-        String avatar = cursor.getString(idAvatarURL);
-        avatar = "monitor.webp";
+        String avatar="";
         ProductosDBHelper productoDBHelper = new ProductosDBHelper(context);
         SQLiteDatabase db = new ProductosDBHelper(context).getReadableDatabase();
         productoDBHelper.onCreate(db);
@@ -65,22 +63,22 @@ public class ItemsCursorAdapter extends CursorAdapter {
             while (cursorProductos.moveToNext()) {
                 String name =  cursorProductos.getString(columIndex);
                 String idCategoria = cursorProductos.getString(columIndexCat);
-
                 CategoriaProductosDBHelper categoriaProductosDBHelper = new CategoriaProductosDBHelper(context);
                 SQLiteDatabase dbCategorias = new CategoriaProductosDBHelper(context).getReadableDatabase();
                 categoriaProductosDBHelper.onCreate(dbCategorias);
                 Cursor cursorCategorias = categoriaProductosDBHelper.getCategoriaProductoById(idCategoria);
+                int columnIndexAvatarURL = cursorCategorias.getColumnIndex(CategoriaProductosContract.CategoriaProductosEntry.IMAGEN);
                 int columIndexCategoria = cursorCategorias.getColumnIndex(CategoriaProductosContract.CategoriaProductosEntry.CATEGORIA);
                 if(cursorCategorias.getCount() > 0) {
                     while (cursorCategorias.moveToNext()) {
                         String categoria =  cursorCategorias.getString(columIndexCategoria);
+                        avatar = cursorCategorias.getString(columnIndexAvatarURL);
                         nameText.setText(categoria + " " + name);
                     }
                 }
             }
         }
-
-        Uri URI = Uri.parse("file:app/src/main/assets/" + avatar);
+        Uri URI = Uri.parse(avatar);
         if (avatar != null) {
             Glide
                     .with(context)
@@ -88,15 +86,7 @@ public class ItemsCursorAdapter extends CursorAdapter {
                     .load(URI)
                     .error(R.drawable.puestodetrabajo)
                     .centerCrop()
-                    .into(new BitmapImageViewTarget(avatarImage) {
-                        @Override
-                        protected void setResource(Bitmap resource){
-                            RoundedBitmapDrawable drawable
-                                    = RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                            drawable.setCircular(true);
-                            avatarImage.setImageDrawable(drawable);
-                        }
-                    });
+                    .into(avatarImage);
         }
     }
 }

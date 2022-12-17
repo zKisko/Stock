@@ -59,7 +59,9 @@ public class ItemsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder info = new AlertDialog.Builder(ItemsActivity.this);
-                info.setMessage("Añade los elementos a los puestos de trabajo pulsando el botón de la parte inferior derecha con el simbolo + ")
+                info.setMessage("Añade los elementos a los puestos de trabajo pulsando el botón de la parte inferior derecha con el simbolo + ." +
+                                "                                             " +
+                                "Pulsa en el elemento para ver sus carectiristicas, editarlo o borrarlo.")
                         .setCancelable(false)
                         .setNeutralButton("Ok", new DialogInterface.OnClickListener() { // CREO EL OK PARA CERRRAR LA PANTALLA
                             @Override

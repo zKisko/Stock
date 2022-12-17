@@ -33,7 +33,11 @@ public class WorkstationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder info = new AlertDialog.Builder(WorkstationActivity.this);
-                info.setMessage("En esta pantalla puedes añadir los puestos de trabajo pulsando el botón ubicado en la parte inferior derecha que contiene el simbolo + ")
+                info.setMessage("En esta pantalla puedes añadir los puestos de trabajo pulsando el botón ubicado en la parte inferior derecha que contiene el simbolo +. " +
+                                "                                                                                                          " +
+                                "Para ver los elementos que hay en cada puesto de trabajo pulse en el puesto correspondiente." +
+                                "                                                                                                            " +
+                                "Pulse prolongadamente en el puesto de trabajo para editar el nombre o elimiarlo. ")
                         .setCancelable(false)
                         .setNeutralButton("Ok", new DialogInterface.OnClickListener(){ // CREO EL OK PARA CERRRAR LA PANTALLA
                             @Override

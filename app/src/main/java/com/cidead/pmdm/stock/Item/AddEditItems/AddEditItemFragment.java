@@ -128,9 +128,10 @@ public class AddEditItemFragment extends Fragment {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cargarSpinnerProductos(id);
+                if (ItemId == null) {
+                    cargarSpinnerProductos(id); //CARGA EL SPINNER SI NO HAY UN REGISTRO ANTERIOR
+                }                               //ESTO SE HACE PARA QUE AL EDITAR NO SE MUEVA DEL CAMPO SELECCIONADO
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -349,49 +350,68 @@ public class AddEditItemFragment extends Fragment {
     }
 
     private void showItem(Item item) {
-
-        int posProducto = 0;
-        int posCategoria = 0;
         productoActual = item.getIdProducto();
         categoriaActual = 0;
         ProductosDBHelper productosDbHelper = new ProductosDBHelper(this.getContext());
         Cursor producto = productosDbHelper.getProductoById(String.valueOf(productoActual));
         int columIndexIdCat = producto.getColumnIndex(ProductosContract.ProductosEntry._IDCATEGORIA);
-        int columIndex_Id = producto.getColumnIndex(ProductosContract.ProductosEntry._ID);
         if(producto.getCount()>0){
             while (producto.moveToNext()){
                 categoriaActual = Integer.parseInt(producto.getString(columIndexIdCat));
             }
         }
 
-        llenarCategorias();
-        cargarSpinnerProductos(categoriaActual);
-        if (cursorProductos.getCount()>0){;
-            cursorProductos.moveToFirst();
-            while (cursorProductos.moveToNext()){
-                if (productoActual == cursorProductos.getInt(columIndex_Id)) {
-                    posProducto = cursorProductos.getPosition();
-                    break;
-                }else{
-                    posProducto++;
-                }
-            }
-        }
-        if (cursorCategorias.getCount()>0){
-            cursorCategorias.moveToFirst();
-            while (cursorCategorias.moveToNext()) {
-                int cCategoria = cursorCategorias.getInt(columIndex_Id);
-                if (categoriaActual == cCategoria) {
-                    posCategoria = cursorCategorias.getPosition();
-                    break;
-                }else{
-                    posCategoria++;
-                }
-            }
-        }
+        int prodPosIndex;
 
-        sCategoria.setSelection(posCategoria);
-        sProducto.setSelection(posProducto);
+        if (ItemId != null){
+            ItemsDBHelper itemsDBHelperS = new ItemsDBHelper(this.getContext());
+            Cursor itemById = itemsDBHelperS.getItemById(ItemId);
+            if (itemById.getCount()>0){
+                while (itemById.moveToNext()){
+                    prodPosIndex = itemById.getColumnIndex(ItemsContract.ItemEntry.IDPRODUCTO);
+                    int prodId = itemById.getInt(prodPosIndex);
+                    ProductosDBHelper ProdDBHelper = new ProductosDBHelper(this.getContext());
+                    Cursor cursorProdById = ProdDBHelper.getProductoById(String.valueOf(prodId));
+                    int indexId = cursorProdById.getColumnIndex(ProductosContract.ProductosEntry._ID);
+                    int idProducto = 0;
+                    if (cursorProdById.getCount()>0){
+                        while (cursorProdById.moveToNext()){
+                            idProducto = cursorProdById.getInt(indexId);
+                        }
+                    }
+
+                    llenarCategorias();
+                    cargarSpinnerProductos(categoriaActual);
+
+                    String[] queryCols = new String[]{_ID, ProductosContract.ProductosEntry.PRODUCTO};
+                    String[] idCategoria = new String[]{String.valueOf(categoriaActual)};
+                    SQLiteDatabase db = new ProductosDBHelper(this.getContext()).getReadableDatabase();
+                    ProductosDBHelper.onCreate(db);
+                    cursorProductos  = db.query(
+                            ProductosContract.ProductosEntry.TABLE_NAME, // the table to query
+                            queryCols,                // the columns to return
+                            ProductosContract.ProductosEntry._IDCATEGORIA+ " LIKE ?", // the columns for the WHERE clause
+                            idCategoria,              // the values for the WHERE clause
+                            null,                     // don't group the rows
+                            null,                     // don't filter by row groups
+                            null                      // don't sort
+                    );
+                    int posItemProd = 0;
+                    if (cursorProductos.getCount() > 0){
+                        while (cursorProductos.moveToNext()){
+                            int idProdAct = cursorProductos.getInt(indexId);
+                            if (idProdAct != idProducto){
+                                posItemProd++;
+                            }else{
+                                break;
+                            }
+                        }
+                    }
+                    sCategoria.setSelection(categoriaActual-1);
+                    sProducto.setSelection(posItemProd);
+                }
+            }
+        }
         QuantityField.setText(item.getQuantity());
         ConditionField.setText(item.getCondition());
         DescriptionField.setText(item.getDescription());

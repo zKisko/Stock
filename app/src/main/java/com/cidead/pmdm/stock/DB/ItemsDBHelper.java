@@ -42,13 +42,7 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
     // Insertamos datos ficticios para prueba inicial
     private void mockData(SQLiteDatabase sqLiteDatabase) {
         mockItem(sqLiteDatabase, new Item(1,1, "3","Nuevo", "Monitor LG 24 pulgadas.",null));
-        mockItem(sqLiteDatabase, new Item(1,2, "2", "Nuevo", "Monitor", null));
-        mockItem(sqLiteDatabase, new Item(1,3, "1", "Nuevo", "Monitor", null));
-        mockItem(sqLiteDatabase, new Item(1,4, "3", "Nuevo", "Monitor", null ));
-        mockItem(sqLiteDatabase, new Item(2,5, "2", "Nuevo", "Monitor", null));
-        mockItem(sqLiteDatabase, new Item(2,6, "3", "Nuevo", "Monitor", null));
-        mockItem(sqLiteDatabase, new Item(2,7, "2", "Nuevo", "Monitor", null));
-        mockItem(sqLiteDatabase, new Item(2,8, "1", "Nuevo", "Monitor", null));
+        mockItem(sqLiteDatabase, new Item(2,6, "2", "Usado", "Bluetooth", null));
     }
 
     public long mockItem(SQLiteDatabase db, Item item) {

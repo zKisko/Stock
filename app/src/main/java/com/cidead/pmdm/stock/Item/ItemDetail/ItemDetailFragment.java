@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.cidead.pmdm.stock.DB.CategoriaProductosContract;
 import com.cidead.pmdm.stock.DB.CategoriaProductosDBHelper;
 import com.cidead.pmdm.stock.DB.ProductosContract;
@@ -125,18 +127,21 @@ public class ItemDetailFragment extends Fragment {
         SQLiteDatabase dbCategoria = new CategoriaProductosDBHelper(this.getContext()).getReadableDatabase();
         categoriaProductosDBHelper.onCreate(dbCategoria);
         Cursor categoria = categoriaProductosDBHelper.getCategoriaProductoById(idCatPro);
+        String avatar="";
+        int columnIndexAvatarURL = categoria.getColumnIndex(CategoriaProductosContract.CategoriaProductosEntry.IMAGEN);
         int columIdCat = categoria.getColumnIndex(CategoriaProductosContract.CategoriaProductosEntry.CATEGORIA);
         if(categoria.getCount() >= 1) {
             while (categoria.moveToNext()) {
                 nombreProducto = categoria.getString(columIdCat) + " " + nombreProducto;
+                avatar = categoria.getString(columnIndexAvatarURL);
             }
         }
 
-        mCollapsingView.setTitle(nombreProducto);
-       /* Glide.with(getContext())
-                .load(Uri.parse("file:///android_asset/" + item.getAvatarurl()))
+       mCollapsingView.setTitle(nombreProducto);
+       Glide.with(getContext())
+                .load(Uri.parse(avatar))
                 .centerCrop()
-                .into(mAvatarurl);*/
+                .into(mAvatarurl);
         mQuantity.setText(item.getQuantity());
         mCondition.setText(item.getCondition());
         mDescription.setText(item.getDescription());
