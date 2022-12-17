@@ -2,8 +2,8 @@
 * Trabajo fin de grado del Grado superior de desarrollo de aplicaciones multiplataforma
 ##
 Enlace de el .apk de la aplicación:
-[app-debug.apk
-](https://github.com/zKisko/Stock/blob/master/app-debug.apk)
+[Stock
+](https://github.com/zKisko/Stock/blob/master/Stock.apk)
 ##
 Enlace de la memoria:
 [Memoria del proyecto integrado Stock. 
