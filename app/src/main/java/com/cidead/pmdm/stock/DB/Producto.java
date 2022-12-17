@@ -1,6 +1,6 @@
 package com.cidead.pmdm.stock.DB;
 
-import static com.cidead.pmdm.stock.DB.ProductosContract.ProductosEntry.PRODUCTOS;
+import static com.cidead.pmdm.stock.DB.ProductosContract.ProductosEntry.PRODUCTO;
 import static com.cidead.pmdm.stock.DB.ProductosContract.ProductosEntry._IDCATEGORIA;
 
 import android.annotation.SuppressLint;
@@ -22,13 +22,13 @@ public class Producto {
     public Producto (Cursor cursor){
         _id = cursor.getInt(cursor.getColumnIndex(ProductosContract.ProductosEntry._ID));
         _idCategoria = cursor.getInt(cursor.getColumnIndex(_IDCATEGORIA));
-        Producto = String.valueOf(cursor.getColumnIndex(PRODUCTOS));
+        Producto = String.valueOf(cursor.getColumnIndex(PRODUCTO));
     }
 
     public ContentValues toContentValues() {
         ContentValues values = new ContentValues();
         values.put(_IDCATEGORIA, _idCategoria);
-        values.put(PRODUCTOS, Producto);
+        values.put(PRODUCTO, Producto);
         return values;
     }
 

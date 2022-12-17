@@ -13,3 +13,4 @@ public class CategoriaProductosContract {
         public static String IMAGEN = "Imagen";
     }
 }
+

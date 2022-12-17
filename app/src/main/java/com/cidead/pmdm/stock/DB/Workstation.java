@@ -39,9 +39,13 @@ public class Workstation {
             return wname;
         }
 
-    public void setWname(String name){ wname = name; }
+    public void setWname(String name){
+        wname = name;
+    }
 
-    public void setId(String id){ _id = id; }
+    public void setId(String id){
+        _id = id;
+    }
 
     }
 

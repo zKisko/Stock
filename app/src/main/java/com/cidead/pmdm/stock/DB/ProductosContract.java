@@ -10,6 +10,6 @@ public class ProductosContract {
 
         public static final String _ID = "_id";
         public static String _IDCATEGORIA = "_idCategoria";
-        public static final String PRODUCTOS = "productos";
+        public static final String PRODUCTO = "productos";
     }
 }

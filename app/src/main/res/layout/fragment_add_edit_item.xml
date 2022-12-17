@@ -19,75 +19,78 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/l_Productos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:text="Productos:" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
 
-                <Spinner
-                    android:id="@+id/s_Productos"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin">
+                    <TextView
+                        android:id="@+id/l_categoria"
+                        android:layout_width="100dp"
+                        android:layout_height="25dp"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Categorias:"
+                        android:textSize="20dp" />
 
-                </Spinner>
+                    <Spinner
+                        android:id="@+id/s_Categoria"
+                        android:layout_width="230dp"
+                        android:layout_height="30dp"
+                        android:minHeight="32dp">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:text="+">
+                    </Spinner>
 
-                </androidx.appcompat.widget.AppCompatButton>
+                    <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/salvarcategoria"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/add_circle_48">
+
+                    </com.google.android.material.floatingactionbutton.FloatingActionButton> -->
+                </LinearLayout>
 
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/l_categoria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:text="Categorias:" />
+                <LinearLayout
+                    android:layout_width="303dp"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
 
-                <Spinner
-                    android:id="@+id/s_Categoria"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/l_Productos"
+                        android:layout_width="100dp"
+                        android:layout_height="25dp"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Productos:"
+                        android:textAllCaps="false"
+                        android:textSize="20dp" />
 
-                </Spinner>
+                    <Spinner
+                        android:id="@+id/s_Productos"
+                        android:layout_width="230dp"
+                        android:layout_height="30dp"
+                        android:minHeight="48dp">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:text="+">
+                    </Spinner>
 
-                </androidx.appcompat.widget.AppCompatButton>
+                    <!--  <Button
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/add_circle_48"                        >
+
+                    </Button> -->
+                </LinearLayout>
 
             </TableRow>
 
         </TableLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/l_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/f_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/nombre"
-                android:inputType="textPersonName"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColorHint="#78909C" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/l_quantity"

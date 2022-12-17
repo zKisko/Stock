@@ -22,15 +22,15 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) { /** Creamos un Try Catch para comprobar si existe la tabla Workstation.
                                             * En caso contrario, la creamos y la rellenamos con el contenido del mock de pruebas. */
         if(db.isOpen()){
-        }else{
+        }else {
         }
-        try{
+            try{
             getAllItems();
         }catch(Exception e){
             db.execSQL("CREATE TABLE " + ItemsContract.ItemEntry.TABLE_NAME + " ("
                     + ItemsContract.ItemEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + ItemEntry.IDWORKSTATION + " INTEGER NOT NULL,"
-                    + ItemsContract.ItemEntry.NAME + " TEXT NOT NULL,"
+                    + ItemsContract.ItemEntry.IDPRODUCTO + " TEXT NOT NULL,"
                     + ItemsContract.ItemEntry.QUANTITY + " TEXT NOT NULL,"
                     + ItemsContract.ItemEntry.CONDITION + " TEXT NOT NULL,"
                     + ItemsContract.ItemEntry.DESCRIPTION + " TEXT NOT NULL,"
@@ -41,15 +41,14 @@ public class ItemsDBHelper extends SQLiteOpenHelper {
 
     // Insertamos datos ficticios para prueba inicial
     private void mockData(SQLiteDatabase sqLiteDatabase) {
-        mockItem(sqLiteDatabase, new Item(1,"Monitor", "3","Nuevo", "Monitor LG 24 pulgadas.",null));
-        mockItem(sqLiteDatabase, new Item(1,"Teclado", "2", "Nuevo", "Monitor", null));
-        mockItem(sqLiteDatabase, new Item(1,"Raton", "1", "Nuevo", "Monitor", null));
-        mockItem(sqLiteDatabase, new Item(1,"Torre", "3", "Nuevo", "Monitor", null ));
-        mockItem(sqLiteDatabase, new Item(2,"Cable HDMI", "2", "Nuevo", "Monitor", null));
-        mockItem(sqLiteDatabase, new Item(2,"Cable de alimentación", "3", "Nuevo", "Monitor", null));
-        mockItem(sqLiteDatabase, new Item(2,"Mesa de escritorio", "2", "Nuevo", "Monitor", null));
-        mockItem(sqLiteDatabase, new Item(2,"Silla de oficina", "1", "Nuevo", "Monitor", null));
-
+        mockItem(sqLiteDatabase, new Item(1,1, "3","Nuevo", "Monitor LG 24 pulgadas.",null));
+        mockItem(sqLiteDatabase, new Item(1,2, "2", "Nuevo", "Monitor", null));
+        mockItem(sqLiteDatabase, new Item(1,3, "1", "Nuevo", "Monitor", null));
+        mockItem(sqLiteDatabase, new Item(1,4, "3", "Nuevo", "Monitor", null ));
+        mockItem(sqLiteDatabase, new Item(2,5, "2", "Nuevo", "Monitor", null));
+        mockItem(sqLiteDatabase, new Item(2,6, "3", "Nuevo", "Monitor", null));
+        mockItem(sqLiteDatabase, new Item(2,7, "2", "Nuevo", "Monitor", null));
+        mockItem(sqLiteDatabase, new Item(2,8, "1", "Nuevo", "Monitor", null));
     }
 
     public long mockItem(SQLiteDatabase db, Item item) {

@@ -1,6 +1,6 @@
 package com.cidead.pmdm.stock.DB;
 
-import static com.cidead.pmdm.stock.DB.ProductosContract.ProductosEntry.PRODUCTOS;
+import static com.cidead.pmdm.stock.DB.ProductosContract.ProductosEntry.PRODUCTO;
 import static com.cidead.pmdm.stock.DB.ProductosContract.ProductosEntry.TABLE_NAME;
 import static com.cidead.pmdm.stock.DB.ProductosContract.ProductosEntry._ID;
 import static com.cidead.pmdm.stock.DB.ProductosContract.ProductosEntry._IDCATEGORIA;
@@ -29,26 +29,68 @@ public class ProductosDBHelper extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE " + TABLE_NAME + " ("
                     + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + _IDCATEGORIA + " INTEGER,"
-                    + PRODUCTOS + " TEXT )");
+                    + PRODUCTO + " TEXT )");
             mockData(db);
-            Log.i("CategoriaProductosDBHelper", "Tabla creada");
         }
     }
 
     // Insertamos datos ficticios para prueba inicial
     private void mockData(SQLiteDatabase sqLiteDatabase) {
-        mockItem(sqLiteDatabase, new Producto(1,"LG"));
-        mockItem(sqLiteDatabase, new Producto(2,"Trust"));
-        mockItem(sqLiteDatabase, new Producto(3,"NewSkill"));
-        mockItem(sqLiteDatabase, new Producto(4,"Acer"));
-        mockItem(sqLiteDatabase, new Producto(5,"HP"));
-        mockItem(sqLiteDatabase, new Producto(6,"Samsumg"));
-        mockItem(sqLiteDatabase, new Producto(7,"Huawei"));
-        mockItem(sqLiteDatabase, new Producto(8,"Apple"));
-        mockItem(sqLiteDatabase, new Producto(9,"Canon"));
-        mockItem(sqLiteDatabase, new Producto(10,"Epson"));
-        mockItem(sqLiteDatabase, new Producto(11,"Mitsai"));
-        mockItem(sqLiteDatabase, new Producto(12,"Otra"));
+        mockItem(sqLiteDatabase, new Producto(1, "LG")); //id = 1
+        mockItem(sqLiteDatabase, new Producto(1, "Acer")); //id = 2
+        mockItem(sqLiteDatabase, new Producto(1, "Benq")); //id = 3
+        mockItem(sqLiteDatabase, new Producto(1, "Samsung"));
+        mockItem(sqLiteDatabase, new Producto(1, "Otra"));
+        mockItem(sqLiteDatabase, new Producto(2, "Corsair"));
+        mockItem(sqLiteDatabase, new Producto(2, "Logitech"));
+        mockItem(sqLiteDatabase, new Producto(2, "Razer"));
+        mockItem(sqLiteDatabase, new Producto(2, "Otra"));
+        mockItem(sqLiteDatabase, new Producto(3, "Corsair"));
+        mockItem(sqLiteDatabase, new Producto(3, "Logitech"));
+        mockItem(sqLiteDatabase, new Producto(3, "Razer"));
+        mockItem(sqLiteDatabase, new Producto(3, "Otra"));
+        mockItem(sqLiteDatabase, new Producto(4, "Lenovo"));
+        mockItem(sqLiteDatabase, new Producto(4, "HP"));
+        mockItem(sqLiteDatabase, new Producto(4, "Otra"));
+        mockItem(sqLiteDatabase, new Producto(5, "Samsumg"));
+        mockItem(sqLiteDatabase, new Producto(5, "Xiaomi"));
+        mockItem(sqLiteDatabase, new Producto(5, "Huawei"));
+        mockItem(sqLiteDatabase, new Producto(5, "Apple"));
+        mockItem(sqLiteDatabase, new Producto(5, "LG"));
+        mockItem(sqLiteDatabase, new Producto(5, "Otra"));
+        mockItem(sqLiteDatabase, new Producto(6, "Logitech"));
+        mockItem(sqLiteDatabase, new Producto(6, "Onikuma"));
+        mockItem(sqLiteDatabase, new Producto(6, "HyperX"));
+        mockItem(sqLiteDatabase, new Producto(6, "Otra"));
+        mockItem(sqLiteDatabase, new Producto(7, "Acer"));
+        mockItem(sqLiteDatabase, new Producto(7, "LG"));
+        mockItem(sqLiteDatabase, new Producto(7, "Lenovo"));
+        mockItem(sqLiteDatabase, new Producto(7, "Hp"));
+        mockItem(sqLiteDatabase, new Producto(7, "Apple"));
+        mockItem(sqLiteDatabase, new Producto(7, "Dell"));
+        mockItem(sqLiteDatabase, new Producto(7, "Otra"));
+        mockItem(sqLiteDatabase, new Producto(8, "Epson"));
+        mockItem(sqLiteDatabase, new Producto(8, "Brother"));
+        mockItem(sqLiteDatabase, new Producto(8, "Canon"));
+        mockItem(sqLiteDatabase, new Producto(8, "Otra"));
+        mockItem(sqLiteDatabase, new Producto(9, "HP"));
+        mockItem(sqLiteDatabase, new Producto(9, "Canon"));
+        mockItem(sqLiteDatabase, new Producto(9, "Otra"));
+        mockItem(sqLiteDatabase, new Producto(10, "Samsumg"));
+        mockItem(sqLiteDatabase, new Producto(10, "Huawei"));
+        mockItem(sqLiteDatabase, new Producto(10, "Apple"));
+        mockItem(sqLiteDatabase, new Producto(10, "Otra"));
+        mockItem(sqLiteDatabase, new Producto(11, "Logitech"));
+        mockItem(sqLiteDatabase, new Producto(11, "AverMedia"));
+        mockItem(sqLiteDatabase, new Producto(11, "Otra"));
+        mockItem(sqLiteDatabase, new Producto(12, "de datos"));
+        mockItem(sqLiteDatabase, new Producto(12, "HDMI"));
+        mockItem(sqLiteDatabase, new Producto(12, "USB"));
+        mockItem(sqLiteDatabase, new Producto(12, "de alimentación"));
+        mockItem(sqLiteDatabase, new Producto(12, "Otros"));
+        mockItem(sqLiteDatabase, new Producto(13, "de escritorio"));
+        mockItem(sqLiteDatabase, new Producto(14, "de escritorio"));
+        mockItem(sqLiteDatabase, new Producto(15, "Otros"));
     }
 
     public long mockItem(SQLiteDatabase db, Producto producto) {

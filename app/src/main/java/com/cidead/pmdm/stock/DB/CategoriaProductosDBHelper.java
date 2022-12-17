@@ -11,7 +11,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
 
@@ -21,8 +20,8 @@ public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {   /** Creamos un Try Catch para comprobar si existe la
-                                                tabla Workstation. En caso contrario, la creamos y la
-                                                rellenamos con el contenido del mock de pruebas. */
+     tabla Workstation. En caso contrario, la creamos y la
+     rellenamos con el contenido del mock de pruebas. */
         try{
             getAllCategoriasProducto();
         }catch(Exception e){
@@ -31,7 +30,7 @@ public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
                     + CATEGORIA + " TEXT,"
                     + IMAGEN + " TEXT )");
             mockData(db);
-            Log.i("CategoriaProductosDBHelper", "Tabla creada");
+
         }
     }
 
@@ -49,6 +48,8 @@ public class CategoriaProductosDBHelper extends SQLiteOpenHelper {
         mockItem(sqLiteDatabase, new CategoriaProducto("Tablet","tablet.xml"));
         mockItem(sqLiteDatabase, new CategoriaProducto("Webcam","webcam.xml"));
         mockItem(sqLiteDatabase, new CategoriaProducto("Cable","cable-48.xml"));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Mesa",""));
+        mockItem(sqLiteDatabase, new CategoriaProducto("Silla",""));
         mockItem(sqLiteDatabase, new CategoriaProducto("Otros","icono_estudio_fondo_blanco.jpg"));
     }
 

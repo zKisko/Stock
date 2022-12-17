@@ -8,8 +8,10 @@ android:fitsSystemWindows="true"
 tools:context=".Item.ItemDetail.ItemDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout4"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
+        android:background="@color/purple_200"
         android:fitsSystemWindows="true"
         android:theme="@style/Animation.Design.BottomSheetDialog">
 
@@ -22,14 +24,26 @@ tools:context=".Item.ItemDetail.ItemDetailActivity">
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <!-- Imagen del detalle -->
-            <ImageView
-                android:id="@+id/iv_avatar"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/purple_200"
-                android:fitsSystemWindows="true"
-                app:layout_collapseMode="parallax"
-                android:src="@drawable/icono_estudio_fondo_blanco"/>
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="163dp"
+                    android:background="@color/purple_200"
+                    android:fitsSystemWindows="true"
+                    android:src="@drawable/keyboard_outline"
+                    app:layout_collapseMode="parallax"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.492"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

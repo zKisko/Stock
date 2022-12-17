@@ -12,7 +12,7 @@ public class ItemsContract {
 
         public static final String _ID = "_id";
         public static final String IDWORKSTATION = "id_workstation";
-        public static final String NAME = "name";
+        public static final String IDPRODUCTO = "id_producto";
         public static final String QUANTITY = "quantity";
         public static final String CONDITION = "condition";
         public static final String DESCRIPTION = "description";

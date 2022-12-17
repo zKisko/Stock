@@ -13,17 +13,17 @@ public class Item {
 
         private int _id; /* codigo del Item */
         private final int id_workstation; /* codigo del equipo */
-        private final String name; /* nombre */
+        private final int idProducto; /* nombre */
         private final String quantity; /* cantidad */
         private final String condition; /* estado del item */
         private final String description; /* descripcion adicional*/
         private final String avatarurl; /* imagen del item */
 
-        public Item(int id_workstation, String name,
+        public Item(int id_workstation, int idProducto,
                     String quantity, String condition,
                     String description, String avatarurl) {
             this.id_workstation = id_workstation;
-            this.name = name;
+            this.idProducto = idProducto;
             this.quantity = quantity;
             this.condition = condition;
             this.description = description;
@@ -34,7 +34,7 @@ public class Item {
     public Item(Cursor cursor) {
         _id = cursor.getInt(cursor.getColumnIndex(ItemsContract.ItemEntry._ID));
         id_workstation = cursor.getInt(cursor.getColumnIndex(ItemsContract.ItemEntry.IDWORKSTATION));
-        name = cursor.getString(cursor.getColumnIndex(ItemsContract.ItemEntry.NAME));
+        idProducto = cursor.getInt(cursor.getColumnIndex(ItemsContract.ItemEntry.IDPRODUCTO));
         quantity = cursor.getString(cursor.getColumnIndex(ItemsContract.ItemEntry.QUANTITY));
         condition = cursor.getString(cursor.getColumnIndex(ItemsContract.ItemEntry.CONDITION));
         description = cursor.getString(cursor.getColumnIndex(ItemsContract.ItemEntry.DESCRIPTION));
@@ -44,7 +44,7 @@ public class Item {
     public ContentValues toContentValues() {
         ContentValues values = new ContentValues();
         values.put(ItemsContract.ItemEntry.IDWORKSTATION, id_workstation);
-        values.put(ItemsContract.ItemEntry.NAME, name);
+        values.put(ItemsContract.ItemEntry.IDPRODUCTO, idProducto);
         values.put(ItemsContract.ItemEntry.QUANTITY, quantity);
         values.put(ItemsContract.ItemEntry.CONDITION, condition);
         values.put(ItemsContract.ItemEntry.DESCRIPTION, description);
@@ -58,16 +58,20 @@ public class Item {
 
     public int getId_workstation(){return id_workstation;}
 
-    public String getName() {
-        return name;
+    public int getIdProducto() {
+        return idProducto;
     }
 
-    public String getQuantity() { return quantity; }
+    public String getQuantity() {
+            return quantity; }
 
-    public String getCondition() { return condition; }
+    public String getCondition() {
+            return condition; }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+            return description; }
 
-    public String getAvatarurl() { return avatarurl; }
+    public String getAvatarurl() {
+            return avatarurl; }
 }
 

@@ -3,6 +3,7 @@ package com.cidead.pmdm.stock.Item.ItemDetail;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -16,6 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cidead.pmdm.stock.DB.CategoriaProductosContract;
+import com.cidead.pmdm.stock.DB.CategoriaProductosDBHelper;
+import com.cidead.pmdm.stock.DB.ProductosContract;
+import com.cidead.pmdm.stock.DB.ProductosDBHelper;
 import com.cidead.pmdm.stock.Item.AddEditItems.AddEditItemsActivity;
 import com.cidead.pmdm.stock.DB.Item;
 import com.cidead.pmdm.stock.DB.ItemsDBHelper;
@@ -100,7 +105,34 @@ public class ItemDetailFragment extends Fragment {
     }
 
     private void showItem(Item item){
-        mCollapsingView.setTitle(item.getName());
+
+        ProductosDBHelper productosDBHelper = new ProductosDBHelper(this.getContext());
+        SQLiteDatabase db = new ProductosDBHelper(this.getContext()).getReadableDatabase();
+        productosDBHelper.onCreate(db);
+        Cursor producto = productosDBHelper.getProductoById(String.valueOf(item.getIdProducto()));
+        int columIndex = producto.getColumnIndex(ProductosContract.ProductosEntry.PRODUCTO);
+        int columIdCatIndex = producto.getColumnIndex(ProductosContract.ProductosEntry._IDCATEGORIA);
+
+        String nombreProducto ="";
+        String idCatPro = "";
+        if(producto.getCount() >= 1) {
+            while (producto.moveToNext()) {
+                nombreProducto = producto.getString(columIndex);
+                idCatPro = producto.getString(columIdCatIndex);
+            }
+        }
+        CategoriaProductosDBHelper categoriaProductosDBHelper =new CategoriaProductosDBHelper(this.getContext());
+        SQLiteDatabase dbCategoria = new CategoriaProductosDBHelper(this.getContext()).getReadableDatabase();
+        categoriaProductosDBHelper.onCreate(dbCategoria);
+        Cursor categoria = categoriaProductosDBHelper.getCategoriaProductoById(idCatPro);
+        int columIdCat = categoria.getColumnIndex(CategoriaProductosContract.CategoriaProductosEntry.CATEGORIA);
+        if(categoria.getCount() >= 1) {
+            while (categoria.moveToNext()) {
+                nombreProducto = categoria.getString(columIdCat) + " " + nombreProducto;
+            }
+        }
+
+        mCollapsingView.setTitle(nombreProducto);
        /* Glide.with(getContext())
                 .load(Uri.parse("file:///android_asset/" + item.getAvatarurl()))
                 .centerCrop()
